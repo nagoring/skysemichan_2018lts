@@ -11,35 +11,40 @@ namespace Skysemi.With.Events
     public class EventManager 
     {
         private readonly Game game = Game.instance;
-        private CalculateActionCardsEventSender _calculateActionCardsEventSender = null;
-        private SyncPlayerStatusEventSender _syncPlayerStatusEventSender = null;
-        private Dictionary<EEvent, IEventSender>  _eventSenderDictionary = new Dictionary<EEvent, IEventSender>();
+        private readonly Dictionary<EEvent, IEventSender>  _eventSenderDictionary = new Dictionary<EEvent, IEventSender>();
         
 
         public void RegisterEvent()
         {
-            if (_eventSenderDictionary.ContainsKey(EEvent.CalculateActionCards) == false)
-            {
-                _eventSenderDictionary.Add(EEvent.CalculateActionCards, new CalculateActionCardsEventSender());
-            }
-            if (_eventSenderDictionary.ContainsKey(EEvent.SyncPlayerStatus) == false)
-            {
-                _eventSenderDictionary.Add(EEvent.SyncPlayerStatus, new SyncPlayerStatusEventSender());
-            }
+            // 計算
+            AddSenderEvent(EEvent.CalculateActionCards, new CalculateActionCardsEventSender());
+            // playerStatusに反映
+            AddSenderEvent(EEvent.SyncPlayerStatus, new SyncPlayerStatusEventSender());
             Player player = game.GetPlayer();
-            _eventSenderDictionary[EEvent.CalculateActionCards].Eventer += player.CalculateEquipmentActionCardsReceiver;
-            ;
-//            _calculateActionCardsEventSender.Eventer += enemy.CalculateEquipmentActionCardsReceiver;
+            EnemyManager enemyManager = game.GetEnemyManager();
+            AddReceiver(EEvent.CalculateActionCards, player.CalculateEquipmentActionCardsReceiver);
+            AddReceiver(EEvent.CalculateActionCards, enemyManager.CalculateEquipmentActionCardsReceiver);
             
             PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
-            _eventSenderDictionary[EEvent.SyncPlayerStatus].Eventer += playerStatusWindow.SyncPlayerStatusReceiver;
+            AddReceiver(EEvent.SyncPlayerStatus, playerStatusWindow.SyncPlayerStatusReceiver);
+//            this.RemoveEventer(EEvent.SyncPlayerStatus, playerStatusWindow.SyncPlayerStatusReceiver);
         }
 
-//        public void setEvnet(EEvent eventkey, Func func)
-//        {
-//            
-//        }
-        
+        public void AddSenderEvent(EEvent eventKey, IEventSender iEventSender)
+        {
+            if (_eventSenderDictionary.ContainsKey(eventKey) == false)
+            {
+                _eventSenderDictionary.Add(eventKey, iEventSender);
+            }
+        }
+        public void AddReceiver(EEvent eventKey, BaseEventSender.EventDelegate func)
+        {
+            _eventSenderDictionary[eventKey].Eventer += func;
+        }
+        public void RemoveReceiver(EEvent eventKey, BaseEventSender.EventDelegate func)
+        {
+            _eventSenderDictionary[eventKey].Eventer -= func;
+        }
         public IEventSender EventSenderFactory(EEvent eventKey)
         {
             return _eventSenderDictionary[eventKey];

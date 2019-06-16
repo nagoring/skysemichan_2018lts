@@ -25,7 +25,6 @@ namespace Skysemi.With.CardUI
             obj.SetActive(true);
             // プレハブを元にEquipmentCardFieldMiniを生成して、CanvasUIの子供にする
             GameObject instance = (GameObject)Instantiate(obj,Vector2.zero,Quaternion.identity);
-            Debug.Log(instance);
             instance.transform.parent = parentTransform;
             instance.transform.localScale = new Vector3(1,1,1);
             instance.transform.localPosition = new Vector3(x, y, 0);
@@ -63,13 +62,28 @@ namespace Skysemi.With.CardUI
 
         public void Equip(int index, ActionCards.ABase actionCard)
         {
+            actionCard.Init();
+            string prefabFilePath = actionCard.GetPrefabFilePath();
+            GameObject actionCardPrefab = (GameObject)Resources.Load(prefabFilePath);
+            GameObject instance = (GameObject)Instantiate(actionCardPrefab,Vector2.zero,Quaternion.identity);
+            
             EquipmentCardBoxMini equipmentCardBox = _equipmentCardBoxs[index];
+            // CardBoxにChildオブジェクトを全て削除
+            foreach (Transform n in equipmentCardBox.gameObject.transform)
+            {
+                GameObject.Destroy(n.gameObject);
+            }
             equipmentCardBox.Equip(actionCard);
-            GameObject childGameObject = _equipmentCardBoxs[index].transform.Find("ImageInvisibleSprite").gameObject;
-            Sprite sprite = Resources.Load<Sprite>(equipmentCardBox.GetImageFilePath());
-            Image childImage = childGameObject.GetComponent<Image>();
-            childImage.sprite = sprite;
-            childImage.SetAlpha( 1.0f );
+            int atk = equipmentCardBox.GetActionCard().Atk;
+            instance.transform.parent = equipmentCardBox.transform;
+            instance.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
+            instance.transform.localPosition = new Vector3(0, 0, 0);
+
+//            GameObject childGameObject = _equipmentCardBoxs[index].transform.Find("ImageInvisibleSpriteMini").gameObject;
+//            Sprite sprite = Resources.Load<Sprite>(equipmentCardBox.GetImageFilePath());
+//            Image childImage = childGameObject.GetComponent<Image>();
+//            childImage.sprite = sprite;
+//            childImage.SetAlpha( 1.0f );
         }
 
         public EquipmentCardBoxMini[] GetEquipmentCardBoxs()

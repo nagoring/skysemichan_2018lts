@@ -8,10 +8,6 @@ namespace Skysemi.With.Chara
 {
     public class EnemyNasu : Enemy {
 
-        //protected int hp;
-        //protected int mp;
-        //protected int atk;
-        //protected int def;
         void Awake()
         {
             Init();
@@ -19,19 +15,18 @@ namespace Skysemi.With.Chara
 
         void Init()
         {
-            this.id = EChara.Nasu;
-            this.enemyName = "ナス";
-            this.maxhp = 15;
-            this.maxmp = 9;
-            this.hp = maxhp;
-            this.mp = maxmp;
-            this.atk = 5;
-            this.def = 0;
-            this.spirit = 0;
-            this.maxspirit = 0;
+            this.Id = EChara.Nasu;
+            this.CharaName = "ナス";
+            this.MaxHp = 15;
+            this.Hp = MaxHp;
+            this.Atk = 5;
+            this.Def = 0;
+            this.Spirit = 1;
+            this.MaxSpirit = 0;
             this.exp =4;
             this.msg = "ぼくをたべて！ぼくをたべて！";
             //msgDamageAfterDict.Add(id)
+            this.msgDamageAfterList = new List<string>();
             this.msgDamageAfterList.Add("そんなんじゃまだまだ食べられないよ！");
             this.msgDamageAfterList.Add("もうちょいで食べれるね！");
 		

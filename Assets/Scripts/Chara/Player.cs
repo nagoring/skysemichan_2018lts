@@ -176,15 +176,10 @@ namespace Skysemi.With.Chara
 			
 		}
 
-//		public void CalculateEquipmentActionCardsReceiver(CalculateActionCardsEventArgs e)
 		public void CalculateEquipmentActionCardsReceiver(BaseEventArgs e)
 		{
 			CalculateActionCardsEventArgs eventArgs = (CalculateActionCardsEventArgs)e.GetObject();
-//			
-			Debug.Log("-----------------------------");
-			Debug.Log("CalculateEquipmentActionCardsReceiver");
-			Debug.Log("-----------------------------");
-			
+			int tmpMaxHp = 0;
 			int tmpAtk = 0;
 			int tmpDef = 0;
 			int tmpSpirit = param.spirit;
@@ -195,11 +190,13 @@ namespace Skysemi.With.Chara
 			foreach (ActionCards.ABase actionCard in actionCards)
 			{
 				if (actionCard == null) continue;
+				tmpMaxHp += actionCard.MaxHp;
 				tmpAtk += actionCard.Atk;
 				tmpDef += actionCard.Def;
 				tmpSpirit += actionCard.Spirit;
 				tmpAgi += actionCard.Agi;
 			}
+			param.tmpMaxHp = tmpMaxHp;
 			param.atk = param.str + 1 + tmpAtk;
 			param.def = param.vit + tmpDef;
 			param.spirit = param.spirit + tmpSpirit;

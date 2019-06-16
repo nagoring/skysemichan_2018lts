@@ -36,10 +36,16 @@ namespace Skysemi.With.CardUI
                 RectTransform rectTransform = this.GetComponent<RectTransform>();
                 float width = rectTransform.sizeDelta.x;
                 float height = rectTransform.sizeDelta.y;
+                float scaleX = rectTransform.localScale.x;
+                float scaleY = rectTransform.localScale.y;
                 cardUsageObject.transform.localScale = new Vector3(1,1,1);
                 // ActionCardの右横に説明文を入れる
-                cardUsageObject.transform.localPosition = new Vector3(transform.localPosition.x + width / 4, transform.localPosition.y - height / 4);
+                float localPositionX = transform.parent.localPosition.x + width / 4 + (1 - scaleX) * (width * 2.0f);
+                float localPositionY = transform.parent.localPosition.y + height / 4 + (1 - scaleY) * (-height);
+                cardUsageObject.transform.localPosition = new Vector3(localPositionX, localPositionY);
                 ActionCards.ABase actionCard = GetComponent<ActionCards.ABase>();
+                Debug.Log("transform.localPosition.x");
+                Debug.Log(transform.parent.localPosition.x);
                 
                 Text textObject = cardUsageObject.GetComponentInChildren<Text>();
                 textObject.text = actionCard.GetCardUsageText();

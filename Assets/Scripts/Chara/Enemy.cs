@@ -9,17 +9,17 @@ namespace Skysemi.With.Chara
 	public class Enemy : MonoBehaviour, IChara
 	{
 		public CharaParameter param;
-		public int Hp{get {return this.hp;}set{hp = value;}}
-		public int MaxHp{get {return this.maxhp;}set{maxhp = value;}}
+		public int Hp{get {return param.hp;}set{param.hp = value;}}
+		public int MaxHp{get {return param.maxhp;}set{param.maxhp = value;}}
 		public int Mp{get {return this.mp;}set{mp = value;}}
 		public int MaxMp{get {return this.maxmp;}set{maxmp = value;}}
-		public int Atk{get {return this.atk;}set{atk = value;}}
-		public int Def{get {return this.def;}set{def = value;}}
-		public int Agi { get; set; }
-		public int Spirit { get { return this.spirit; } set { spirit = value; } }
-		public int MaxSpirit { get { return this.maxspirit; } set { maxspirit = value; } }
-		public EChara Id{get {return this.id;}set{id = value;}}
-		public string CharaName{get {return this.enemyName;}set{enemyName = value;}}
+		public int Atk{get {return param.atk;}set{param.atk = value;}}
+		public int Def{get {return param.def;}set{param.def = value;}}
+		public int Agi{get {return param.agi;}set{param.agi = value;}}	
+		public int Spirit { get { return param.spirit; } set { param.spirit = value; } }
+		public int MaxSpirit { get { return param.maxspirit; } set { param.maxspirit = value; } }
+		public EChara Id{get {return param.id;}set{param.id = value;}}
+		public string CharaName{get {return param.charaName;}set{param.charaName = value;}}
 	
 		public string enemyName;
 		public int maxhp;

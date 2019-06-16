@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Skysemi.With.Enum;
 using UnityEngine;
@@ -7,6 +8,10 @@ namespace Skysemi.With.ActionCards
 {
 	public class Punch : ActionCards.ABase
 	{
+		private void Awake()
+		{
+		}
+
 		// Use this for initialization
 		void Start ()
 		{

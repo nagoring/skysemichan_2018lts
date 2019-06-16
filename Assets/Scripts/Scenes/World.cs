@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Skysemi.With.ActionCards;
 using Skysemi.With.CardUI;
 using Skysemi.With.Chara;
 using Skysemi.With.Core;
@@ -6,6 +7,7 @@ using Skysemi.With.Enum;
 using Skysemi.With.Events;
 using Skysemi.With.Scenes.WorldObject;
 using StatusUI;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 using EquipmentCardField = Skysemi.With.CardUI.EquipmentCardField;
@@ -93,22 +95,50 @@ namespace Skysemi.With.Scenes
 			_cardBoard.gameObject.SetActive(false);
 			_equipmentCardField = EquipmentCardField.CreateEquipmentCardFieldInCanvas(canvasUI, -240, -300);
 			_equipmentCardField.Init();
-			game.eventManager.RegisterEvent();
 			
-			//UIのステータス反映
+			
+			EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
+			localEnemyStatusWindow.Init();
+			
+			game.eventManager.RegisterEvent();
+			game.eventManager.AddSenderEvent(EEvent.SyncEnemyStatus, new StandartEventSender());
+			game.eventManager.AddReceiver(EEvent.SyncEnemyStatus, localEnemyStatusWindow.SyncEnemyStatusReceiver);
+			
+			//自UIのステータス反映
 			SyncStatusEventArgs syncStatusEventArgs = new SyncStatusEventArgs();
 			syncStatusEventArgs.CharaParameter = game.GetPlayer().param;
-			var baseEventArgs = new BaseEventArgs();
-			baseEventArgs.SetObject(syncStatusEventArgs);
-			_playerStatusWindow.SyncPlayerStatusReceiver(baseEventArgs);
+			var baseEventArgsForPlayer = new BaseEventArgs();
+			baseEventArgsForPlayer.SetObject(syncStatusEventArgs);
+			game.eventManager.EventSenderFactory(EEvent.SyncPlayerStatus).Send(baseEventArgsForPlayer);
 			
 			//＊実験＊ 敵の装備をセットする
+			game.enemyManager.SetEnemy(gameObject.AddComponent<EnemyNasu>());
 			_equipmentCardFieldMini = EquipmentCardFieldMini.CreateEquipmentCardFieldMiniInParentTransform(enemyStatusWindow.transform, 0, -125f);
 			_equipmentCardFieldMini.Init();
-
+			_equipmentCardFieldMini.Equip(0, gameObject.AddComponent<Punch>());
+			_equipmentCardFieldMini.Equip(1, gameObject.AddComponent<Punch>());
+			_equipmentCardFieldMini.Equip(2, gameObject.AddComponent<MagicAddMaxHp>());
+			_equipmentCardFieldMini.Equip(3, gameObject.AddComponent<MagicAddMaxHp>());
+			game.enemyManager.SetEquipmentCardFieldMini(_equipmentCardFieldMini);
 			
-//			Debug.Log(syncStatusEventArgs.CharaParameter);
-//			game.eventManager.EventSenderFactory(EEvent.SyncPlayerStatus).Send(syncStatusEventArgs);
+			// 敵装備計算 装備カードの能力反映イベントの発火 PlayerもEnemyも両方起こる
+			EquipmentCardBoxMini[] equipmentCardBoxMinis = _equipmentCardFieldMini.GetEquipmentCardBoxs();
+			CalculateActionCardsEventArgs calculateActionCardsEventArgs = new CalculateActionCardsEventArgs();
+			calculateActionCardsEventArgs.SetActionCard(0, equipmentCardBoxMinis[0]?.GetActionCard());
+			calculateActionCardsEventArgs.SetActionCard(1, equipmentCardBoxMinis[1]?.GetActionCard());
+			calculateActionCardsEventArgs.SetActionCard(2, equipmentCardBoxMinis[2]?.GetActionCard());
+			calculateActionCardsEventArgs.SetActionCard(3, equipmentCardBoxMinis[3]?.GetActionCard());
+			game.eventManager.EventSenderFactory(EEvent.CalculateActionCards)?.Send(new BaseEventArgs(calculateActionCardsEventArgs));
+			game.enemyManager.RecoveryHp();
+			
+			
+
+			// 敵UIのステータス反映
+			SyncStatusEnemyEventArgs syncStatusEnemyEventArgs = new SyncStatusEnemyEventArgs();
+			syncStatusEnemyEventArgs.CharaParameter = game.enemyManager.GetEnemy().param;
+			syncStatusEnemyEventArgs.EquipmentCardFieldMini = _equipmentCardFieldMini;
+			game.eventManager.EventSenderFactory(EEvent.SyncEnemyStatus).Send(new BaseEventArgs(syncStatusEnemyEventArgs));
+			
 			
 			mode = EMode.WALKING;
 			

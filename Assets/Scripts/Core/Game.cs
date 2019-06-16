@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
+using Boo.Lang;
 using Skysemi.With.Chara;
 using Skysemi.With.Enum;
 using Skysemi.With.Events;
@@ -29,6 +30,7 @@ namespace Skysemi.With.Core
         public static Game instance = null;
         private Player _player = null;
         public EventManager eventManager = null;
+        public EnemyManager enemyManager = null;
         public int progress;
         public Dictionary<string, UnityEvent> events;
         public EStage destinationPlace;
@@ -56,6 +58,7 @@ namespace Skysemi.With.Core
                 instance = this;
                 destinationPlace = EStage.NONE;
                 eventManager = new EventManager();
+                enemyManager = new EnemyManager();
             }
             else if (instance != this)
             {
@@ -156,6 +159,11 @@ namespace Skysemi.With.Core
                 _player.Init("名無し");
             }
             return _player;
+        }
+
+        public EnemyManager GetEnemyManager()
+        {
+            return enemyManager;
         }
 //        public void SetEvent(string key, UnityAction call)
 //        {
