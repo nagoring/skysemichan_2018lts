@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -40,12 +41,17 @@ namespace Skysemi.With.CardUI
                 float scaleY = rectTransform.localScale.y;
                 cardUsageObject.transform.localScale = new Vector3(1,1,1);
                 // ActionCardの右横に説明文を入れる
-                float localPositionX = transform.parent.localPosition.x + width / 4 + (1 - scaleX) * (width * 2.0f);
-                float localPositionY = transform.parent.localPosition.y + height / 4 + (1 - scaleY) * (-height);
+                float localPositionX = transform.localPosition.x + width / 4 + (1 - scaleX) * (width * 2.0f);
+                float localPositionY = transform.localPosition.y + height / 4 + (1 - scaleY) * (-height);
+
+                //EnemyStatusWindowのための処置
+                if (Math.Abs(transform.localPosition.x) < 1)
+                {
+                    localPositionX = transform.parent.localPosition.x + width / 4 + (1 - scaleX) * (width * 2.0f);
+                    localPositionY = transform.parent.localPosition.y + height / 4 + (1 - scaleY) * (-height);
+                }
                 cardUsageObject.transform.localPosition = new Vector3(localPositionX, localPositionY);
                 ActionCards.ABase actionCard = GetComponent<ActionCards.ABase>();
-                Debug.Log("transform.localPosition.x");
-                Debug.Log(transform.parent.localPosition.x);
                 
                 Text textObject = cardUsageObject.GetComponentInChildren<Text>();
                 textObject.text = actionCard.GetCardUsageText();

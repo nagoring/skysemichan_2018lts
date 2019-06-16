@@ -50,6 +50,7 @@ namespace StatusUI
             int atk = args.CharaParameter.atk;
             int def = args.CharaParameter.def;
             
+            Name.text = args.CharaParameter.charaName;
             Hp.text = args.CharaParameter.hp.ToString();
             Spirit.text = args.CharaParameter.spirit.ToString();
             Atk.text = args.CharaParameter.atk.ToString();

@@ -115,7 +115,7 @@ namespace Skysemi.With.Scenes
 			game.enemyManager.SetEnemy(gameObject.AddComponent<EnemyNasu>());
 			_equipmentCardFieldMini = EquipmentCardFieldMini.CreateEquipmentCardFieldMiniInParentTransform(enemyStatusWindow.transform, 0, -125f);
 			_equipmentCardFieldMini.Init();
-			_equipmentCardFieldMini.Equip(0, gameObject.AddComponent<Punch>());
+			_equipmentCardFieldMini.Equip(0, gameObject.AddComponent<NasuHeart>());
 			_equipmentCardFieldMini.Equip(1, gameObject.AddComponent<Punch>());
 			_equipmentCardFieldMini.Equip(2, gameObject.AddComponent<MagicAddMaxHp>());
 			_equipmentCardFieldMini.Equip(3, gameObject.AddComponent<MagicAddMaxHp>());
@@ -138,6 +138,26 @@ namespace Skysemi.With.Scenes
 			syncStatusEnemyEventArgs.CharaParameter = game.enemyManager.GetEnemy().param;
 			syncStatusEnemyEventArgs.EquipmentCardFieldMini = _equipmentCardFieldMini;
 			game.eventManager.EventSenderFactory(EEvent.SyncEnemyStatus).Send(new BaseEventArgs(syncStatusEnemyEventArgs));
+			
+			//実験 途中でカードをすげ替える場合のケース 設定が多すぎなのでまとめたい
+//			_equipmentCardFieldMini.Equip(0, gameObject.AddComponent<StrongPunch>());
+//			_equipmentCardFieldMini.Equip(1, gameObject.AddComponent<StrongPunch>());
+//			_equipmentCardFieldMini.Equip(2, gameObject.AddComponent<StrongPunch>());
+//			_equipmentCardFieldMini.Equip(3, gameObject.AddComponent<StrongPunch>());
+//			game.enemyManager.SetEquipmentCardFieldMini(_equipmentCardFieldMini);
+//			equipmentCardBoxMinis = _equipmentCardFieldMini.GetEquipmentCardBoxs();
+//			calculateActionCardsEventArgs = new CalculateActionCardsEventArgs();
+//			calculateActionCardsEventArgs.SetActionCard(0, equipmentCardBoxMinis[0]?.GetActionCard());
+//			calculateActionCardsEventArgs.SetActionCard(1, equipmentCardBoxMinis[1]?.GetActionCard());
+//			calculateActionCardsEventArgs.SetActionCard(2, equipmentCardBoxMinis[2]?.GetActionCard());
+//			calculateActionCardsEventArgs.SetActionCard(3, equipmentCardBoxMinis[3]?.GetActionCard());
+//			game.eventManager.EventSenderFactory(EEvent.CalculateActionCards)?.Send(new BaseEventArgs(calculateActionCardsEventArgs));
+//			syncStatusEnemyEventArgs = new SyncStatusEnemyEventArgs();
+//			syncStatusEnemyEventArgs.CharaParameter = game.enemyManager.GetEnemy().param;
+//			syncStatusEnemyEventArgs.EquipmentCardFieldMini = _equipmentCardFieldMini;
+//			game.eventManager.EventSenderFactory(EEvent.SyncEnemyStatus)?.Send(new BaseEventArgs(syncStatusEnemyEventArgs));
+			//実験END
+
 			
 			
 			mode = EMode.WALKING;

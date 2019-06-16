@@ -99,10 +99,10 @@ namespace Skysemi.With.CardUI
             SetCard(5, obj.AddComponent<Pan>(), type);
             SetCard(6, obj.AddComponent<StrongShield>(), type);
             SetCard(7, obj.AddComponent<RoboBlade>(), type);
-//            SetCard(8, obj.AddComponent<Pan>());
-//            SetCard(9, obj.AddComponent<Pan>());
-//            SetCard(10, obj.AddComponent<Pan>());
-//            SetCard(11, obj.AddComponent<Pan>());z
+            SetCard(8, obj.AddComponent<NasuHeart>(), type);
+            SetCard(9, obj.AddComponent<Pan>(), type);
+            SetCard(10, obj.AddComponent<Pan>(), type);
+            SetCard(11, obj.AddComponent<Pan>(), type);
             
         }
         void Start()

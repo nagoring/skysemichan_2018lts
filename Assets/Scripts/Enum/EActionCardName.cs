@@ -12,5 +12,6 @@
         StrongPanch = 6,
         StrongShield = 7,
         RoboBlade = 9,
+        NasuHeart = 10,
     }    
 }

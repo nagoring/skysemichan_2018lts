@@ -34,7 +34,6 @@ namespace Skysemi.With.Chara
         public void CalculateEquipmentActionCardsReceiver(BaseEventArgs e)
         {
             CalculateActionCardsEventArgs eventArgs = (CalculateActionCardsEventArgs)e.GetObject();
-			
             int tmpMaxHp = 0;
             int tmpAtk = 0;
             int tmpDef = 0;

@@ -17,9 +17,11 @@ namespace Skysemi.With.Chara
         {
             this.Id = EChara.Nasu;
             this.CharaName = "ナス";
-            this.MaxHp = 15;
+//            this.MaxHp = 15;
+            this.MaxHp = 1;
             this.Hp = MaxHp;
-            this.Atk = 5;
+//            this.Atk = 5;
+            this.Atk = 1;
             this.Def = 0;
             this.Spirit = 1;
             this.MaxSpirit = 0;
