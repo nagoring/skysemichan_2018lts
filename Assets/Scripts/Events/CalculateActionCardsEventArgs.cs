@@ -7,6 +7,10 @@ namespace Skysemi.With.Events
     {
         ActionCards.ABase[] actionCards = new ActionCards.ABase[4];
 
+        public CalculateActionCardsEventArgs(Skysemi.With.CardUI.IEquipmentCardField iEquipmentCardField)
+        {
+            SetActionCards(iEquipmentCardField);
+        }
         private void InitActionCards()
         {
             actionCards = new ActionCards.ABase[4];
@@ -24,15 +28,15 @@ namespace Skysemi.With.Events
             return actionCards;
         }
 
-        public void SetActionCards(EquipmentCardFieldMini equipmentCardFieldMini)
+        public void SetActionCards(IEquipmentCardField iEquipmentCardField)
         {
             InitActionCards();
-//            int index = 0;
-//            foreach(EquipmentCardBoxMiniUi card in equipmentCardBoxMinis)
-//            {
-//                actionCards[index] = card.GetActionCard();
-//                index++;
-//            }
+            int index = 0;
+            foreach (ActionCards.ABase actionCard in iEquipmentCardField.GetActionCards())
+            {
+                actionCards[index] = actionCard;
+                index++;
+            }
         }
     }
 }

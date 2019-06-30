@@ -44,19 +44,30 @@ namespace StatusUI
 
         public void SyncEnemyStatusReceiver(BaseEventArgs e)
         {
-            var args = (SyncStatusEnemyEventArgs)e.GetObject();
+            SyncStatusEnemyEventArgs args = (SyncStatusEnemyEventArgs)e.GetObject();
             int hp = args.CharaParameter.hp;
             int spirit = args.CharaParameter.spirit;
             int atk = args.CharaParameter.atk;
             int def = args.CharaParameter.def;
+            int agi = args.CharaParameter.agi;
+//            Skysemi.With.ActionCards.ABase[] actionCards = args.EquipmentCardField.GetActionCards();
+//            foreach (Skysemi.With.ActionCards.ABase card in actionCards)
+//            {
+//                Debug.Log(atk);
+//                if (card == null) continue;
+//                hp += card.MaxHp;
+//                spirit += card.Spirit;
+//                atk += card.Atk;
+//                def += card.Def;
+//                agi += card.Agi;
+//            }
             
             Name.text = args.CharaParameter.charaName;
-            Hp.text = args.CharaParameter.hp.ToString();
-            Spirit.text = args.CharaParameter.spirit.ToString();
-            Atk.text = args.CharaParameter.atk.ToString();
-            Def.text = args.CharaParameter.def.ToString();
-            
-            
+            Hp.text = hp.ToString();
+            Spirit.text = spirit.ToString();
+            Atk.text = atk.ToString();
+            Def.text = def.ToString();
+
         }
         
     }

@@ -8,18 +8,19 @@ using Skysemi.With.CardUI;
 
 namespace Skysemi.With.CardUI
 {
-    public class EquipmentCardFieldMini : MonoBehaviour
+    public class EquipmentCardFieldMini : MonoBehaviour, IEquipmentCardField
     {
         private const string PrefabPath = "Prefabs/CardUI/EquipmentCardFieldMini";
         private readonly float[] _xTbl = {-50, 50, -50, 50};
         private readonly float[] _yTbl = {65, 65, -50, -50};
-        public int SelectedCardBoxIndex { get; set; }
-        public GameObject SelectedGameObjectCardBox { get; set; }
-        public Image SelectedIconImage { get; set; }
+//        public int SelectedCardBoxIndex { get; set; }
+//        public GameObject SelectedGameObjectCardBox { get; set; }
+//        public Image SelectedIconImage { get; set; }
 
         private EquipmentCardBoxMiniUi[] _equipmentCardBoxUis;
         /// <summary>
         /// 装備しているActionCard
+        /// <param name="parentTransform">親となるTransform</param>
         /// </summary>
         private ActionCards.ABase[] _actionCard = new ActionCards.ABase[4];
         public static EquipmentCardFieldMini CreateEquipmentCardFieldMiniInParentTransform(Transform parentTransform, float x = 0, float y = -125)
@@ -31,7 +32,9 @@ namespace Skysemi.With.CardUI
             instance.transform.parent = parentTransform;
             instance.transform.localScale = new Vector3(1,1,1);
             instance.transform.localPosition = new Vector3(x, y, 0);
-            return instance.GetComponent<EquipmentCardFieldMini>();
+            EquipmentCardFieldMini equipmentCardFiled = instance.GetComponent<EquipmentCardFieldMini>();
+            equipmentCardFiled.Init();
+            return equipmentCardFiled;
         }
 
         /// <summary>
@@ -66,6 +69,7 @@ namespace Skysemi.With.CardUI
         public void Equip(int index, ActionCards.ABase actionCard)
         {
             actionCard.Init();
+            _actionCard[index] = actionCard;
             string prefabFilePath = actionCard.GetPrefabFilePath();
             GameObject actionCardPrefab = (GameObject)Resources.Load(prefabFilePath);
             GameObject instance = (GameObject)Instantiate(actionCardPrefab,Vector2.zero,Quaternion.identity);
@@ -76,18 +80,10 @@ namespace Skysemi.With.CardUI
             {
                 GameObject.Destroy(n.gameObject);
             }
-//            equipmentCardBox.Equip(actionCard);
-//            int atk = equipmentCardBox.GetActionCard().Atk;
             int atk = actionCard.Atk;
             instance.transform.parent = equipmentCardBox.transform;
             instance.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
             instance.transform.localPosition = new Vector3(0, 0, 0);
-
-//            GameObject childGameObject = _equipmentCardBoxUis[index].transform.Find("ImageInvisibleSpriteMini").gameObject;
-//            Sprite sprite = Resources.Load<Sprite>(equipmentCardBox.GetImageFilePath());
-//            Image childImage = childGameObject.GetComponent<Image>();
-//            childImage.sprite = sprite;
-//            childImage.SetAlpha( 1.0f );
         }
 
         public void Init()
@@ -105,6 +101,10 @@ namespace Skysemi.With.CardUI
         public ActionCards.ABase GetActionCard(int index)
         {
             return _actionCard?[index];
+        }
+        public ActionCards.ABase[] GetActionCards()
+        {
+            return _actionCard;
         }
     }
 }

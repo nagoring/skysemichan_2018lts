@@ -5,7 +5,12 @@ using UnityEngine.UI;
 
 namespace Skysemi.With.CardUI
 {
-    public class EquipmentCardField : MonoBehaviour
+    /// <summary>
+    /// Card欄のUIの作成
+    /// 装備の管理
+    /// 画像の切り替え
+    /// </summary>
+    public class EquipmentCardField : MonoBehaviour, IEquipmentCardField
     {
         private const string PrefabPath = "Prefabs/CardUI/EquipmentCardField";
         private readonly float[] _xTbl = {-300, -100, 100, 300};
@@ -87,6 +92,10 @@ namespace Skysemi.With.CardUI
         public ActionCards.ABase GetActionCard(int index)
         {
             return _actionCard?[index];
+        }
+        public ActionCards.ABase[] GetActionCards()
+        {
+            return _actionCard;
         }
     }
 }

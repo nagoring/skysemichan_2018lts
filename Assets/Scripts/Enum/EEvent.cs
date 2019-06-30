@@ -3,6 +3,7 @@
     public enum EEvent
     {
         CalculateActionCards,
+        CalculateActionCardsByEnemy,
         SyncPlayerStatus,
         SyncEnemyStatus,
     }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using Boo.Lang;
 using Skysemi.With.ActionCards;
 using Skysemi.With.CardUI;
 using Skysemi.With.Chara;
@@ -7,9 +7,7 @@ using Skysemi.With.Enum;
 using Skysemi.With.Events;
 using Skysemi.With.Scenes.WorldObject;
 using StatusUI;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using EquipmentCardField = Skysemi.With.CardUI.EquipmentCardField;
 
@@ -20,9 +18,9 @@ namespace Skysemi.With.Scenes
 		public static World instance;
 		public static Game game;
 	    private CardBoard _cardBoard;
-	    private EquipmentCardField _equipmentCardField;
+	    private Skysemi.With.CardUI.EquipmentCardField _equipmentCardField;
 	    private PlayerStatusWindow _playerStatusWindow;
-	    private EquipmentCardFieldMini _equipmentCardFieldMini;
+	    private Skysemi.With.CardUI.EquipmentCardFieldMini _equipmentCardFieldMini;
 	    public GameObject enemyLayer;
 	    public Canvas canvasUI;
 	    public Image enemyStatusWindow;
@@ -103,7 +101,7 @@ namespace Skysemi.With.Scenes
 			
 			EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
 			localEnemyStatusWindow.Init();
-			
+			//Eventの登録
 			game.eventManager.RegisterEvent();
 			game.eventManager.AddSenderEvent(EEvent.SyncEnemyStatus, new StandartEventSender());
 			game.eventManager.AddReceiver(EEvent.SyncEnemyStatus, localEnemyStatusWindow.SyncEnemyStatusReceiver);
@@ -116,50 +114,23 @@ namespace Skysemi.With.Scenes
 			game.eventManager.EventSenderFactory(EEvent.SyncPlayerStatus).Send(baseEventArgsForPlayer);
 			
 			//＊実験＊ 敵の装備をセットする
-			game.enemyManager.SetEnemy(gameObject.AddComponent<EnemyNasu>());
 			_equipmentCardFieldMini = EquipmentCardFieldMini.CreateEquipmentCardFieldMiniInParentTransform(enemyStatusWindow.transform, 0, -125f);
-			_equipmentCardFieldMini.Init();
-			_equipmentCardFieldMini.Equip(0, gameObject.AddComponent<NasuHeart>());
-			_equipmentCardFieldMini.Equip(1, gameObject.AddComponent<Punch>());
-			_equipmentCardFieldMini.Equip(2, gameObject.AddComponent<MagicAddMaxHp>());
-			_equipmentCardFieldMini.Equip(3, gameObject.AddComponent<MagicAddMaxHp>());
-			game.enemyManager.SetEquipmentCardFieldMini(_equipmentCardFieldMini);
-			
-			// 敵装備計算 装備カードの能力反映イベントの発火 PlayerもEnemyも両方起こる
-//			EquipmentCardBoxMiniUi[] equipmentCardBoxMinis = _equipmentCardFieldMini.GetEquipmentCardBoxs();
-			CalculateActionCardsEventArgs calculateActionCardsEventArgs = new CalculateActionCardsEventArgs();
-			calculateActionCardsEventArgs.SetActionCard(0, _equipmentCardFieldMini.GetActionCard(0));
-			calculateActionCardsEventArgs.SetActionCard(1, _equipmentCardFieldMini.GetActionCard(1));
-			calculateActionCardsEventArgs.SetActionCard(2, _equipmentCardFieldMini.GetActionCard(2));
-			calculateActionCardsEventArgs.SetActionCard(3, _equipmentCardFieldMini.GetActionCard(3));
-			game.eventManager.EventSenderFactory(EEvent.CalculateActionCards)?.Send(new BaseEventArgs(calculateActionCardsEventArgs));
-			game.enemyManager.RecoveryHp();
+			game.enemyManager.Init(gameObject.AddComponent<EnemyNasu>(), _equipmentCardFieldMini);
+			game.enemyManager.Equip(0, gameObject.AddComponent<NasuHeart>());
+			game.enemyManager.Equip(1, gameObject.AddComponent<MagicAddMaxHp>());
+			game.enemyManager.Equip(2, gameObject.AddComponent<Punch>());
+			game.enemyManager.Equip(3, gameObject.AddComponent<Punch>());
+			game.enemyManager.SyncRecoveryHpInclude();
 			
 			
 
-			// 敵UIのステータス反映
-			SyncStatusEnemyEventArgs syncStatusEnemyEventArgs = new SyncStatusEnemyEventArgs();
-			syncStatusEnemyEventArgs.CharaParameter = game.enemyManager.GetEnemy().param;
-			syncStatusEnemyEventArgs.EquipmentCardFieldMini = _equipmentCardFieldMini;
-			game.eventManager.EventSenderFactory(EEvent.SyncEnemyStatus).Send(new BaseEventArgs(syncStatusEnemyEventArgs));
-			
-			//実験 途中でカードをすげ替える場合のケース 設定が多すぎなのでまとめたい
-//			_equipmentCardFieldMini.Equip(0, gameObject.AddComponent<StrongPunch>());
-//			_equipmentCardFieldMini.Equip(1, gameObject.AddComponent<StrongPunch>());
-//			_equipmentCardFieldMini.Equip(2, gameObject.AddComponent<StrongPunch>());
-//			_equipmentCardFieldMini.Equip(3, gameObject.AddComponent<StrongPunch>());
-//			game.enemyManager.SetEquipmentCardFieldMini(_equipmentCardFieldMini);
-////			equipmentCardBoxMinis = _equipmentCardFieldMini.GetEquipmentCardBoxs();
-//			calculateActionCardsEventArgs = new CalculateActionCardsEventArgs();
-////			calculateActionCardsEventArgs.SetActionCard(0, equipmentCardBoxMinis[0]?.GetActionCard());
-////			calculateActionCardsEventArgs.SetActionCard(1, equipmentCardBoxMinis[1]?.GetActionCard());
-////			calculateActionCardsEventArgs.SetActionCard(2, equipmentCardBoxMinis[2]?.GetActionCard());
-////			calculateActionCardsEventArgs.SetActionCard(3, equipmentCardBoxMinis[3]?.GetActionCard());
-//			game.eventManager.EventSenderFactory(EEvent.CalculateActionCards)?.Send(new BaseEventArgs(calculateActionCardsEventArgs));
-//			syncStatusEnemyEventArgs = new SyncStatusEnemyEventArgs();
-//			syncStatusEnemyEventArgs.CharaParameter = game.enemyManager.GetEnemy().param;
-//			syncStatusEnemyEventArgs.EquipmentCardFieldMini = _equipmentCardFieldMini;
-//			game.eventManager.EventSenderFactory(EEvent.SyncEnemyStatus)?.Send(new BaseEventArgs(syncStatusEnemyEventArgs));
+
+			//実験 途中でカードをすげ替える場合のケース 設定が多すぎなのでまとめたい。19.07.01 だいぶまとまった
+//			game.enemyManager.Equip(0, gameObject.AddComponent<MagicAddMaxHp>());
+//			game.enemyManager.Equip(1, gameObject.AddComponent<NasuHeart>());
+//			game.enemyManager.Equip(2, gameObject.AddComponent<MagicAddMaxHp>());
+//			game.enemyManager.Equip(3, gameObject.AddComponent<MagicAddMaxHp>());
+//			game.enemyManager.SyncRecoveryHpInclude();
 			//実験END
 
 			

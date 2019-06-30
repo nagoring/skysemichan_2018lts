@@ -1,27 +1,46 @@
+using Skysemi.With.ActionCards;
 using Skysemi.With.CardUI;
+using Skysemi.With.Core;
+using Skysemi.With.Enum;
 using Skysemi.With.Events;
-using UnityEngine;
 
 namespace Skysemi.With.Chara
 {
-    public class EnemyManager
+    public class EnemyManager : CardUI.IEquipmentCardField
     {
-        private EquipmentCardFieldMini _equipmentCardFieldMini;
-        
+        private Skysemi.With.CardUI.IEquipmentCardField _equipmentCardField;
         private Enemy _enemy;
-        public void SetEnemy(Enemy enemy)
+
+        public void Init(Enemy enemy, Skysemi.With.CardUI.IEquipmentCardField equipmentCardFieldMini)
         {
             _enemy = enemy;
+            _equipmentCardField = equipmentCardFieldMini;
         }
+        
 
         public Enemy GetEnemy()
         {
             return _enemy;
         }
 
-        public void SetEquipmentCardFieldMini(EquipmentCardFieldMini equipmentCardFieldMini)
+        public ABase GetActionCard(int index)
         {
-            _equipmentCardFieldMini = equipmentCardFieldMini;
+            return _equipmentCardField.GetActionCard(index);
+        }
+
+        public ABase[] GetActionCards()
+        {
+            return _equipmentCardField.GetActionCards();
+        }
+
+        public void Equip(int index, ActionCards.ABase actionCard)
+        {
+            _equipmentCardField.Equip(index, actionCard);
+        }
+
+        private void SetEquipmentCardField(Skysemi.With.CardUI.IEquipmentCardField equipmentCardField)
+        {
+            _equipmentCardField = equipmentCardField;
         }
 
         /// <summary>
@@ -69,7 +88,29 @@ namespace Skysemi.With.Chara
             //		PlayerManager.instance.SyncUiStatusByPlayer(this);
 			
         }
-        
+        /// <summary>
+        /// HPを全回復してステータスを同期させる
+        /// </summary>
+        public void SyncRecoveryHpInclude()
+        {
+            Skysemi.With.CardUI.IEquipmentCardField equipmentCardField = _equipmentCardField;
+            SetEquipmentCardField(equipmentCardField);
+            Game game = Game.instance;
+            game.eventManager.EventSenderFactory(EEvent.CalculateActionCardsByEnemy)?.Send(new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardField)));
+            RecoveryHp();
+            game.eventManager.EventSenderFactory(EEvent.SyncEnemyStatus)?.Send(new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
+        }
+        /// <summary>
+        /// ステータスを同期させる
+        /// </summary>
+        public void Sync()
+        {
+            Skysemi.With.CardUI.IEquipmentCardField equipmentCardField = _equipmentCardField;
+            SetEquipmentCardField(equipmentCardField);
+            Game game = Game.instance;
+            game.eventManager.EventSenderFactory(EEvent.CalculateActionCardsByEnemy)?.Send(new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardField)));
+            game.eventManager.EventSenderFactory(EEvent.SyncEnemyStatus)?.Send(new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
+        }
         
     }
 }
