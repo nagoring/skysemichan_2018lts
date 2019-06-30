@@ -9,6 +9,7 @@ using Skysemi.With.Scenes.WorldObject;
 using StatusUI;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using EquipmentCardField = Skysemi.With.CardUI.EquipmentCardField;
 
@@ -22,10 +23,14 @@ namespace Skysemi.With.Scenes
 	    private EquipmentCardField _equipmentCardField;
 	    private PlayerStatusWindow _playerStatusWindow;
 	    private EquipmentCardFieldMini _equipmentCardFieldMini;
-
+	    public GameObject enemyLayer;
 	    public Canvas canvasUI;
-
 	    public Image enemyStatusWindow;
+
+
+	    public EMode Mode {get;set;}
+	    private EMode _mode = EMode.WALKING;
+
 //		public SkysemiChanManager skysemiChanManager;
 //		public SkysemiChanMsg skysemiChanMsg;
 //		public EventManager eventManager;
@@ -39,7 +44,6 @@ namespace Skysemi.With.Scenes
 //		public GameObject enemeyLayer;
 //		public Canvas canvas;
 //		public Sprite[] imageRoads = new Sprite[3];
-		public EMode mode = EMode.WALKING;
 
 
 //		public ETurn turn = ETurn.PLAYER;
@@ -122,12 +126,12 @@ namespace Skysemi.With.Scenes
 			game.enemyManager.SetEquipmentCardFieldMini(_equipmentCardFieldMini);
 			
 			// 敵装備計算 装備カードの能力反映イベントの発火 PlayerもEnemyも両方起こる
-			EquipmentCardBoxMini[] equipmentCardBoxMinis = _equipmentCardFieldMini.GetEquipmentCardBoxs();
+//			EquipmentCardBoxMiniUi[] equipmentCardBoxMinis = _equipmentCardFieldMini.GetEquipmentCardBoxs();
 			CalculateActionCardsEventArgs calculateActionCardsEventArgs = new CalculateActionCardsEventArgs();
-			calculateActionCardsEventArgs.SetActionCard(0, equipmentCardBoxMinis[0]?.GetActionCard());
-			calculateActionCardsEventArgs.SetActionCard(1, equipmentCardBoxMinis[1]?.GetActionCard());
-			calculateActionCardsEventArgs.SetActionCard(2, equipmentCardBoxMinis[2]?.GetActionCard());
-			calculateActionCardsEventArgs.SetActionCard(3, equipmentCardBoxMinis[3]?.GetActionCard());
+			calculateActionCardsEventArgs.SetActionCard(0, _equipmentCardFieldMini.GetActionCard(0));
+			calculateActionCardsEventArgs.SetActionCard(1, _equipmentCardFieldMini.GetActionCard(1));
+			calculateActionCardsEventArgs.SetActionCard(2, _equipmentCardFieldMini.GetActionCard(2));
+			calculateActionCardsEventArgs.SetActionCard(3, _equipmentCardFieldMini.GetActionCard(3));
 			game.eventManager.EventSenderFactory(EEvent.CalculateActionCards)?.Send(new BaseEventArgs(calculateActionCardsEventArgs));
 			game.enemyManager.RecoveryHp();
 			
@@ -145,12 +149,12 @@ namespace Skysemi.With.Scenes
 //			_equipmentCardFieldMini.Equip(2, gameObject.AddComponent<StrongPunch>());
 //			_equipmentCardFieldMini.Equip(3, gameObject.AddComponent<StrongPunch>());
 //			game.enemyManager.SetEquipmentCardFieldMini(_equipmentCardFieldMini);
-//			equipmentCardBoxMinis = _equipmentCardFieldMini.GetEquipmentCardBoxs();
+////			equipmentCardBoxMinis = _equipmentCardFieldMini.GetEquipmentCardBoxs();
 //			calculateActionCardsEventArgs = new CalculateActionCardsEventArgs();
-//			calculateActionCardsEventArgs.SetActionCard(0, equipmentCardBoxMinis[0]?.GetActionCard());
-//			calculateActionCardsEventArgs.SetActionCard(1, equipmentCardBoxMinis[1]?.GetActionCard());
-//			calculateActionCardsEventArgs.SetActionCard(2, equipmentCardBoxMinis[2]?.GetActionCard());
-//			calculateActionCardsEventArgs.SetActionCard(3, equipmentCardBoxMinis[3]?.GetActionCard());
+////			calculateActionCardsEventArgs.SetActionCard(0, equipmentCardBoxMinis[0]?.GetActionCard());
+////			calculateActionCardsEventArgs.SetActionCard(1, equipmentCardBoxMinis[1]?.GetActionCard());
+////			calculateActionCardsEventArgs.SetActionCard(2, equipmentCardBoxMinis[2]?.GetActionCard());
+////			calculateActionCardsEventArgs.SetActionCard(3, equipmentCardBoxMinis[3]?.GetActionCard());
 //			game.eventManager.EventSenderFactory(EEvent.CalculateActionCards)?.Send(new BaseEventArgs(calculateActionCardsEventArgs));
 //			syncStatusEnemyEventArgs = new SyncStatusEnemyEventArgs();
 //			syncStatusEnemyEventArgs.CharaParameter = game.enemyManager.GetEnemy().param;
@@ -160,7 +164,7 @@ namespace Skysemi.With.Scenes
 
 			
 			
-			mode = EMode.WALKING;
+			_mode = EMode.WALKING;
 			
 //			PlayerManager.instance.LoadData();
 //			Player player = Player.instance;
@@ -305,13 +309,13 @@ namespace Skysemi.With.Scenes
 //		public void PushBtnItem()
 //		{
 //	//		GameMainManager game = GameMainManager.instance;
-//	//		if (game.mode != EMode.WALKING) return;
+//	//		if (game._mode != EMode.WALKING) return;
 //	//		SkysemiChanMsg.instance.msgOther[EMsgOther.PushItem]();
 //		}
 //		public void PushBtnHome()
 //		{
 //	//		GameMainManager game = GameMainManager.instance;
-//	//		if (game.mode != EMode.WALKING) return;
+//	//		if (game._mode != EMode.WALKING) return;
 //	//		SkysemiChanMsg.instance.msgOther[EMsgOther.PushHome]();
 //		}
 	    public ISceneController GetSelfController()
@@ -333,5 +337,23 @@ namespace Skysemi.With.Scenes
 	    {
 		    return _playerStatusWindow;
 	    }
+	    
+		public void PushGoFrontButton()
+		{
+//			if (game.mode == EMode.BOSS_BATTLE_AFTER) return;
+//			if (GameSystem.instance.destinationPlace == EStage.OTHER_STAGE1)
+//			{
+//				SoundManager.instance.PlaySingle(game.clipSoundWalking);
+//			}
+//			
+//			Player player = Player.instance;
+//			player.Progress++;
+//
+//			int landIndex = player.Progress % 3;
+//			game.loadLayer.sprite = game.imageRoads[landIndex];
+//			game.playerManager.textProgress.text = player.Progress.ToString();
+//			Player.instance.NaturalHealingByWalk();
+//			game.CheckingProgress();
+		}
     }
 }

@@ -17,8 +17,11 @@ namespace Skysemi.With.CardUI
         public GameObject SelectedGameObjectCardBox { get; set; }
         public Image SelectedIconImage { get; set; }
 
-        private EquipmentCardBoxMini[] _equipmentCardBoxs;
-        
+        private EquipmentCardBoxMiniUi[] _equipmentCardBoxUis;
+        /// <summary>
+        /// 装備しているActionCard
+        /// </summary>
+        private ActionCards.ABase[] _actionCard = new ActionCards.Empty[4];
         public static EquipmentCardFieldMini CreateEquipmentCardFieldMiniInParentTransform(Transform parentTransform, float x = 0, float y = -125)
         {
             GameObject obj = (GameObject)Resources.Load (PrefabPath);
@@ -39,10 +42,10 @@ namespace Skysemi.With.CardUI
         /// <param name="types">動的に使いするスクリプトの配列</param>        
         public void CreateEquipmentCardBoxMini(int index, Type[] types = null)
         {
-            string prefabFilePath = "Prefabs/CardUI/EquipmentCardBoxMini" + index;
+            string prefabFilePath = "Prefabs/CardUI/EquipmentCardBoxMiniUi" + index;
             GameObject actionCardPrefab = (GameObject)Resources.Load(prefabFilePath);
             GameObject instance = (GameObject)Instantiate(actionCardPrefab,Vector2.zero,Quaternion.identity);
-            instance.name = "EquipmentCardBoxMini" + index;
+            instance.name = "EquipmentCardBoxMiniUi" + index;
             instance.transform.parent = transform;
             instance.transform.localScale = new Vector3(1,1,1);
             float x = _xTbl[index];
@@ -55,9 +58,9 @@ namespace Skysemi.With.CardUI
                     instance.AddComponent(types[i]);
                 }
             }
-            Type equipmentCardBoxType = Type.GetType("Skysemi.With.CardUI.EquipmentCardBoxMini");
+            Type equipmentCardBoxType = Type.GetType("Skysemi.With.CardUI.EquipmentCardBoxMiniUi");
             instance.AddComponent(equipmentCardBoxType);
-            _equipmentCardBoxs[index] = instance.GetComponent<EquipmentCardBoxMini>();
+            _equipmentCardBoxUis[index] = instance.GetComponent<EquipmentCardBoxMiniUi>();
         }
 
         public void Equip(int index, ActionCards.ABase actionCard)
@@ -67,40 +70,41 @@ namespace Skysemi.With.CardUI
             GameObject actionCardPrefab = (GameObject)Resources.Load(prefabFilePath);
             GameObject instance = (GameObject)Instantiate(actionCardPrefab,Vector2.zero,Quaternion.identity);
             
-            EquipmentCardBoxMini equipmentCardBox = _equipmentCardBoxs[index];
+            EquipmentCardBoxMiniUi equipmentCardBox = _equipmentCardBoxUis[index];
             // CardBoxにChildオブジェクトを全て削除
             foreach (Transform n in equipmentCardBox.gameObject.transform)
             {
                 GameObject.Destroy(n.gameObject);
             }
-            equipmentCardBox.Equip(actionCard);
-            int atk = equipmentCardBox.GetActionCard().Atk;
+//            equipmentCardBox.Equip(actionCard);
+//            int atk = equipmentCardBox.GetActionCard().Atk;
+            int atk = actionCard.Atk;
             instance.transform.parent = equipmentCardBox.transform;
             instance.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
             instance.transform.localPosition = new Vector3(0, 0, 0);
 
-//            GameObject childGameObject = _equipmentCardBoxs[index].transform.Find("ImageInvisibleSpriteMini").gameObject;
+//            GameObject childGameObject = _equipmentCardBoxUis[index].transform.Find("ImageInvisibleSpriteMini").gameObject;
 //            Sprite sprite = Resources.Load<Sprite>(equipmentCardBox.GetImageFilePath());
 //            Image childImage = childGameObject.GetComponent<Image>();
 //            childImage.sprite = sprite;
 //            childImage.SetAlpha( 1.0f );
         }
 
-        public EquipmentCardBoxMini[] GetEquipmentCardBoxs()
-        {
-            return _equipmentCardBoxs;
-        }
         public void Init()
         {
             Type[] types = {
 //                Type.GetType("Skysemi.With.CardUI.PlayerEquipmentCardBoxClickEvent"),
             };
-            
-            _equipmentCardBoxs = new EquipmentCardBoxMini[4];
+            _equipmentCardBoxUis = new EquipmentCardBoxMiniUi[4];
             CreateEquipmentCardBoxMini(0, types);
             CreateEquipmentCardBoxMini(1, types);
             CreateEquipmentCardBoxMini(2, types);
             CreateEquipmentCardBoxMini(3, types);
+        }
+
+        public ActionCards.ABase GetActionCard(int index)
+        {
+            return _actionCard?[index];
         }
     }
 }
