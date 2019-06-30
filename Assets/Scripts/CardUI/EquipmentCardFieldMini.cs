@@ -21,7 +21,7 @@ namespace Skysemi.With.CardUI
         /// <summary>
         /// 装備しているActionCard
         /// </summary>
-        private ActionCards.ABase[] _actionCard = new ActionCards.Empty[4];
+        private ActionCards.ABase[] _actionCard = new ActionCards.ABase[4];
         public static EquipmentCardFieldMini CreateEquipmentCardFieldMiniInParentTransform(Transform parentTransform, float x = 0, float y = -125)
         {
             GameObject obj = (GameObject)Resources.Load (PrefabPath);

@@ -29,12 +29,16 @@ namespace Skysemi.With.CardUI
             
             //イベントを発火させる
 //            EquipmentCardFieldにあるActionCardを計算するイベントを発生させる
-            EquipmentCardBox[] equipmentCardBoxs = equipmentCardField.GetEquipmentCardBoxs();
+//            EquipmentCardBoxUi[] equipmentCardBoxs = equipmentCardField.GetEquipmentCardBoxs();
             CalculateActionCardsEventArgs calculateActionCardsEventArgs = new CalculateActionCardsEventArgs();
-            calculateActionCardsEventArgs.SetActionCard(0, equipmentCardBoxs[0]?.GetActionCard());
-            calculateActionCardsEventArgs.SetActionCard(1, equipmentCardBoxs[1]?.GetActionCard());
-            calculateActionCardsEventArgs.SetActionCard(2, equipmentCardBoxs[2]?.GetActionCard());
-            calculateActionCardsEventArgs.SetActionCard(3, equipmentCardBoxs[3]?.GetActionCard());
+//            calculateActionCardsEventArgs.SetActionCard(0, equipmentCardBoxs[0]?.GetActionCard());
+//            calculateActionCardsEventArgs.SetActionCard(1, equipmentCardBoxs[1]?.GetActionCard());
+//            calculateActionCardsEventArgs.SetActionCard(2, equipmentCardBoxs[2]?.GetActionCard());
+//            calculateActionCardsEventArgs.SetActionCard(3, equipmentCardBoxs[3]?.GetActionCard());
+            calculateActionCardsEventArgs.SetActionCard(0, equipmentCardField.GetActionCard(0));
+            calculateActionCardsEventArgs.SetActionCard(1, equipmentCardField.GetActionCard(1));
+            calculateActionCardsEventArgs.SetActionCard(2, equipmentCardField.GetActionCard(2));
+            calculateActionCardsEventArgs.SetActionCard(3, equipmentCardField.GetActionCard(3));
 
             game.eventManager.EventSenderFactory(EEvent.CalculateActionCards).Send(new BaseEventArgs(calculateActionCardsEventArgs));
             

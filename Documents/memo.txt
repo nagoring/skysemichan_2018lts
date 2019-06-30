@@ -1,0 +1,52 @@
+        public void Equip(int index, ActionCards.ABase actionCard)
+        {
+            EquipmentCardBox equipmentCardBox = _equipmentCardBoxs[index];
+//            equipmentCardBox.Equip(actionCard);
+            _actionCard[index] = actionCard;
+//            GameObject childGameObject = _equipmentCardBoxs[index].transform.GetChild(0).gameObject;
+            GameObject childGameObject = _equipmentCardBoxs[index].transform.Find("ImageInvisibleSprite").gameObject;
+//            GameObject instance = (GameObject)Instantiate((GameObject)Resources.Load("Prefabs/Image/MagicAddMaxHp"),Vector2.zero,Quaternion.identity);
+            ;
+//            GameObject newGameObject = new GameObject();
+//            childGameObject.transform.parent = transform;
+//            GameObject newGameObject = (GameObject)gameObject.AddComponent(_equipmentCardBoxs[index]);
+//            ;
+//            Texture2D tex2d = Resources.Load(equipmentCardBox.GetImageFilePath()) as Texture2D;
+            Sprite sprite = Resources.Load<Sprite>(actionCard.GetImageFilePath());
+//            SelectedIconImage.sprite =  Sprite.Create(tex2d, new Rect(0,0,tex2d.width,tex2d.height), Vector2.zero);;
+//            GameObject childGameObject = _equipmentCardBoxs[SelectedCardBoxIndex].transform.GetChild(0).gameObject;
+//            GameObject childGameObject = SelectedGameObjectCardBox.transform.GetChild(0).gameObject;
+//            Image childImage = childGameObject.GetComponentInChildren<Image>();
+            Image childImage = childGameObject.GetComponent<Image>();
+//            Image childImage = image.gameObject.GetComponentInChildren<Image>();
+            
+//            Image image = actionCard.gameObject.GetComponent<Image>();
+//            childImage = Instantiate(image);
+//            sprite. = new Rect(0,0,200,200);
+//            childImage.sprite =  sprite;
+            ;
+//            childImage.sprite =  Sprite.Create(tex2d, new Rect(0,0,tex2d.width,tex2d.height), Vector2.zero);
+//            childImage.sprite =  actionCard.gameObject.GetComponent<Image>().sprite;
+            childImage.sprite = sprite;
+//            childImage.sprite.pivot = new Vector2(200,200);
+//            childImage.sprite.textureRectOffset()
+//            Debug.Log(childImage.sprite.pivot);
+//            childImage.rectTransform.sizeDelta = new Vector2(300,300);
+//            childImage.rectTransform.localScale = new Vector3(1,1,1);
+//            childImage.transform.localScale = new Vector3(1,1,1);
+            
+            childImage.SetAlpha( 1.0f );
+//            childImage.preserveAspect = true;
+//            childImage.SetNativeSize();
+//            Debug.Log(tex2d.width+":"+tex2d.height);
+//            GameObject child = transform.Find("BoardArea" + index).gameObject;
+//            child.SetActive(true);
+//            Image childImage = child.GetComponent<Image>();
+//            childImage.sprite = Sprite.Create(tex2d, new Rect(0,0,tex2d.width,tex2d.height), Vector2.zero);;
+            //			Image image = new Image();
+//			Instantiate();
+
+            ;
+            
+//            obj.GetComponent()
+        }

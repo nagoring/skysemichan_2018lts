@@ -14,7 +14,7 @@ namespace Skysemi.With.CardUI
         public void OnPointerClick(PointerEventData eventData) 
         {
             //CardBoardを表示・非表示
-            int index = int.Parse(name.Replace("EquipmentCardBox", ""));
+            int index = int.Parse(name.Replace("EquipmentCardBoxUi", ""));
 
             Game game = Game.instance;
             IPlayerCardUiController cardUiController =  game.GetCardUiController();
