@@ -109,11 +109,8 @@ namespace Skysemi.With.Scenes
 			game.eventManager.AddReceiver(EEvent.SyncEnemyStatus, localEnemyStatusWindow.SyncEnemyStatusReceiver);
 			
 			//自UIのステータス反映
-			SyncStatusEventArgs syncStatusEventArgs = new SyncStatusEventArgs();
-			syncStatusEventArgs.CharaParameter = game.GetPlayer().param;
-			var baseEventArgsForPlayer = new BaseEventArgs();
-			baseEventArgsForPlayer.SetObject(syncStatusEventArgs);
-			game.eventManager.EventSenderFactory(EEvent.SyncPlayerStatus).Send(baseEventArgsForPlayer);
+			SyncStatusEventArgs syncStatusEventArgs = new SyncStatusEventArgs(game.GetPlayer().param);
+			game.FireEvent(EEvent.SyncPlayerStatus, new BaseEventArgs(syncStatusEventArgs));
 			
 			//＊実験＊ 敵の装備をセットする
 			_equipmentCardFieldMini = EquipmentCardFieldMini.CreateEquipmentCardFieldMiniInParentTransform(enemyStatusWindow.transform, 0, -125f);
@@ -324,7 +321,7 @@ namespace Skysemi.With.Scenes
 			int landIndex = player.Progress % 3;
 			roadLayer.sprite = imageRoads[landIndex];
 			_playerStatusWindow.Progress.text = player.Progress.ToString();
-//			Player.instance.NaturalHealingByWalk();
+			player.NaturalHealingByWalk();
 //			game.CheckingProgress();
 		}
     }

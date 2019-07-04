@@ -96,9 +96,9 @@ namespace Skysemi.With.Chara
             Skysemi.With.CardUI.IEquipmentCardField equipmentCardField = _equipmentCardField;
             SetEquipmentCardField(equipmentCardField);
             Game game = Game.instance;
-            game.eventManager.EventSenderFactory(EEvent.CalculateActionCardsByEnemy)?.Send(new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardField)));
+            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardField)));
             RecoveryHp();
-            game.eventManager.EventSenderFactory(EEvent.SyncEnemyStatus)?.Send(new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
+            game.FireEvent(EEvent.SyncEnemyStatus, new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
         }
         /// <summary>
         /// ステータスを同期させる
@@ -108,8 +108,8 @@ namespace Skysemi.With.Chara
             Skysemi.With.CardUI.IEquipmentCardField equipmentCardField = _equipmentCardField;
             SetEquipmentCardField(equipmentCardField);
             Game game = Game.instance;
-            game.eventManager.EventSenderFactory(EEvent.CalculateActionCardsByEnemy)?.Send(new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardField)));
-            game.eventManager.EventSenderFactory(EEvent.SyncEnemyStatus)?.Send(new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
+            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardField)));
+            game.FireEvent(EEvent.SyncEnemyStatus, new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
         }
         
     }

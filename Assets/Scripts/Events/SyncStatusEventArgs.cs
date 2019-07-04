@@ -5,6 +5,11 @@ namespace Skysemi.With.Events
 {
     public class SyncStatusEventArgs : EventArgs
     {
-        public CharaParameter CharaParameter { get; set; } 
+        public CharaParameter CharaParameter { get; set; }
+
+        public SyncStatusEventArgs(CharaParameter charaParameter)
+        {
+            CharaParameter = charaParameter;
+        }
     }
 }

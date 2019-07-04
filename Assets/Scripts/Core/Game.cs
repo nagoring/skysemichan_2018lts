@@ -165,6 +165,11 @@ namespace Skysemi.With.Core
         {
             return enemyManager;
         }
+
+        public void FireEvent(EEvent eventKey, BaseEventArgs args)
+        {
+            eventManager.EventSenderFactory(EEvent.SyncPlayerStatus).Send(args);
+        }
 //        public void SetEvent(string key, UnityAction call)
 //        {
 //            if (!events.ContainsKey(key))

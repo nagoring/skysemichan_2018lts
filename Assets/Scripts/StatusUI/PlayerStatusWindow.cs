@@ -64,6 +64,7 @@ namespace StatusUI
             Def.text = args.CharaParameter.def.ToString();
             MaxHp.text = (args.CharaParameter.maxhp + args.CharaParameter.tmpMaxHp).ToString();
             MaxSpirit.text = args.CharaParameter.maxspirit.ToString();
+            Progress.text = args.CharaParameter.progress.ToString();
         }
     }
 }

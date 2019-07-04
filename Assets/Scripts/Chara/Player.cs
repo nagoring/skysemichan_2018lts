@@ -312,14 +312,16 @@ namespace Skysemi.With.Chara
 	////		
 	////	}
 	//
-	//	public void NaturalHealingByWalk()
-	//	{
-	//		if (MaxHp > Hp)
-	//		{
-	//			Hp += 1;
-	//		}
-	//		PlayerManager.instance.SyncUiStatusByPlayer(this);
-	//	}
+		public void NaturalHealingByWalk()
+		{
+			Game game = Game.instance;
+			if (MaxHp > Hp)
+			{
+				Hp += 1;
+			}
+			SyncStatusEventArgs syncStatusEventArgs = new SyncStatusEventArgs(param);
+			game.FireEvent(EEvent.SyncPlayerStatus, new BaseEventArgs(syncStatusEventArgs));
+		}
 	//
 	//	private void InitActionCardsParam()
 	//	{
