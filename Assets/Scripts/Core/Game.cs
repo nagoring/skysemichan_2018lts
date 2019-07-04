@@ -168,7 +168,7 @@ namespace Skysemi.With.Core
 
         public void FireEvent(EEvent eventKey, BaseEventArgs args)
         {
-            eventManager.EventSenderFactory(EEvent.SyncPlayerStatus).Send(args);
+            eventManager.EventSenderFactory(eventKey).Send(args);
         }
 //        public void SetEvent(string key, UnityAction call)
 //        {
