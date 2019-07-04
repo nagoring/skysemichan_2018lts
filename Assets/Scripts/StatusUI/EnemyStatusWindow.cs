@@ -14,6 +14,7 @@ namespace StatusUI
         public Text Spirit { get; set; }
         public Text Atk { get; set; }
         public Text Def { get; set; }
+        public Text Agi { get; set; }
         
         
         
@@ -39,6 +40,7 @@ namespace StatusUI
             Spirit = transform.Find("TextEnemySpirit").GetComponent<Text>();
             Atk = transform.Find("TextEnemyAtk").GetComponent<Text>();
             Def = transform.Find("TextEnemyDef").GetComponent<Text>();
+            Agi = transform.Find("TextEnemyAgi").GetComponent<Text>();
         }
         
 
@@ -67,6 +69,7 @@ namespace StatusUI
             Spirit.text = spirit.ToString();
             Atk.text = atk.ToString();
             Def.text = def.ToString();
+            Agi.text = Agi.ToString();
 
         }
         
