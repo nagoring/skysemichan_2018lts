@@ -28,6 +28,9 @@ namespace Skysemi.With.Scenes
 
 	    public EMode Mode {get;set;}
 	    private EMode _mode = EMode.WALKING;
+	    public Sprite[] imageRoads = new Sprite[3];
+
+		public Image roadLayer;
 
 //		public SkysemiChanManager skysemiChanManager;
 //		public SkysemiChanMsg skysemiChanMsg;
@@ -38,7 +41,6 @@ namespace Skysemi.With.Scenes
 		public EffectManager effectManager;
 //		public Image imageFlatLand;
 //		public Sprite imageFlatLandEveningSprite;
-//		public Image loadLayer;
 //		public GameObject enemeyLayer;
 //		public Canvas canvas;
 //		public Sprite[] imageRoads = new Sprite[3];
@@ -317,12 +319,11 @@ namespace Skysemi.With.Scenes
 //				SoundManager.instance.PlaySingle(game.clipSoundWalking);
 //			}
 //			
-//			Player player = Player.instance;
-//			player.Progress++;
-//
-//			int landIndex = player.Progress % 3;
-//			game.loadLayer.sprite = game.imageRoads[landIndex];
-//			game.playerManager.textProgress.text = player.Progress.ToString();
+			Player player = game.GetPlayer();
+			player.Progress++;
+			int landIndex = player.Progress % 3;
+			roadLayer.sprite = imageRoads[landIndex];
+			_playerStatusWindow.Progress.text = player.Progress.ToString();
 //			Player.instance.NaturalHealingByWalk();
 //			game.CheckingProgress();
 		}

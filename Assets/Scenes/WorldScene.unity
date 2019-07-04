@@ -610,6 +610,11 @@ MonoBehaviour:
   enemyLayer: {fileID: 349938821}
   canvasUI: {fileID: 1431727013}
   enemyStatusWindow: {fileID: 2064606522}
+  imageRoads:
+  - {fileID: 21300000, guid: 9c1c317961a3c11479799a0cea37f3cb, type: 3}
+  - {fileID: 21300000, guid: d88f38fca52517a47a217e0189aac81c, type: 3}
+  - {fileID: 21300000, guid: 3a820c88f18ef1e4b8283fb3bd1e0346, type: 3}
+  roadLayer: {fileID: 164669384}
   effectManager: {fileID: 1083265014}
 --- !u!4 &1005927881
 Transform:
@@ -821,6 +826,66 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688060189659503007, guid: bdcaf9b0927044448a191eb996c1ec31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 209
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688060188807372139, guid: bdcaf9b0927044448a191eb996c1ec31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 159
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688060190038958507, guid: bdcaf9b0927044448a191eb996c1ec31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 119.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688060189578525934, guid: bdcaf9b0927044448a191eb996c1ec31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 79.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688060189384852453, guid: bdcaf9b0927044448a191eb996c1ec31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5753432390336229558, guid: bdcaf9b0927044448a191eb996c1ec31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.9999943
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688060190074751024, guid: bdcaf9b0927044448a191eb996c1ec31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 209
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688060188850857369, guid: bdcaf9b0927044448a191eb996c1ec31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 159
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688060190271567150, guid: bdcaf9b0927044448a191eb996c1ec31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 119.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688060190476043922, guid: bdcaf9b0927044448a191eb996c1ec31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 79.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688060188588206371, guid: bdcaf9b0927044448a191eb996c1ec31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 39.000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 8811814026760813045, guid: bdcaf9b0927044448a191eb996c1ec31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.9999943
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdcaf9b0927044448a191eb996c1ec31, type: 3}
@@ -1183,7 +1248,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1947591946}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1005927880}
+        m_MethodName: PushGoFrontButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1947591946

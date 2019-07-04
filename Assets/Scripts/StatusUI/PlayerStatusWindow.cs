@@ -8,6 +8,7 @@ namespace StatusUI
 {
     public class PlayerStatusWindow : AppMonoBehaviour
     {
+        private static PlayerStatusWindow _playerStatusWindow = null; 
         private const string PrefabPath = "Prefabs/StatusUI/PlayerStatusWindow";
         public Text Lv { get; set; }
         public Text Hp { get; set; }
@@ -18,19 +19,24 @@ namespace StatusUI
         public Text Exp { get; set; }
         public Text MaxHp { get; set; }
         public Text MaxSpirit { get; set; }
-        
+
+
         public static PlayerStatusWindow CreatePlayerStatusWindowInCanvasUI(Canvas canvasUI)
         {
-            GameObject obj = (GameObject)Resources.Load (PrefabPath);
-            obj.SetActive(true);
-            // プレハブを元にCardBoardを生成して、CanvasUIの子供にする
-            GameObject instance = (GameObject)Instantiate(obj,Vector2.zero,Quaternion.identity);
-            instance.transform.parent = canvasUI.transform;
-            instance.transform.localScale = new Vector3(1,1,1);
-            instance.transform.localPosition = new Vector3(399,-70, 0);
-            PlayerStatusWindow playerStatusWindow = instance.GetComponent<PlayerStatusWindow>();
-            playerStatusWindow.Init();
-            return playerStatusWindow;
+            if (_playerStatusWindow == null)
+            {
+                GameObject obj = (GameObject)Resources.Load (PrefabPath);
+                obj.SetActive(true);
+                // プレハブを元にCardBoardを生成して、CanvasUIの子供にする
+                GameObject instance = (GameObject)Instantiate(obj,Vector2.zero,Quaternion.identity);
+                instance.transform.parent = canvasUI.transform;
+                instance.transform.localScale = new Vector3(1,1,1);
+                instance.transform.localPosition = new Vector3(399,-70, 0);
+                PlayerStatusWindow playerStatusWindow = instance.GetComponent<PlayerStatusWindow>();
+                playerStatusWindow.Init();
+                _playerStatusWindow = playerStatusWindow;
+            }
+            return _playerStatusWindow;
         }
         
         public void Init()
@@ -59,6 +65,5 @@ namespace StatusUI
             MaxHp.text = (args.CharaParameter.maxhp + args.CharaParameter.tmpMaxHp).ToString();
             MaxSpirit.text = args.CharaParameter.maxspirit.ToString();
         }
-        
     }
 }
