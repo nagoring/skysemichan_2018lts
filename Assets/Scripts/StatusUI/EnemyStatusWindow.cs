@@ -69,8 +69,7 @@ namespace StatusUI
             Spirit.text = spirit.ToString();
             Atk.text = atk.ToString();
             Def.text = def.ToString();
-            Agi.text = Agi.ToString();
-
+            Agi.text = agi.ToString();
         }
         
     }

@@ -12,7 +12,7 @@ namespace Skysemi.With.CardUI
     {
         private const string PrefabPath = "Prefabs/CardUI/EquipmentCardFieldMini";
         private readonly float[] _xTbl = {-50, 50, -50, 50};
-        private readonly float[] _yTbl = {65, 65, -50, -50};
+        private readonly float[] _yTbl = {45, 45, -70, -70};
 //        public int SelectedCardBoxIndex { get; set; }
 //        public GameObject SelectedGameObjectCardBox { get; set; }
 //        public Image SelectedIconImage { get; set; }

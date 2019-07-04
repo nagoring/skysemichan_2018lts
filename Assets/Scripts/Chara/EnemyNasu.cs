@@ -23,6 +23,7 @@ namespace Skysemi.With.Chara
 //            this.Atk = 5;
             this.Atk = 1;
             this.Def = 0;
+            this.Agi = 0;
             this.Spirit = 1;
             this.MaxSpirit = 0;
             this.exp =4;
