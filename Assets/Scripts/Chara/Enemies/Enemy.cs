@@ -4,9 +4,9 @@ using Skysemi.With.Enum;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Skysemi.With.Chara
+namespace Skysemi.With.Chara.Enemies
 {
-	public class Enemy : MonoBehaviour, IChara
+	abstract public class Enemy : MonoBehaviour, IChara
 	{
 		public CharaParameter param;
 		public int Hp{get {return param.hp;}set{param.hp = value;}}
@@ -140,6 +140,7 @@ namespace Skysemi.With.Chara
 		{
 		}
 		public void SayAtkAfter(IChara target){}
-		
+		public abstract string GetImageFilePath();
+		public abstract string GetPrefabFilePath();
 	}
 }

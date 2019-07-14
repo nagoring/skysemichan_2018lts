@@ -22,10 +22,10 @@ namespace Skysemi.With.CardUI
             bool active = cardBoardUi.gameObject.activeSelf;
             cardBoardUi.gameObject.SetActive(!active);
 
-            EquipmentCardField equipmentCardField = cardUiController.GetEquipmentCardField();
-            equipmentCardField.SelectedCardBoxIndex = index;
-            equipmentCardField.SelectedGameObjectCardBox = transform.gameObject;
-            equipmentCardField.SelectedIconImage = iconImage;
+            EquipmentCardFieldUi equipmentCardFieldUi = cardUiController.GetEquipmentCardField();
+            equipmentCardFieldUi.SelectedCardBoxIndex = index;
+            equipmentCardFieldUi.SelectedGameObjectCardBox = transform.gameObject;
+            equipmentCardFieldUi.SelectedIconImage = iconImage;
             
 
         }

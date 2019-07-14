@@ -100,7 +100,7 @@ namespace Skysemi.With.Events
 //	{
 //		game.isBoss = false;
 //		game.PlayMusicBattle();
-//		game.mode = EMode.BATTLE;
+//		game.mode = EWorldMode.BATTLE;
 //		WayEventParam param = new WayEventParam();
 //		this.WayEvent(param);
 //	}
@@ -110,7 +110,7 @@ namespace Skysemi.With.Events
 //
 //		game.PlayMusicBossBattle();
 //		
-//		game.mode = EMode.BATTLE;
+//		game.mode = EWorldMode.BATTLE;
 //		WayEventParam param = new WayEventParam();
 //		this.WayEvent(param);
 //	}
@@ -127,10 +127,10 @@ namespace Skysemi.With.Events
 //		
 //		BattleEndEventParam param = new BattleEndEventParam();
 //		this.BattleEndEvent(param);
-//		game.mode = EMode.WALKING;
+//		game.mode = EWorldMode.WALKING;
 //		if (!game.isBoss) return;
 //		
-//		game.mode = EMode.BOSS_BATTLE_AFTER;
+//		game.mode = EWorldMode.BOSS_BATTLE_AFTER;
 //		StartCoroutine(this.DelayMethod(2.3f, () =>
 //		{
 //			game.skysemiChanMsg.msgOther[EMsgOther.BossRingo]();
@@ -148,7 +148,7 @@ namespace Skysemi.With.Events
 //	{
 //		game.PlayMusicField();
 //		Player.instance.InitProgress();
-//		game.mode = EMode.WALKING;
+//		game.mode = EWorldMode.WALKING;
 //		game.GoHomeForLoser();
 ////		this.BattleEndEventForLoser();
 //	}
@@ -156,7 +156,7 @@ namespace Skysemi.With.Events
 //	public void DoBattleEndEventForEscape()
 //	{
 //		game.PlayMusicField();
-//		game.mode = EMode.WALKING;
+//		game.mode = EWorldMode.WALKING;
 //		BattleEndEventParam param = new BattleEndEventParam();
 //		this.BattleEndEventForEscape(param);
 //	}	

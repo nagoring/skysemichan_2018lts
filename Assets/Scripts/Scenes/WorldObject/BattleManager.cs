@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Skysemi.With.Chara;
+using Skysemi.With.Chara.Enemies;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
 using UnityEngine;
@@ -144,7 +145,7 @@ namespace Skysemi.With.Scenes.WorldObject
 		/// </summary>
 		void BattleEndForLoser()
 		{
-			_world.Mode = EMode.WALKING;
+			_world.WorldMode = EWorldMode.WALKING;
 //			SoundManager.instance.PlaySingle(game.clipLoser);
 //			//スカゼミちゃんメッセージ
 //			game.skysemiChanMsg.msgOther[EMsgOther.BattleLoser]();
@@ -157,7 +158,7 @@ namespace Skysemi.With.Scenes.WorldObject
 		/// </summary>
 		public void BattleEndForEscape()
 		{
-			_world.Mode = EMode.WALKING;
+			_world.WorldMode = EWorldMode.WALKING;
 //			SoundManager.instance.PlaySingle(game.clipEscape);
 //			game.skysemiChanMsg.msgOther[EMsgOther.BattleEscape]();
 //			StartCoroutine(this.DelayMethod(0.5f, () =>
@@ -204,14 +205,14 @@ namespace Skysemi.With.Scenes.WorldObject
 
 		public void PushBtnEscape()
 		{
-			if (_world.Mode != EMode.BATTLE) return;
+			if (_world.WorldMode != EWorldMode.BATTLE) return;
 			if (eBattleStatus != EBattleStatus.IDLE) return;
 //			//戦闘中だったら逃げ出す
 			eBattleStatus = EBattleStatus.ESCAPE;
 //			//boss戦だったら拠点に帰る
 //			if (game.isBoss)
 //			{
-//				_world.Mode = EMode.WALKING;
+//				_world.WorldMode = EWorldMode.WALKING;
 //				SoundManager.instance.PlaySingle(game.clipEscape);
 //				game.skysemiChanMsg.msgOther[EMsgOther.BossEscape]();
 //				StartCoroutine(this.DelayMethod(2.0f, () =>

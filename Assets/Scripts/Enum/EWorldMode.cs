@@ -1,6 +1,6 @@
 ﻿namespace Skysemi.With.Enum
 {
-    public enum EMode
+    public enum EWorldMode
     {
         WALKING = 0,
         BATTLE = 1,

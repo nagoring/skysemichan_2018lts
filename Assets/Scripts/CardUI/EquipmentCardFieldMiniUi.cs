@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Skysemi.With.Core;
-using Skysemi.With.CardUI;
 
 namespace Skysemi.With.CardUI
 {
-    public class EquipmentCardFieldMini : MonoBehaviour, IEquipmentCardField
+    public class EquipmentCardFieldMiniUi : MonoBehaviour, Skysemi.With.CardUI.IEquipmentCardFieldUi
     {
-        private const string PrefabPath = "Prefabs/CardUI/EquipmentCardFieldMini";
+        private const string PrefabPath = "Prefabs/CardUI/EquipmentCardFieldMiniUi";
         private readonly float[] _xTbl = {-50, 50, -50, 50};
         private readonly float[] _yTbl = {45, 45, -70, -70};
 //        public int SelectedCardBoxIndex { get; set; }
@@ -23,7 +22,7 @@ namespace Skysemi.With.CardUI
         /// <param name="parentTransform">親となるTransform</param>
         /// </summary>
         private ActionCards.ABase[] _actionCard = new ActionCards.ABase[4];
-        public static EquipmentCardFieldMini CreateEquipmentCardFieldMiniInParentTransform(Transform parentTransform, float x = 0, float y = -125)
+        public static EquipmentCardFieldMiniUi CreateEquipmentCardFieldMiniInParentTransform(Transform parentTransform, float x = 0, float y = -125)
         {
             GameObject obj = (GameObject)Resources.Load (PrefabPath);
             obj.SetActive(true);
@@ -32,7 +31,7 @@ namespace Skysemi.With.CardUI
             instance.transform.parent = parentTransform;
             instance.transform.localScale = new Vector3(1,1,1);
             instance.transform.localPosition = new Vector3(x, y, 0);
-            EquipmentCardFieldMini equipmentCardFiled = instance.GetComponent<EquipmentCardFieldMini>();
+            EquipmentCardFieldMiniUi equipmentCardFiled = instance.GetComponent<EquipmentCardFieldMiniUi>();
             equipmentCardFiled.Init();
             return equipmentCardFiled;
         }

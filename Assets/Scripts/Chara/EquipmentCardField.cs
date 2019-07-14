@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Skysemi.With.ActionCards;
+using Skysemi.With.CardUI;
 using UnityEngine;
 
 namespace Skysemi.With.Chara
 {
-    public class EquipmentCardField : IEquipmentCardField
+    public class EquipmentCardField : IEquipmentCardFieldChara
     {
         private ActionCards.ABase[] _actionCardArray;
         private const int EquipmentLength = 4;

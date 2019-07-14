@@ -5,6 +5,6 @@ namespace Skysemi.With.Scenes
     public interface IPlayerCardUiController
     {
         CardBoard GetCardBoard();
-        EquipmentCardField GetEquipmentCardField();
+        EquipmentCardFieldUi GetEquipmentCardField();
     }
 }

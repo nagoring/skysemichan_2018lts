@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
 	}
 //	public void PushGoFrontButton()
 //	{
-//		if (game.mode == EMode.BOSS_BATTLE_AFTER) return;
+//		if (game.mode == EWorldMode.BOSS_BATTLE_AFTER) return;
 //		if (GameSystem.instance.destinationPlace == EStage.OTHER_STAGE1)
 //		{
 //			SoundManager.instance.PlaySingle(game.clipSoundWalking);
@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
 //		game.CheckingProgress();
 //	}
 //	public void EncountEnemeyBegin(WayEventParam param) {
-//		if (game.mode != EMode.BATTLE) return;
+//		if (game.mode != EWorldMode.BATTLE) return;
 //		//GoFrontButton stop
 //		buttonGoFront.SetActive(false);
 //		//ActionCommand Begin

@@ -1,7 +1,7 @@
-﻿using Boo.Lang;
-using Skysemi.With.ActionCards;
+﻿using Skysemi.With.ActionCards;
 using Skysemi.With.CardUI;
 using Skysemi.With.Chara;
+using Skysemi.With.Chara.Enemies;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
 using Skysemi.With.Events;
@@ -9,7 +9,6 @@ using Skysemi.With.Scenes.WorldObject;
 using StatusUI;
 using UnityEngine;
 using UnityEngine.UI;
-using EquipmentCardField = Skysemi.With.CardUI.EquipmentCardField;
 
 namespace Skysemi.With.Scenes
 {
@@ -18,19 +17,22 @@ namespace Skysemi.With.Scenes
 		public static World instance;
 		public static Game game;
 	    private CardBoard _cardBoard;
-	    private Skysemi.With.CardUI.EquipmentCardField _equipmentCardField;
+	    private Skysemi.With.CardUI.EquipmentCardFieldUi _equipmentCardFieldUi;
 	    private PlayerStatusWindow _playerStatusWindow;
-	    private Skysemi.With.CardUI.EquipmentCardFieldMini _equipmentCardFieldMini;
+	    private Skysemi.With.CardUI.EquipmentCardFieldMiniUi _equipmentCardFieldMiniUi;
 	    public GameObject enemyLayer;
 	    public Canvas canvasUI;
 	    public Image enemyStatusWindow;
+	    public GameObject buttonGoFront;
 
 
-	    public EMode Mode {get;set;}
-	    private EMode _mode = EMode.WALKING;
+	    public EWorldMode WorldMode {get;set;}
+	    private EWorldMode _worldMode = EWorldMode.WALKING;
 	    public Sprite[] imageRoads = new Sprite[3];
 
 		public Image roadLayer;
+		private int _randomEncount = 5;
+		private bool _isBoss = false;
 
 //		public SkysemiChanManager skysemiChanManager;
 //		public SkysemiChanMsg skysemiChanMsg;
@@ -41,13 +43,12 @@ namespace Skysemi.With.Scenes
 		public EffectManager effectManager;
 //		public Image imageFlatLand;
 //		public Sprite imageFlatLandEveningSprite;
-//		public GameObject enemeyLayer;
 //		public Canvas canvas;
 //		public Sprite[] imageRoads = new Sprite[3];
 
 
 //		public ETurn turn = ETurn.PLAYER;
-//		public bool isBoss = false;
+//		public bool _isBoss = false;
 //	
 //		//効果音
 //		public AudioClip clipPanch;
@@ -65,7 +66,7 @@ namespace Skysemi.With.Scenes
 //		public AudioClip musicBladeRobo;
 //		public AudioClip musicStage4Boss;
 //		
-//		private int randomEncount = 5;
+//		private int _randomEncount = 5;
 //		//エフェクト
 //		public GameObject damageEffect1Prefab;
 //		
@@ -97,8 +98,8 @@ namespace Skysemi.With.Scenes
 			_cardBoard = CardBoard.CreateCardBoardInCanvasUI(canvasUI);
 			_cardBoard.Init();
 			_cardBoard.gameObject.SetActive(false);
-			_equipmentCardField = EquipmentCardField.CreateEquipmentCardFieldInCanvas(canvasUI, -240, -300);
-			_equipmentCardField.Init();
+			_equipmentCardFieldUi = EquipmentCardFieldUi.CreateEquipmentCardFieldInCanvas(canvasUI, -240, -300);
+			_equipmentCardFieldUi.Init();
 			
 			
 			EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
@@ -113,13 +114,14 @@ namespace Skysemi.With.Scenes
 			game.FireEvent(EEvent.SyncPlayerStatus, new BaseEventArgs(syncStatusEventArgs));
 			
 			//＊実験＊ 敵の装備をセットする
-			_equipmentCardFieldMini = EquipmentCardFieldMini.CreateEquipmentCardFieldMiniInParentTransform(enemyStatusWindow.transform, 0, -125f);
-			game.enemyManager.Init(gameObject.AddComponent<EnemyNasu>(), _equipmentCardFieldMini);
-			game.enemyManager.Equip(0, gameObject.AddComponent<NasuHeart>());
-			game.enemyManager.Equip(1, gameObject.AddComponent<MagicAddMaxHp>());
-			game.enemyManager.Equip(2, gameObject.AddComponent<Punch>());
-			game.enemyManager.Equip(3, gameObject.AddComponent<Punch>());
-			game.enemyManager.SyncRecoveryHpInclude();
+			_equipmentCardFieldMiniUi = EquipmentCardFieldMiniUi.CreateEquipmentCardFieldMiniInParentTransform(enemyStatusWindow.transform, 0, -125f);
+//			Enemy enemy = game.enemyManager.CreateCharaObject(this, EChara.Nasu);
+//			game.enemyManager.Init(enemy, _equipmentCardFieldMiniUi);
+//			game.enemyManager.Equip(0, gameObject.AddComponent<NasuHeart>());
+//			game.enemyManager.Equip(1, gameObject.AddComponent<MagicAddMaxHp>());
+//			game.enemyManager.Equip(2, gameObject.AddComponent<Punch>());
+//			game.enemyManager.Equip(3, gameObject.AddComponent<Punch>());
+//			game.enemyManager.SyncRecoveryHpInclude();
 			
 			
 
@@ -134,7 +136,7 @@ namespace Skysemi.With.Scenes
 
 			
 			
-			_mode = EMode.WALKING;
+			_worldMode = EWorldMode.WALKING;
 			
 //			PlayerManager.instance.LoadData();
 //			Player player = Player.instance;
@@ -219,14 +221,14 @@ namespace Skysemi.With.Scenes
 //				return;
 //			}
 //			
-//			randomEncount--;
+//			_randomEncount--;
 //			if (player.Progress == 0) return;
 //			if (player.Progress == boss_encount_progress)
 //			{
 //				eventManager.EncountEnemyBoss();
 //			}
-//			else if(randomEncount <= 0){
-//				randomEncount = Random.Range(1, 8) + 10;
+//			else if(_randomEncount <= 0){
+//				_randomEncount = Random.Range(1, 8) + 10;
 //				eventManager.EncountEnemy();
 //			}
 //		}
@@ -279,13 +281,13 @@ namespace Skysemi.With.Scenes
 //		public void PushBtnItem()
 //		{
 //	//		GameMainManager game = GameMainManager.instance;
-//	//		if (game._mode != EMode.WALKING) return;
+//	//		if (game._worldMode != EWorldMode.WALKING) return;
 //	//		SkysemiChanMsg.instance.msgOther[EMsgOther.PushItem]();
 //		}
 //		public void PushBtnHome()
 //		{
 //	//		GameMainManager game = GameMainManager.instance;
-//	//		if (game._mode != EMode.WALKING) return;
+//	//		if (game._worldMode != EWorldMode.WALKING) return;
 //	//		SkysemiChanMsg.instance.msgOther[EMsgOther.PushHome]();
 //		}
 	    public ISceneController GetSelfController()
@@ -298,9 +300,9 @@ namespace Skysemi.With.Scenes
 		    return _cardBoard;
 	    }
 
-	    public EquipmentCardField GetEquipmentCardField()
+	    public EquipmentCardFieldUi GetEquipmentCardField()
 	    {
-		    return _equipmentCardField;
+		    return _equipmentCardFieldUi;
 	    }
 
 	    public PlayerStatusWindow GetPlayerStatusWindow()
@@ -310,7 +312,7 @@ namespace Skysemi.With.Scenes
 	    
 		public void PushGoFrontButton()
 		{
-//			if (game.mode == EMode.BOSS_BATTLE_AFTER) return;
+//			if (game.mode == EWorldMode.BOSS_BATTLE_AFTER) return;
 //			if (GameSystem.instance.destinationPlace == EStage.OTHER_STAGE1)
 //			{
 //				SoundManager.instance.PlaySingle(game.clipSoundWalking);
@@ -322,7 +324,74 @@ namespace Skysemi.With.Scenes
 			roadLayer.sprite = imageRoads[landIndex];
 			_playerStatusWindow.Progress.text = player.Progress.ToString();
 			player.NaturalHealingByWalk();
-//			game.CheckingProgress();
+			CheckingProgress();
 		}
+		public void CheckingProgress()
+		{
+			int boss_encount_progress = 100;
+			Player player = game.GetPlayer();
+			EStage eStage = game.destinationPlace;
+//			if (eStage == EStage.OTHER_STAGE1)
+//			{
+//				if (player.Progress == boss_encount_progress)
+//				{
+//					eventManager.EncountEnemyBoss();
+//				}
+//				return;
+//			}
+		
+			_randomEncount--;
+			if (player.Progress == 0) return;
+			if (player.Progress == boss_encount_progress)
+			{
+//				eventManager.EncountEnemyBoss();
+			}
+			else if(_randomEncount <= 0){
+//				_randomEncount = Random.Range(1, 8) + 10;
+				EncountEnemy();
+			}
+		}
+		public void EncountEnemy()
+		{
+			_isBoss = false;
+//			game.PlayMusicBattle();
+			_worldMode = EWorldMode.BATTLE;
+//			WayEventParam param = new WayEventParam();
+//			this.WayEvent(param);
+			EncountEvent();
+		}
+
+		private void EncountEvent()
+		{
+            if (WorldMode != EWorldMode.BATTLE) return;
+			game.enemyManager.createEnemy(this, _equipmentCardFieldMiniUi);
+			game.enemyManager.displayEnemy(enemyLayer);
+			EncountEnemeyBegin();
+//			this.WayEvent += game.uiManager.EncountEnemeyBegin;
+//			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
+
+		}
+
+		public Skysemi.With.CardUI.EquipmentCardFieldMiniUi equipmentCardFieldMini()
+		{
+			return _equipmentCardFieldMiniUi;
+		}
+		public void EncountEnemeyBegin() {
+			if (_worldMode != EWorldMode.BATTLE) return;
+			//GoFrontButton stop
+			buttonGoFront.SetActive(false);
+			//ActionCommand Begin
+
+			//ナビゲーションウィンドウの作成
+//			btnNavigationWindow.SetActive(true);
+//			Text navText = btnNavigationWindow.GetComponentInChildren<Text>();
+//			navText.text = param.enemy.msg;
+//			navText.color = new Color(255, 0, 0);
+//
+//			//攻撃用の戦闘の進行ボタンを作成
+//			btnBattleFlow.SetActive(true);
+//			game.turn = ETurn.PLAYER;
+		}
+		
     }
 }

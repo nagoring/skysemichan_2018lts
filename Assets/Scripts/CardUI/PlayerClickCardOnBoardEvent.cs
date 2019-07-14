@@ -17,20 +17,20 @@ namespace Skysemi.With.CardUI
             //CardBoardを表示・非表示
             Game game = Game.instance;
             Skysemi.With.Scenes.IPlayerCardUiController cardUiController =  game.GetCardUiController();
-            EquipmentCardField equipmentCardField = cardUiController.GetEquipmentCardField();
-            int selectedIndex = equipmentCardField.SelectedCardBoxIndex;
+            EquipmentCardFieldUi equipmentCardFieldUi = cardUiController.GetEquipmentCardField();
+            int selectedIndex = equipmentCardFieldUi.SelectedCardBoxIndex;
             if (selectedIndex > 3)
             {
                 selectedIndex = 0;
             }
             ActionCards.ABase actoinCard = GetComponent<ActionCards.ABase>();
-            equipmentCardField.Equip(selectedIndex, actoinCard);
+            equipmentCardFieldUi.Equip(selectedIndex, actoinCard);
             cardUiController.GetCardBoard().gameObject.SetActive(false);
             
             //イベントを発火させる
 //            EquipmentCardFieldにあるActionCardを計算するイベントを発生させる
-//            EquipmentCardBoxUi[] equipmentCardBoxs = equipmentCardField.GetEquipmentCardBoxs();
-            CalculateActionCardsEventArgs calculateActionCardsEventArgs = new CalculateActionCardsEventArgs(equipmentCardField);
+//            EquipmentCardBoxUi[] equipmentCardBoxs = equipmentCardFieldUi.GetEquipmentCardBoxs();
+            CalculateActionCardsEventArgs calculateActionCardsEventArgs = new CalculateActionCardsEventArgs(equipmentCardFieldUi);
             game.FireEvent(EEvent.CalculateActionCards, new BaseEventArgs(calculateActionCardsEventArgs));
             
             //計算後PlayerStatusUiに反映させる

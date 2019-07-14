@@ -1,6 +1,6 @@
 namespace Skysemi.With.CardUI
 {
-    public interface IEquipmentCardField
+    public interface IEquipmentCardFieldUi
     {
         ActionCards.ABase GetActionCard(int index);
         ActionCards.ABase[] GetActionCards();

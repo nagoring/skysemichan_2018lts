@@ -10,9 +10,9 @@ namespace Skysemi.With.CardUI
     /// 装備の管理
     /// 画像の切り替え
     /// </summary>
-    public class EquipmentCardField : MonoBehaviour, IEquipmentCardField
+    public class EquipmentCardFieldUi : MonoBehaviour, IEquipmentCardFieldUi
     {
-        private const string PrefabPath = "Prefabs/CardUI/EquipmentCardField";
+        private const string PrefabPath = "Prefabs/CardUI/EquipmentCardFieldUi";
         private readonly float[] _xTbl = {-300, -100, 100, 300};
         public int SelectedCardBoxIndex { get; set; }
         public GameObject SelectedGameObjectCardBox { get; set; }
@@ -24,7 +24,7 @@ namespace Skysemi.With.CardUI
         void Start()
         {
         }
-        public static EquipmentCardField CreateEquipmentCardFieldInCanvas(Canvas canvasUi, float x = -240, float y = -300)
+        public static EquipmentCardFieldUi CreateEquipmentCardFieldInCanvas(Canvas canvasUi, float x = -240, float y = -300)
         {
             GameObject obj = (GameObject)Resources.Load (PrefabPath);
             obj.SetActive(true);
@@ -33,7 +33,7 @@ namespace Skysemi.With.CardUI
             instance.transform.parent = canvasUi.transform;
             instance.transform.localScale = new Vector3(1,1,1);
             instance.transform.localPosition = new Vector3(x, y, 0);
-            return instance.GetComponent<EquipmentCardField>();
+            return instance.GetComponent<EquipmentCardFieldUi>();
         }
 
         /// <summary>

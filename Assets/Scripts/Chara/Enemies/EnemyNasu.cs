@@ -4,7 +4,7 @@ using Skysemi.With.Chara;
 using Skysemi.With.Enum;
 using UnityEngine;
 
-namespace Skysemi.With.Chara
+namespace Skysemi.With.Chara.Enemies
 {
     public class EnemyNasu : Enemy {
 
@@ -45,6 +45,16 @@ namespace Skysemi.With.Chara
         // Update is called once per frame
         void Update () {
 		
+        }
+
+        public override string GetImageFilePath()
+        {
+            return "Enemies/nasu";
+        }
+
+        public override string GetPrefabFilePath()
+        {
+            throw new System.NotImplementedException();
         }
     }
 

@@ -52,7 +52,7 @@ namespace StatusUI
             int atk = args.CharaParameter.atk;
             int def = args.CharaParameter.def;
             int agi = args.CharaParameter.agi;
-//            Skysemi.With.ActionCards.ABase[] actionCards = args.EquipmentCardField.GetActionCards();
+//            Skysemi.With.ActionCards.ABase[] actionCards = args.EquipmentCardFieldUi.GetActionCards();
 //            foreach (Skysemi.With.ActionCards.ABase card in actionCards)
 //            {
 //                Debug.Log(atk);

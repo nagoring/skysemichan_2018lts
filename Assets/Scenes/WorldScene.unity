@@ -610,12 +610,14 @@ MonoBehaviour:
   enemyLayer: {fileID: 349938821}
   canvasUI: {fileID: 1431727013}
   enemyStatusWindow: {fileID: 2064606522}
+  buttonGoFront: {fileID: 0}
   imageRoads:
   - {fileID: 21300000, guid: 9c1c317961a3c11479799a0cea37f3cb, type: 3}
   - {fileID: 21300000, guid: d88f38fca52517a47a217e0189aac81c, type: 3}
   - {fileID: 21300000, guid: 3a820c88f18ef1e4b8283fb3bd1e0346, type: 3}
   roadLayer: {fileID: 164669384}
   effectManager: {fileID: 1083265014}
+  enemeyLayer: {fileID: 1947591943}
 --- !u!4 &1005927881
 Transform:
   m_ObjectHideFlags: 0

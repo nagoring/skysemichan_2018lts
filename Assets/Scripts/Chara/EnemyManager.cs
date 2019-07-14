@@ -1,20 +1,28 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 using Skysemi.With.ActionCards;
 using Skysemi.With.CardUI;
+using Skysemi.With.Chara.Enemies;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
 using Skysemi.With.Events;
+using Skysemi.With.Scenes;
+using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace Skysemi.With.Chara
 {
-    public class EnemyManager : CardUI.IEquipmentCardField
+    public class EnemyManager : CardUI.IEquipmentCardFieldUi
     {
-        private Skysemi.With.CardUI.IEquipmentCardField _equipmentCardField;
+        private Skysemi.With.CardUI.IEquipmentCardFieldUi _equipmentCardFieldUi;
         private Enemy _enemy;
+//        private GameObject _enemyGameObject;
 
-        public void Init(Enemy enemy, Skysemi.With.CardUI.IEquipmentCardField equipmentCardFieldMini)
+        public void Init(Enemy enemy, Skysemi.With.CardUI.IEquipmentCardFieldUi equipmentCardFieldUiMini)
         {
             _enemy = enemy;
-            _equipmentCardField = equipmentCardFieldMini;
+            _equipmentCardFieldUi = equipmentCardFieldUiMini;
         }
         
 
@@ -25,22 +33,22 @@ namespace Skysemi.With.Chara
 
         public ABase GetActionCard(int index)
         {
-            return _equipmentCardField.GetActionCard(index);
+            return _equipmentCardFieldUi.GetActionCard(index);
         }
 
         public ABase[] GetActionCards()
         {
-            return _equipmentCardField.GetActionCards();
+            return _equipmentCardFieldUi.GetActionCards();
         }
 
         public void Equip(int index, ActionCards.ABase actionCard)
         {
-            _equipmentCardField.Equip(index, actionCard);
+            _equipmentCardFieldUi.Equip(index, actionCard);
         }
 
-        private void SetEquipmentCardField(Skysemi.With.CardUI.IEquipmentCardField equipmentCardField)
+        private void SetEquipmentCardField(Skysemi.With.CardUI.IEquipmentCardFieldUi equipmentCardFieldUi)
         {
-            _equipmentCardField = equipmentCardField;
+            _equipmentCardFieldUi = equipmentCardFieldUi;
         }
 
         /// <summary>
@@ -93,10 +101,10 @@ namespace Skysemi.With.Chara
         /// </summary>
         public void SyncRecoveryHpInclude()
         {
-            Skysemi.With.CardUI.IEquipmentCardField equipmentCardField = _equipmentCardField;
-            SetEquipmentCardField(equipmentCardField);
+            Skysemi.With.CardUI.IEquipmentCardFieldUi equipmentCardFieldUi = _equipmentCardFieldUi;
+            SetEquipmentCardField(equipmentCardFieldUi);
             Game game = Game.instance;
-            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardField)));
+            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardFieldUi)));
             RecoveryHp();
             game.FireEvent(EEvent.SyncEnemyStatus, new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
         }
@@ -105,12 +113,41 @@ namespace Skysemi.With.Chara
         /// </summary>
         public void Sync()
         {
-            Skysemi.With.CardUI.IEquipmentCardField equipmentCardField = _equipmentCardField;
-            SetEquipmentCardField(equipmentCardField);
+            Skysemi.With.CardUI.IEquipmentCardFieldUi equipmentCardFieldUi = _equipmentCardFieldUi;
+            SetEquipmentCardField(equipmentCardFieldUi);
             Game game = Game.instance;
-            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardField)));
+            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardFieldUi)));
             game.FireEvent(EEvent.SyncEnemyStatus, new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
         }
-        
+
+        public void createEnemy(MonoBehaviour mono, IEquipmentCardFieldUi inEquipmentCardFieldUi)
+        {
+            EnemyFactory enemyFactory = EnemyFactory.GetInstance();
+            Enemy targetEnemy = enemyFactory.Factory(mono);
+            Init(targetEnemy, inEquipmentCardFieldUi);
+            Equip(0, mono.gameObject.AddComponent<NasuHeart>());
+            Equip(1, mono.gameObject.AddComponent<MagicAddMaxHp>());
+            Equip(2, mono.gameObject.AddComponent<Punch>());
+            Equip(3, mono.gameObject.AddComponent<Punch>());
+            SyncRecoveryHpInclude();
+
+            
+            
+//            Game game = Game.instance;
+//            if (world.WorldMode != EWorldMode.BATTLE) return;
+//            imageEnemeyStatusWindow.SetActive(true);
+        }
+
+        public void displayEnemy(GameObject enemeyLayer)
+        {
+            Enemy enemy = GetEnemy();
+            Sprite sprite = Resources.Load<Sprite>(enemy.GetImageFilePath());
+            Image childImage = enemeyLayer.GetComponent<Image>();
+            childImage.sprite = sprite;
+            childImage.SetAlpha( 1.0f );
+            enemy.gameObject.SetActive(true);
+            enemy.gameObject.transform.SetParent(enemeyLayer.transform, false);
+            enemeyLayer.SetActive(true);
+        }
     }
 }

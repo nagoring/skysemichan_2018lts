@@ -1,6 +1,5 @@
 using Skysemi.With.CardUI;
 using Skysemi.With.Chara;
-using IEquipmentCardField = Skysemi.With.CardUI.IEquipmentCardField;
 
 namespace Skysemi.With.Events
 {
@@ -11,7 +10,7 @@ namespace Skysemi.With.Events
             CharaParameter = _charaParameter;
         }
         public CharaParameter CharaParameter { get; set; } 
-//        public IEquipmentCardField EquipmentCardField { get; set; } 
+//        public IEquipmentCardFieldUi EquipmentCardFieldUi { get; set; } 
 
     }
 }
