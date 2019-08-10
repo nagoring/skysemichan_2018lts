@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
 //	public void EncountEnemeyBegin(WayEventParam param) {
 //		if (game.mode != EWorldMode.BATTLE) return;
 //		//GoFrontButton stop
-//		buttonGoFront.SetActive(false);
+//		btnGoFront.SetActive(false);
 //		//ActionCommand Begin
 //
 //		//ナビゲーションウィンドウの作成
@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
 //	}
 //	public void EncountEnemeyEnd(BattleEndEventParam param) {
 //		//GoFrontButton Begin
-//		buttonGoFront.SetActive(true);
+//		btnGoFront.SetActive(true);
 //		//ActionCommand End
 //		btnNavigationWindow.SetActive(false);
 //		btnBattleFlow.SetActive(false);

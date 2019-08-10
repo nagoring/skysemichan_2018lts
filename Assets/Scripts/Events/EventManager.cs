@@ -31,8 +31,13 @@ namespace Skysemi.With.Events
 //            this.RemoveEventer(EEvent.SyncPlayerStatus, playerStatusWindow.SyncPlayerStatusReceiver);
         }
 
-        public void AddSenderEvent(EEvent eventKey, IEventSender iEventSender)
+        public void AddSenderEvent(EEvent eventKey, IEventSender iEventSender = null)
         {
+            if (iEventSender == null)
+            {
+                iEventSender = new StandartEventSender();
+            }
+            
             if (_eventSenderDictionary.ContainsKey(eventKey) == false)
             {
                 _eventSenderDictionary.Add(eventKey, iEventSender);

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Skysemi.With.Chara;
 using Skysemi.With.Chara.Enemies;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
@@ -11,7 +10,7 @@ namespace Skysemi.With.Scenes.WorldObject
 	{
 		public static BattleManager instance = null;
 		private World _world = World.instance;
-		public Game game;
+		private Game game = Game.instance;
 		private Enemy enemy;
 		private List<IChara> charaActOrderList;
 
@@ -229,6 +228,171 @@ namespace Skysemi.With.Scenes.WorldObject
 //				BattleEndForEscape();
 //			}
 		}
+//	private void ToTarget(IChara actionChara, IChara targetChara)
+//	{
+//		//行動アニメーション
+//		actionChara.PlayActionAnimation();
+//		//行動効果音
+//		actionChara.PlayActionSound();
+//		
+//		//アニメーションの待ち時間
+//		float wait = actionChara.GetWaitTimeByAnimation();
+//		StartCoroutine(this.DelayMethod(wait, () =>
+//		{
+//			//行動による結果
+//			actionChara.Act(targetChara);
+//
+//			StartCoroutine(this.DelayMethod(0.8f, () =>
+//			{
+//			}));
+//
+//		}));
+//	}
+	
+//	private void TurnPlayer() {
+//		Player player = Player.instance;
+//		Enemy enemy = game.enemyManager.enemy;
+//		//攻撃アニメーション
+//		StartCoroutine(game.effectManager.attackPunchAnimation());
+//		SoundManager.instance.PlaySingleRepeat(game.clipPanch, 3, 0.3f);
+//
+//		//0.3秒後に実行する
+//		StartCoroutine(this.DelayMethod(0.3f, () =>
+//		{
+//			//ダメージ処理
+//			int damage = AttackPlayerToEnemy(player, enemy);
+//			enemy.hp -= damage;
+//			game.enemyManager.hp.text = enemy.hp.ToString();
+//
+//			//ナビゲーションメッセージ
+//			Text navText = game.uiManager.btnNavigationWindow.GetComponentInChildren<Text>();
+//			navText.color = new Color(0, 0, 0);
+//			navText.text = string.Format("{0}は{1}のダメージをうけた", enemy.enemyName, damage);
+//
+//			StartCoroutine(this.DelayMethod(0.8f, () =>
+//			{
+//				//敵の死亡判定
+//				if (IsDeadEnemy(enemy))
+//				{
+//					//戦闘終了へ
+//					game.eventManager.DoBattleEndEvent();
+//					return;
+//				}
+//				//敵のメッセージ
+//				game.enemyManager.sayDamageAfterMsg(enemy);
+//				//敵のターンへ
+//				game.turn = ETurn.ENEMY;
+//				StartCoroutine(this.DelayMethod(0.5f, () =>
+//				{
+//					TurnEnemy();
+//				}));
+//			}));
+//		}));
+//	}
+//	private int AttackPlayerToEnemy(Player player, Enemy enemy) {
+//		int damage = player.atk - enemy.def;
+//		damage += (int)Random.Range(-3.0f, 3.0f);
+//		if (damage < 0) damage = 0;
+//		return damage;
+//	}
+//	private bool IsDeadEnemy(Enemy enemy) {
+//		return enemy.hp <= 0;
+//	}
+
+//	private void TurnEnemy() {
+//		Player player = Player.instance;
+//		
+//		Enemy enemy = game.enemyManager.enemy;
+//		//攻撃アニメーション
+//		StartCoroutine(game.effectManager.attackAnimationNormalByEnemy());
+//		//0.3秒後に実行する
+//		StartCoroutine(this.DelayMethod(0.3f, () =>
+//		{
+//			//ダメージ処理
+//			int damage = AttackEnemyToPlayer(enemy, player);
+//			player.hp -= damage;
+//			game.playerManager.textHp.text = player.hp.ToString();
+//
+//			//ナビゲーションメッセージ
+//			Text navText = game.uiManager.btnNavigationWindow.GetComponentInChildren<Text>();
+//			navText.color = new Color(0, 0, 0);
+//			navText.text = string.Format("{0}は{1}のダメージをうけた", player.playerName, damage);
+//
+//			//プレイヤーの死亡判定
+//			if (IsDeadPlayer(player))
+//			{
+//				//戦闘終了へ
+//				//スカゼミちゃんメッセージ
+//				//ナビゲーションメッセージ
+//				return;
+//			}
+//			////スカゼミちゃんのターンへ
+//			game.turn = ETurn.SKYSEMICHAN;
+//			TurnSkysemiChan();
+//		}));
+//
+//	}
+//	private int AttackEnemyToPlayer(Enemy enemy, Player player) {
+//		int damage = enemy.atk - player.def;
+//		damage += (int)Random.Range(-3.0f, 3.0f);
+//		if (damage < 0) damage = 0;
+//		return damage;
+//	}
+//	private bool IsDeadPlayer(Player player) {
+//		return player.hp <= 0;
+//	}
+//
+//	private void TurnSkysemiChan() {
+//		Player player = Player.instance;
+//		Enemy enemy = game.enemyManager.enemy;
+//		SkysemiChan skysemiChan = game.skysemiChanManager.skysemiChan;
+//		//スカゼミちゃんのメッセージ
+//		game.skysemiChanMsg.msgAttakDict[enemy.Id]();
+//		//0.3秒後に実行する
+//		StartCoroutine(this.DelayMethod(0.5f, () => {
+//			//攻撃アニメーション
+//			StartCoroutine(game.effectManager.attackPunchAnimation());
+//			SoundManager.instance.PlaySingleRepeat(game.clipPanch, 3, 0.2f);
+//			
+//			StartCoroutine(this.DelayMethod(0.3f, () => {
+//				//ダメージ処理
+//				int damage = AttackSkysemiChanToEnemy(skysemiChan, enemy);
+//				enemy.hp -= damage;
+//				game.enemyManager.hp.text = enemy.hp.ToString();
+//
+//				//ナビゲーションメッセージ
+//				Text navText = game.uiManager.btnNavigationWindow.GetComponentInChildren<Text>();
+//				navText.color = new Color(0, 0, 0);
+//				navText.text = string.Format("{0}は{1}のダメージをうけた", enemy.enemyName, damage);
+//				game.skysemiChanMsg.msgAttakEndDict[enemy.Id]();
+//
+//				StartCoroutine(this.DelayMethod(0.8f, () =>
+//				{
+//					GameMainManager _game = GameMainManager.instance;
+//					Enemy _enemy = _game.enemyManager.enemy;
+//					//敵の死亡判定
+//					if (IsDeadEnemy(_enemy))
+//					{
+//						//スカゼミちゃんメッセージ
+//						_game.skysemiChanMsg.msgBattleWinner[_enemy.Id](this);
+//						//戦闘終了へ
+//						_game.eventManager.DoBattleEndEvent();
+//						return;
+//					}
+//					_game.skysemiChanMsg.msgPlayerTurnInBattle[_enemy.Id](this);
+//					//敵が生きていればプレイヤーのターンへ
+//					_game.turn = ETurn.PLAYER;
+//				}));
+//			}));
+//		}));
+//	}
+//	private int AttackSkysemiChanToEnemy(SkysemiChan skysemiChan, Enemy enemy) {
+//		//ダメージ処理
+//		int damage = skysemiChan.atk - enemy.def;
+//		damage += (int)Random.Range(0.0f, 6.0f);
+//		if(damage < 0)damage = 0;
+//		return damage;
+//	}
 	}
 }
 

@@ -8,11 +8,13 @@ using Skysemi.With.Events;
 using Skysemi.With.Scenes.WorldObject;
 using StatusUI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Skysemi.With.Scenes
 {
-    public class World : AppMonoBehaviour, ISceneController, IPlayerCardUiController, IPlayerStatusWindow
+    public class World : AppMonoBehaviour, ISceneController, IPlayerCardUiController, 
+	    IPlayerStatusWindow,IGoFrontStateChangeParameter, ISetUpEnemy
     {
 		public static World instance;
 		public static Game game;
@@ -23,15 +25,16 @@ namespace Skysemi.With.Scenes
 	    public GameObject enemyLayer;
 	    public Canvas canvasUI;
 	    public Image enemyStatusWindow;
-	    public GameObject buttonGoFront;
-
+	    [FormerlySerializedAs("buttonGoFront")] public GameObject btnGoFront;
+	    public GameObject btnNavigationWindow;
+	    public GameObject btnBattleFlow;
 
 	    public EWorldMode WorldMode {get;set;}
 	    private EWorldMode _worldMode = EWorldMode.WALKING;
 	    public Sprite[] imageRoads = new Sprite[3];
 
 		public Image roadLayer;
-		private int _randomEncount = 5;
+//		private int _randomEncount = 5;
 		private bool _isBoss = false;
 
 //		public SkysemiChanManager skysemiChanManager;
@@ -41,12 +44,16 @@ namespace Skysemi.With.Scenes
 //		public UIManager uiManager;
 //		public PlayerManager playerManager;
 		public EffectManager effectManager;
+
+		private ISetUpEnemy _setUpEnemyImplementation;
 //		public Image imageFlatLand;
 //		public Sprite imageFlatLandEveningSprite;
 //		public Canvas canvas;
 //		public Sprite[] imageRoads = new Sprite[3];
 
+		private ETurn _turn = ETurn.PLAYER;
 
+		private IEncountRule _encountRule;
 //		public ETurn turn = ETurn.PLAYER;
 //		public bool _isBoss = false;
 //	
@@ -137,6 +144,7 @@ namespace Skysemi.With.Scenes
 			
 			
 			_worldMode = EWorldMode.WALKING;
+			_encountRule = EncountRuleFactory.Create((IGoFrontStateChangeParameter)this);
 			
 //			PlayerManager.instance.LoadData();
 //			Player player = Player.instance;
@@ -324,33 +332,57 @@ namespace Skysemi.With.Scenes
 			roadLayer.sprite = imageRoads[landIndex];
 			_playerStatusWindow.Progress.text = player.Progress.ToString();
 			player.NaturalHealingByWalk();
-			CheckingProgress();
-		}
-		public void CheckingProgress()
-		{
-			int boss_encount_progress = 100;
-			Player player = game.GetPlayer();
-			EStage eStage = game.destinationPlace;
-//			if (eStage == EStage.OTHER_STAGE1)
-//			{
-//				if (player.Progress == boss_encount_progress)
-//				{
-//					eventManager.EncountEnemyBoss();
-//				}
-//				return;
-//			}
-		
-			_randomEncount--;
-			if (player.Progress == 0) return;
-			if (player.Progress == boss_encount_progress)
+			
+//			CheckingProgress();
+
+			/// encountRule EncountNormalRule
+			_encountRule.Run();
+			_worldMode = _encountRule.GetWorldMode();
+//			_randomEncount = _encountRule.GetRandomEncount();
+			_isBoss = _encountRule.IsBoss();
+			if (_encountRule.IsEncount())
 			{
-//				eventManager.EncountEnemyBoss();
-			}
-			else if(_randomEncount <= 0){
-//				_randomEncount = Random.Range(1, 8) + 10;
-				EncountEnemy();
+				_worldMode = _encountRule.GetWorldMode();
+				_encountRule.OutputEnemy(this);
+				btnGoFront.SetActive(false);
+//				btnNavigationWindow.SetActive(true);
+				btnBattleFlow.SetActive(true);
+				_turn = ETurn.PLAYER;
+				
+////			this.WayEvent += game.enemyManager.createEnemy;
+////			this.WayEvent += game.uiManager.EncountEnemeyBegin;
+////			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
+				
 			}
 		}
+//		public void CheckingProgress()
+//		{
+//			Debug.Log("CheckingProgress");
+//			int boss_encount_progress = 100;
+//			Player player = game.GetPlayer();
+//			EStage eStage = game.destinationPlace;
+////			if (eStage == EStage.OTHER_STAGE1)
+////			{
+////				if (player.Progress == boss_encount_progress)
+////				{
+////					eventManager.EncountEnemyBoss();
+////				}
+////				return;
+////			}
+//		
+//			_randomEncount--;
+//			Debug.Log(_randomEncount);
+//			if (player.Progress == 0) return;
+//			if (player.Progress == boss_encount_progress)
+//			{
+////				eventManager.EncountEnemyBoss();
+//			}
+//			else if(_randomEncount <= 0){
+//				_randomEncount = Random.Range(1, 8) + 10;
+//				Debug.Log("call EncountEnemy");
+//				EncountEnemy();
+//			}
+//		}
 		public void EncountEnemy()
 		{
 			_isBoss = false;
@@ -358,40 +390,107 @@ namespace Skysemi.With.Scenes
 			_worldMode = EWorldMode.BATTLE;
 //			WayEventParam param = new WayEventParam();
 //			this.WayEvent(param);
-			EncountEvent();
+//			EncountEvent();
 		}
+//		public void EncountEnemyBoss()
+//		{
+//			game.isBoss = true;
+//
+//			game.PlayMusicBossBattle();
+//		
+//			game.mode = EMode.BATTLE;
+//			WayEventParam param = new WayEventParam();
+//			this.WayEvent(param);
+//		}
 
-		private void EncountEvent()
-		{
-            if (WorldMode != EWorldMode.BATTLE) return;
-			game.enemyManager.createEnemy(this, _equipmentCardFieldMiniUi);
-			game.enemyManager.displayEnemy(enemyLayer);
-			EncountEnemeyBegin();
-//			this.WayEvent += game.uiManager.EncountEnemeyBegin;
-//			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
-
-		}
+//		private void EncountEvent()
+//		{
+//            if (_worldMode != EWorldMode.BATTLE) return;
+//			game.enemyManager.createEnemy(this, _equipmentCardFieldMiniUi);
+//			game.enemyManager.displayEnemy(enemyLayer);
+//			
+////			EncountEnemeyBegin(game.enemyManager.GetEnemy());
+////			this.WayEvent += game.enemyManager.createEnemy;
+////			this.WayEvent += game.uiManager.EncountEnemeyBegin;
+////			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
+//
+//		}
 
 		public Skysemi.With.CardUI.EquipmentCardFieldMiniUi equipmentCardFieldMini()
 		{
 			return _equipmentCardFieldMiniUi;
 		}
-		public void EncountEnemeyBegin() {
-			if (_worldMode != EWorldMode.BATTLE) return;
-			//GoFrontButton stop
-			buttonGoFront.SetActive(false);
-			//ActionCommand Begin
-
-			//ナビゲーションウィンドウの作成
+//		public void EncountEnemeyBegin(Enemy enemy) {
+//			if (_worldMode != EWorldMode.BATTLE) return;
+//			//GoFrontButton stop
+//			btnGoFront.SetActive(false);
+//			//ActionCommand Begin
+//
+//			//ナビゲーションウィンドウの表示
 //			btnNavigationWindow.SetActive(true);
 //			Text navText = btnNavigationWindow.GetComponentInChildren<Text>();
-//			navText.text = param.enemy.msg;
+//			navText.text = enemy.msg;
 //			navText.color = new Color(255, 0, 0);
 //
 //			//攻撃用の戦闘の進行ボタンを作成
-//			btnBattleFlow.SetActive(true);
-//			game.turn = ETurn.PLAYER;
+////			btnBattleFlow.SetActive(true);
+////			game.turn = ETurn.PLAYER;
+//		}
+
+		public void SetWorldMode(EWorldMode eWorldMode)
+		{
+			_worldMode = eWorldMode;
 		}
-		
+
+		public EWorldMode GetWorldMode()
+		{
+			return _worldMode;
+		}
+
+//		public int GetRandomEncount()
+//		{
+//			return _randomEncount;
+//		}
+//		public int SetRandomEncount(int randomEncount)
+//		{
+//			return _randomEncount = randomEncount;
+//		}
+
+//		public int DecrementRandomEncount()
+//		{
+//			_randomEncount--;
+//			return _randomEncount;
+//		}
+		public bool IsBoss()
+		{
+			return _isBoss;
+		}
+
+		public void SetIsBoss(bool isBoss)
+		{
+			_isBoss = isBoss;
+		}
+
+		public MonoBehaviour GetMonoBehaviour()
+		{
+			return this;
+		}
+
+		public IEquipmentCardFieldUi GetEquipmentCardFieldUi()
+		{
+			return _equipmentCardFieldMiniUi;
+		}
+
+		public GameObject GetEnemyLayer()
+		{
+			return enemyLayer;
+		}
+
+		public GameObject GetBtnNavigationWindow()
+		{
+			return btnNavigationWindow;
+		}
+
     }
+    
 }
