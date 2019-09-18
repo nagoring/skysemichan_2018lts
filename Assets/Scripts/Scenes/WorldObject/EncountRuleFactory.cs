@@ -14,7 +14,7 @@ namespace Skysemi.With.Scenes.WorldObject
             EStage eStage = game.destinationPlace;
 			if (eStage == EStage.OTHER_STAGE1)
 			{
-                return new EncountFirstOtherStageRule(worldParameter);
+                return new EncountBossOnlyRule(worldParameter);
 			}
 		
             return new EncountNormalRule(worldParameter);

@@ -20,6 +20,7 @@ namespace Skysemi.With.Chara
         }
         public Enemy Factory(MonoBehaviour mono)
         {
+            return CreateCharaObject(mono, EChara.Nasu);
             Game game = Game.instance;
             
             EStage eStage = game.destinationPlace;

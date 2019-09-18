@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7789274321424639368}
   - component: {fileID: 3958795260058246275}
   m_Layer: 5
-  m_Name: EquipmentCardFieldMini
+  m_Name: EquipmentCardFieldMiniUi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

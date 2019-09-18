@@ -124,6 +124,7 @@ namespace Skysemi.With.Chara
         {
             EnemyFactory enemyFactory = EnemyFactory.GetInstance();
             Enemy targetEnemy = enemyFactory.Factory(mono);
+            Debug.Log(targetEnemy);
             Init(targetEnemy, inEquipmentCardFieldUi);
             Equip(0, mono.gameObject.AddComponent<NasuHeart>());
             Equip(1, mono.gameObject.AddComponent<MagicAddMaxHp>());

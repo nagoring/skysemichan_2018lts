@@ -8,8 +8,8 @@ namespace Skysemi.With.CardUI
     public class CardBoard : MonoBehaviour
     {
         private const string PrefabPath = "Prefabs/CardUI/CardBoard";
-        private Card[] cardArray;
-        float[][] areaPostionTbl =  {
+        private Card[] _cardArray;
+        private readonly float[][] _areaPositionTbl =  {
             new float[] { -300f, 190f },
             new float[] { -100f, 190f },
             new float[] {  100f, 190f },
@@ -42,17 +42,17 @@ namespace Skysemi.With.CardUI
         {
             SetCardOnBoard(index, actionCard, type);
 //            this.SetCardImage(index, actionCard);
-            cardArray[index] = new Card();
-            cardArray[index].Init(index, actionCard);
+            _cardArray[index] = new Card();
+            _cardArray[index].Init(index, actionCard);
         }
 
         public Card GetCard(int index)
         {
-            return cardArray[index];
+            return _cardArray[index];
         }
         public ActionCards.ABase GetActionCard(int index)
         {
-            return cardArray[index].GetActionCard();
+            return _cardArray[index].GetActionCard();
         }
 
         private void SetCardOnBoard(int index, ActionCards.ABase actionCard, Type type = null)
@@ -63,9 +63,8 @@ namespace Skysemi.With.CardUI
             instance.name = "BoardArea" + index;
             instance.transform.parent = transform;
             instance.transform.localScale = new Vector3(1,1,1);
-            float[] xy = areaPostionTbl[index];
+            float[] xy = _areaPositionTbl[index];
             instance.transform.localPosition = new Vector3(xy[0], xy[1], 0);
-//            string scriptPath = "CardUI/PlayerClickCardOnBoardEvent.cs";
             if (type != null)
             {
                 //動的にスクリプトを入れる
@@ -88,7 +87,7 @@ namespace Skysemi.With.CardUI
 
         public void Init()
         {
-            cardArray = new Card[12];
+            _cardArray = new Card[12];
             GameObject obj = new GameObject();
             Type type = Type.GetType("Skysemi.With.CardUI.PlayerClickCardOnBoardEvent");
             SetCard(0, obj.AddComponent<Punch>(), type);
@@ -103,7 +102,6 @@ namespace Skysemi.With.CardUI
             SetCard(9, obj.AddComponent<Pan>(), type);
             SetCard(10, obj.AddComponent<Pan>(), type);
             SetCard(11, obj.AddComponent<Pan>(), type);
-            
         }
         void Start()
         {

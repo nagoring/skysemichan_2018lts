@@ -10,9 +10,9 @@ namespace Skysemi.With.Scenes.WorldObject
     public class EncountNormalRule : IEncountRule
     {
         private int _boss_encount_progress = 100;
-        private int _random_encount = 5;
+        private int _random_encount = 1;
         private bool _is_boss = false;
-        private EWorldMode _eWorldModel = EWorldMode.WALKING;
+        private EWorldMode _eWorldMode = EWorldMode.WALKING;
         private IGoFrontStateChangeParameter _worldParameter;
         public EncountNormalRule(IGoFrontStateChangeParameter worldParameter)
         {
@@ -24,24 +24,22 @@ namespace Skysemi.With.Scenes.WorldObject
             Player player = game.GetPlayer();
             _random_encount--;
             if (player.Progress == 0) return;
-
             
             if (player.Progress == _boss_encount_progress)
             {
                 _is_boss = true;
-                _eWorldModel = EWorldMode.BATTLE;
+                _eWorldMode = EWorldMode.BATTLE;
 //				eventManager.EncountEnemyBoss();
             }
             else if(_random_encount <= 0){
 //			game.PlayMusicBattle();
-                _random_encount = Random.Range(1, 8) + 10;
+//                _random_encount = Random.Range(1, 8) + 10;
                 _is_boss = false;
-                _eWorldModel = EWorldMode.BATTLE;
+                _eWorldMode = EWorldMode.BATTLE;
 //			WayEventParam param = new WayEventParam();
 //			this.WayEvent(param);
 //                EncountEvent();
             }
-            
         }
 
         public EWorldMode GetWorldMode()
@@ -63,15 +61,18 @@ namespace Skysemi.With.Scenes.WorldObject
 
         public void OutputEnemy(ISetUpEnemy iSetUpEnemy)
         {
+            Debug.Log("OutputEnemy");
             Game game = Game.instance;
-            if (_worldParameter.GetWorldMode() != EWorldMode.BATTLE) return;
-            Enemy enemy = game.enemyManager.GetEnemy();
+//            if (_worldParameter.GetWorldMode() != EWorldMode.BATTLE) return;
             game.enemyManager.createEnemy(iSetUpEnemy.GetMonoBehaviour(), iSetUpEnemy.GetEquipmentCardFieldUi());
             game.enemyManager.displayEnemy(iSetUpEnemy.GetEnemyLayer());
+            Enemy enemy = game.enemyManager.GetEnemy();
 			
 			//ナビゲーションウィンドウの表示
             iSetUpEnemy.GetBtnNavigationWindow().SetActive(true);
 			Text navText = iSetUpEnemy.GetBtnNavigationWindow().GetComponentInChildren<Text>();
+            Debug.Log(enemy);
+            Debug.Log(navText.text);
 			navText.text = enemy.msg;
 			navText.color = new Color(255, 0, 0);
             

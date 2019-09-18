@@ -340,7 +340,11 @@ namespace Skysemi.With.Scenes
 			_worldMode = _encountRule.GetWorldMode();
 //			_randomEncount = _encountRule.GetRandomEncount();
 			_isBoss = _encountRule.IsBoss();
-			if (_encountRule.IsEncount())
+			if (_encountRule.IsBoss())
+			{
+				
+			}
+			else if (_encountRule.IsEncount())
 			{
 				_worldMode = _encountRule.GetWorldMode();
 				_encountRule.OutputEnemy(this);

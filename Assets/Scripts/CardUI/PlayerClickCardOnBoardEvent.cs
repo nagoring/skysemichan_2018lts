@@ -23,8 +23,8 @@ namespace Skysemi.With.CardUI
             {
                 selectedIndex = 0;
             }
-            ActionCards.ABase actoinCard = GetComponent<ActionCards.ABase>();
-            equipmentCardFieldUi.Equip(selectedIndex, actoinCard);
+            ActionCards.ABase actionCard = GetComponent<ActionCards.ABase>();
+            equipmentCardFieldUi.Equip(selectedIndex, actionCard);
             cardUiController.GetCardBoard().gameObject.SetActive(false);
             
             //イベントを発火させる

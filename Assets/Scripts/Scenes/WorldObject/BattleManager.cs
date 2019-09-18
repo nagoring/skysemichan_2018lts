@@ -44,6 +44,7 @@ namespace Skysemi.With.Scenes.WorldObject
 
 		public void PushBtnProgressBattle()
 		{
+			if (game == null) game = Game.instance;
 			if (eBattleStatus == EBattleStatus.IDLE)
 			{
 				/////////////
@@ -52,6 +53,8 @@ namespace Skysemi.With.Scenes.WorldObject
 				/////////////
 //				PlayerManager.instance.SyncUpdationParameter();
 				eBattleStatus = EBattleStatus.ACTIVE;
+				Debug.Log(game);
+				Debug.Log(game.enemyManager);
 				enemy = game.enemyManager.GetEnemy();
 				//行動順番を決める
 				OrderAttackTurn();

@@ -27,7 +27,6 @@ namespace StatusUI
             {
                 GameObject obj = (GameObject)Resources.Load (PrefabPath);
                 obj.SetActive(true);
-                // プレハブを元にCardBoardを生成して、CanvasUIの子供にする
                 GameObject instance = (GameObject)Instantiate(obj,Vector2.zero,Quaternion.identity);
                 instance.transform.parent = canvasUI.transform;
                 instance.transform.localScale = new Vector3(1,1,1);

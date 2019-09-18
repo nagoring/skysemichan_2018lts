@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Skysemi.With.Scenes.WorldObject
 {
-    public class EncountFirstOtherStageRule : IEncountRule
+    public class EncountBossOnlyRule : IEncountRule
     {
         private readonly IGoFrontStateChangeParameter _worldParameter;
 
-        public EncountFirstOtherStageRule(IGoFrontStateChangeParameter worldParameter)
+        public EncountBossOnlyRule(IGoFrontStateChangeParameter worldParameter)
         {
             _worldParameter = worldParameter;
         }

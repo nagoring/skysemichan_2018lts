@@ -65,11 +65,9 @@ namespace Skysemi.With.CardUI
         }
         public void Init()
         {
-
             Type[] types = {
                 Type.GetType("Skysemi.With.CardUI.PlayerEquipmentCardBoxClickEvent"),
             };
-            
             _equipmentCardBoxsUi = new EquipmentCardBoxUi[4];
             CreateEquipmentCardBox(0, types);
             CreateEquipmentCardBox(1, types);
