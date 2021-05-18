@@ -61,9 +61,11 @@ namespace Skysemi.With.Scenes.WorldObject
 
         public void OutputEnemy(ISetUpEnemy iSetUpEnemy)
         {
-            Debug.Log("OutputEnemy");
             Game game = Game.instance;
 //            if (_worldParameter.GetWorldMode() != EWorldMode.BATTLE) return;
+            
+            // Activeで初期化されてしまうため一番始めにActiveにしておく
+            iSetUpEnemy.GetEnemyLayer().SetActive(true);
             game.enemyManager.createEnemy(iSetUpEnemy.GetMonoBehaviour(), iSetUpEnemy.GetEquipmentCardFieldUi());
             game.enemyManager.displayEnemy(iSetUpEnemy.GetEnemyLayer());
             Enemy enemy = game.enemyManager.GetEnemy();
@@ -71,8 +73,6 @@ namespace Skysemi.With.Scenes.WorldObject
 			//ナビゲーションウィンドウの表示
             iSetUpEnemy.GetBtnNavigationWindow().SetActive(true);
 			Text navText = iSetUpEnemy.GetBtnNavigationWindow().GetComponentInChildren<Text>();
-            Debug.Log(enemy);
-            Debug.Log(navText.text);
 			navText.text = enemy.msg;
 			navText.color = new Color(255, 0, 0);
             
