@@ -58,9 +58,11 @@ namespace Skysemi.With.Chara
         {
             _enemy.Hp = _enemy.MaxHp;
         }
-        public void CalculateEquipmentActionCardsReceiver(BaseEventArgs e)
+//        public void CalculateEquipmentActionCardsReceiver(BaseEventArgs e)
+        public void CalculateEquipmentActionCardsReceiver(CalculateActionCardsEventArgs eventArgs)
         {
-            CalculateActionCardsEventArgs eventArgs = (CalculateActionCardsEventArgs)e.GetObject();
+            Debug.Log("CALL     CalculateEquipmentActionCardsReceiverCalculateEquipmentActionCardsReceiver");
+//            CalculateActionCardsEventArgs eventArgs = (CalculateActionCardsEventArgs)e.GetObject();
             int tmpMaxHp = 0;
             int tmpAtk = 0;
             int tmpDef = 0;
@@ -78,13 +80,14 @@ namespace Skysemi.With.Chara
                 tmpSpirit += actionCard.Spirit;
                 tmpAgi += actionCard.Agi;
             }
-
+            
+            
             _enemy.param.maxhp = _enemy.param.maxhp + tmpMaxHp;
             _enemy.param.atk = _enemy.param.str + 1 + tmpAtk;
             _enemy.param.def = _enemy.param.vit + tmpDef;
             _enemy.param.spirit = _enemy.param.spirit + tmpSpirit;
             _enemy.param.agi = _enemy.param.agi + tmpAgi;
-			
+            Debug.Log("tmpMaxHp:" + tmpMaxHp);
             //		GameMainManager game = GameMainManager.instance;
             //
             //		game.playerManager.textAtk.text = param.atk.ToString();
@@ -104,7 +107,9 @@ namespace Skysemi.With.Chara
             Skysemi.With.CardUI.IEquipmentCardFieldUi equipmentCardFieldUi = _equipmentCardFieldUi;
             SetEquipmentCardField(equipmentCardFieldUi);
             Game game = Game.instance;
-            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardFieldUi)));
+//            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardFieldUi)));
+            CalculateEquipmentActionCardsReceiver(new Skysemi.With.Events.CalculateActionCardsEventArgs(equipmentCardFieldUi));
+//            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardFieldUi)));
             RecoveryHp();
             game.FireEvent(EEvent.SyncEnemyStatus, new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
         }
@@ -116,7 +121,8 @@ namespace Skysemi.With.Chara
             Skysemi.With.CardUI.IEquipmentCardFieldUi equipmentCardFieldUi = _equipmentCardFieldUi;
             SetEquipmentCardField(equipmentCardFieldUi);
             Game game = Game.instance;
-            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardFieldUi)));
+//            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardFieldUi)));
+            CalculateEquipmentActionCardsReceiver(new CalculateActionCardsEventArgs(equipmentCardFieldUi));
             game.FireEvent(EEvent.SyncEnemyStatus, new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
         }
 
@@ -124,14 +130,12 @@ namespace Skysemi.With.Chara
         {
             EnemyFactory enemyFactory = EnemyFactory.GetInstance();
             Enemy targetEnemy = enemyFactory.Factory(mono);
-            Debug.Log(targetEnemy);
             Init(targetEnemy, inEquipmentCardFieldUi);
             Equip(0, mono.gameObject.AddComponent<NasuHeart>());
             Equip(1, mono.gameObject.AddComponent<MagicAddMaxHp>());
             Equip(2, mono.gameObject.AddComponent<Punch>());
             Equip(3, mono.gameObject.AddComponent<Punch>());
             SyncRecoveryHpInclude();
-
             
             
 //            Game game = Game.instance;
@@ -142,13 +146,14 @@ namespace Skysemi.With.Chara
         public void displayEnemy(GameObject enemeyLayer)
         {
             Enemy enemy = GetEnemy();
+
             Sprite sprite = Resources.Load<Sprite>(enemy.GetImageFilePath());
             Image childImage = enemeyLayer.GetComponent<Image>();
             childImage.sprite = sprite;
             childImage.SetAlpha( 1.0f );
             enemy.gameObject.SetActive(true);
             enemy.gameObject.transform.SetParent(enemeyLayer.transform, false);
-            enemeyLayer.SetActive(true);
+//            enemeyLayer.SetActive(true);
         }
     }
 }

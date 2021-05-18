@@ -16,18 +16,20 @@ namespace Skysemi.With.Events
 
         public void RegisterEvent()
         {
+            //イベントでのobserverパターンはソースの可読性が著しく落ちるため廃止
+            //どこかにHookをかけるように使う可能性があるのでソースは残しておく
             // 計算
-            AddSenderEvent(EEvent.CalculateActionCards, new StandartEventSender());
-            AddSenderEvent(EEvent.CalculateActionCardsByEnemy, new StandartEventSender());
+//            AddSenderEvent(EEvent.CalculateActionCards, new StandartEventSender());
+//            AddSenderEvent(EEvent.CalculateActionCardsByEnemy, new StandartEventSender());
             // playerStatusに反映
-            AddSenderEvent(EEvent.SyncPlayerStatus, new StandartEventSender());
-            Player player = game.GetPlayer();
-            EnemyManager enemyManager = game.GetEnemyManager();
-            AddReceiver(EEvent.CalculateActionCards, player.CalculateEquipmentActionCardsReceiver);
-            AddReceiver(EEvent.CalculateActionCardsByEnemy, enemyManager.CalculateEquipmentActionCardsReceiver);
+//            AddSenderEvent(EEvent.SyncPlayerStatus, new StandartEventSender());
+//            Player player = game.GetPlayer();
+//            EnemyManager enemyManager = game.GetEnemyManager();
+//            AddReceiver(EEvent.CalculateActionCards, player.CalculateEquipmentActionCardsReceiver);
+//            AddReceiver(EEvent.CalculateActionCardsByEnemy, enemyManager.CalculateEquipmentActionCardsReceiver);
             
-            PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
-            AddReceiver(EEvent.SyncPlayerStatus, playerStatusWindow.SyncPlayerStatusReceiver);
+//            PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
+//            AddReceiver(EEvent.SyncPlayerStatus, playerStatusWindow.SyncPlayerStatusReceiver);
 //            this.RemoveEventer(EEvent.SyncPlayerStatus, playerStatusWindow.SyncPlayerStatusReceiver);
         }
 

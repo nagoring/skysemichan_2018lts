@@ -1,4 +1,5 @@
-﻿using Skysemi.With.ActionCards;
+﻿using Boo.Lang;
+using Skysemi.With.ActionCards;
 using Skysemi.With.CardUI;
 using Skysemi.With.Chara;
 using Skysemi.With.Chara.Enemies;
@@ -118,7 +119,10 @@ namespace Skysemi.With.Scenes
 			
 			//自UIのステータス反映
 			SyncStatusEventArgs syncStatusEventArgs = new SyncStatusEventArgs(game.GetPlayer().param);
-			game.FireEvent(EEvent.SyncPlayerStatus, new BaseEventArgs(syncStatusEventArgs));
+//			game.FireEvent(EEvent.SyncPlayerStatus, new BaseEventArgs(syncStatusEventArgs));
+			PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
+			playerStatusWindow.SyncPlayerStatusReceiver(syncStatusEventArgs);
+
 			
 			//＊実験＊ 敵の装備をセットする
 			_equipmentCardFieldMiniUi = EquipmentCardFieldMiniUi.CreateEquipmentCardFieldMiniInParentTransform(enemyStatusWindow.transform, 0, -125f);
@@ -494,6 +498,11 @@ namespace Skysemi.With.Scenes
 		{
 			return btnNavigationWindow;
 		}
+
+	    public EnemyStatusWindow GetEnemyStatusWindow()
+	    {
+		    return enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
+	    }
 
     }
     

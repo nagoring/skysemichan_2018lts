@@ -53,9 +53,9 @@ namespace StatusUI
         
 
 //        public void SyncPlayerStatusReceiver(SyncStatusEventArgs args)
-        public void SyncPlayerStatusReceiver(BaseEventArgs e)
+        public void SyncPlayerStatusReceiver(SyncStatusEventArgs args)
         {
-            var args = (SyncStatusEventArgs)e.GetObject();
+//            var args = (SyncStatusEventArgs)e.GetObject();
             Lv.text = args.CharaParameter.lv.ToString();
             Hp.text = args.CharaParameter.hp.ToString();
             Spirit.text = args.CharaParameter.spirit.ToString();

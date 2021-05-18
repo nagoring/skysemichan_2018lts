@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
+using Skysemi.With.Chara;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
 using Skysemi.With.Events;
 using Skysemi.With.Scenes;
+using StatusUI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -32,11 +34,17 @@ namespace Skysemi.With.CardUI
 //            EquipmentCardBoxUi[] equipmentCardBoxs = equipmentCardFieldUi.GetEquipmentCardBoxs();
             CalculateActionCardsEventArgs calculateActionCardsEventArgs = new CalculateActionCardsEventArgs(equipmentCardFieldUi);
             game.FireEvent(EEvent.CalculateActionCards, new BaseEventArgs(calculateActionCardsEventArgs));
+            Player player = game.GetPlayer();
+            player.CalculateEquipmentActionCardsReceiver(calculateActionCardsEventArgs);
             
             //計算後PlayerStatusUiに反映させる
             SyncStatusEventArgs syncStatusEventArgs = new SyncStatusEventArgs(game.GetPlayer().param);
-            game.FireEvent(EEvent.SyncPlayerStatus, new BaseEventArgs(syncStatusEventArgs));
-            
+//            game.FireEvent(EEvent.SyncPlayerStatus, new BaseEventArgs(syncStatusEventArgs));
+            PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
+//            playerStatusWindow.SyncPlayerStatusReceiver(syncStatusEventArgs);
+//            game.FireEvent(EEvent.SyncPlayerStatus, new BaseEventArgs(syncStatusEventArgs));
+            playerStatusWindow.SyncPlayerStatusReceiver(syncStatusEventArgs);
+
             
             
             
