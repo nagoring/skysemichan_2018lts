@@ -5,6 +5,8 @@ using System.Reflection;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
 using Skysemi.With.Events;
+using Skysemi.With.Scenes;
+using StatusUI;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -130,19 +132,25 @@ namespace Skysemi.With.Chara
 	
 		public void Act(IChara target)
 		{
-	//		GameMainManager game = GameMainManager.instance;
+			Game game = Game.instance;
+//			GameMainManager game = GameMainManager.instance;
 	//		
-	//		if (eBattleAction == EBattleAction.ATK)
-	//		{
-	//			int damage = CalcDamage(target);
-	//			target.Hp -= damage;
-	//			game.enemyManager.hp.text = target.Hp.ToString();
-	//			
-	//			//ナビゲーションメッセージ
-	//			Text navText = game.uiManager.btnNavigationWindow.GetComponentInChildren<Text>();
-	//			navText.color = new Color(0, 0, 0);
-	//			navText.text = string.Format("{0}は{1}のダメージをうけた", target.CharaName, damage);
-	//		}
+			if (eBattleAction == EBattleAction.ATK)
+			{
+				int damage = CalcDamage(target);
+				Debug.Log("damage:" + damage);
+				Debug.Log("target.Hp:" + target.Hp);
+				target.Hp -= damage;
+				EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
+				enemyStatusWindow.Hp.text = target.Hp.ToString();
+				
+//				game.enemyManager.hp.text = target.Hp.ToString();
+				//			
+				//			//ナビゲーションメッセージ
+				//			Text navText = game.uiManager.btnNavigationWindow.GetComponentInChildren<Text>();
+				//			navText.color = new Color(0, 0, 0);
+				//			navText.text = string.Format("{0}は{1}のダメージをうけた", target.CharaName, damage);
+			}
 		}
 	
 		public void SayDamageAfterMsg()
@@ -176,9 +184,10 @@ namespace Skysemi.With.Chara
 			
 		}
 
-		public void CalculateEquipmentActionCardsReceiver(BaseEventArgs e)
+//		public void CalculateEquipmentActionCardsReceiver(BaseEventArgs e)
+		public void CalculateEquipmentActionCardsReceiver(CalculateActionCardsEventArgs eventArgs)
 		{
-			CalculateActionCardsEventArgs eventArgs = (CalculateActionCardsEventArgs)e.GetObject();
+//			CalculateActionCardsEventArgs eventArgs = (CalculateActionCardsEventArgs)e.GetObject();
 			int tmpMaxHp = 0;
 			int tmpAtk = 0;
 			int tmpDef = 0;
@@ -272,18 +281,18 @@ namespace Skysemi.With.Chara
 	//
 	//
 	//
-	//	private int CalcDamage(IChara target)
-	//	{
-	//		int damage = param.atk - target.Def;
-	//		damage += (int)Random.Range(-3.0f, 3.0f);
-	//		if (damage < 0) damage = 0;
-	//		return damage;
-	//	}
-	//
-	//    // Update is called once per frame
-	//    void Update () {
-	//		
-	//	}
+		private int CalcDamage(IChara target)
+		{
+			int damage = param.atk - target.Def;
+			damage += (int)Random.Range(-3.0f, 3.0f);
+			if (damage < 0) damage = 0;
+			return damage;
+		}
+	
+	    // Update is called once per frame
+	    void Update () {
+			
+		}
 	//
 	//	
 	////	//ステータスの更新を行う。ActionCardや己のステータスからATK,DEFを決める
@@ -320,7 +329,9 @@ namespace Skysemi.With.Chara
 				Hp += 1;
 			}
 			SyncStatusEventArgs syncStatusEventArgs = new SyncStatusEventArgs(param);
-			game.FireEvent(EEvent.SyncPlayerStatus, new BaseEventArgs(syncStatusEventArgs));
+//			game.FireEvent(EEvent.SyncPlayerStatus, new BaseEventArgs(syncStatusEventArgs));
+			PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
+			playerStatusWindow.SyncPlayerStatusReceiver(syncStatusEventArgs);
 		}
 	//
 	//	private void InitActionCardsParam()
