@@ -11,8 +11,8 @@ namespace Skysemi.With.Chara.Enemies
 		public CharaParameter param;
 		public int Hp{get {return param.hp;}set{param.hp = value;}}
 		public int MaxHp{get {return param.maxhp;}set{param.maxhp = value;}}
-		public int Mp{get {return this.mp;}set{mp = value;}}
-		public int MaxMp{get {return this.maxmp;}set{maxmp = value;}}
+//		public int Mp{get {return this.mp;}set{mp = value;}}
+//		public int MaxMp{get {return this.maxmp;}set{maxmp = value;}}
 		public int Atk{get {return param.atk;}set{param.atk = value;}}
 		public int Def{get {return param.def;}set{param.def = value;}}
 		public int Agi{get {return param.agi;}set{param.agi = value;}}	
@@ -22,12 +22,12 @@ namespace Skysemi.With.Chara.Enemies
 		public string CharaName{get {return param.charaName;}set{param.charaName = value;}}
 	
 		public string enemyName;
-		public int maxhp;
-		public int maxmp;
-		public int hp;
-		public int mp;
-		public int atk;
-		public int def;
+//		public int maxhp;
+//		public int maxmp;
+//		public int hp;
+//		public int mp;
+//		public int atk;
+//		public int def;
 		public int spirit = 0;
 		public int maxspirit = 10;
 		public string msg;
@@ -127,7 +127,7 @@ namespace Skysemi.With.Chara.Enemies
 	
 		private int CalcDamage(IChara target)
 		{
-			int damage = atk - target.Def;
+			int damage = Atk - target.Def;
 			damage += (int)Random.Range(-3.0f, 3.0f);
 			if (damage < 0) damage = 0;
 			return damage;
