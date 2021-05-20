@@ -39,6 +39,23 @@ namespace Skysemi.With.Core
         private ISceneController _sceneCtrl;
         private IPlayerCardUiController _cardUiController;
         private IPlayerStatusWindow _playerStatusWindow;
+        
+        //効果音
+        public AudioClip clipPanch;
+        public AudioClip clipLpUp;
+        public AudioClip clipLoser;
+        public AudioClip clipEscape;
+        public AudioClip clipEnemyAtk1;
+        public AudioClip clipEnemyBlade1;
+        public AudioClip clipSoundWalking;
+
+        //ミュージック
+        public AudioClip musicWalking;
+        public AudioClip musicStageField4;
+        public AudioClip musicBattle1;
+        public AudioClip musicBladeRobo;
+        public AudioClip musicStage4Boss;
+        
         public readonly int[] expTbl = new int[]
         {
             7,  16,  36,   50,   60,     70, 100, 140, 180, 220,
@@ -186,6 +203,57 @@ namespace Skysemi.With.Core
 //                events[key].Invoke();
 //            }
 //        }
+        public void GetBtnNavigationWindow()
+        {
+            throw new NotImplementedException();
+        }
+        public void PlayMusicBattle()
+        {
+            if (destinationPlace == EStage.OUTSIDE_ROAD)
+            {
+            }
+            else
+            {
+                SoundManager.instance.PlayMusic(musicBattle1);
+            }
+        }
+        public void PlayMusicBossBattle()
+        {
+		
+            if (destinationPlace == EStage.METAL_DEFENCE)
+            {
+                SoundManager.instance.PlayMusic(musicBladeRobo);
+            }
+            else if (destinationPlace == EStage.OUTSIDE_ROAD)
+            {
+                SoundManager.instance.PlayMusic(musicStage4Boss);
+            }
+            else if (destinationPlace == EStage.OTHER_STAGE1)
+            {
+                SoundManager.instance.StopMusic();
+            }
+            else
+            {
+                SoundManager.instance.PlayMusic(musicBattle1);
+            }
+        }
+	
+        public void PlayMusicField()
+        {
+            EStage eStage = destinationPlace;
+            if (eStage == EStage.OUTSIDE_ROAD)
+            {
+                SoundManager.instance.PlayMusic(musicStageField4);
+            }
+            else if (eStage == EStage.OTHER_STAGE1)
+            {
+                SoundManager.instance.StopMusic();
+            }
+            else
+            {
+                SoundManager.instance.PlayMusic(musicWalking);
+            }
+        }
     }
 }
 

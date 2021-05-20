@@ -44,9 +44,8 @@ namespace StatusUI
         }
         
 
-        public void SyncEnemyStatusReceiver(BaseEventArgs e)
+        public void SyncEnemyStatusReceiver(SyncStatusEnemyEventArgs args)
         {
-            SyncStatusEnemyEventArgs args = (SyncStatusEnemyEventArgs)e.GetObject();
             int hp = args.CharaParameter.hp;
             int spirit = args.CharaParameter.spirit;
             int atk = args.CharaParameter.atk;

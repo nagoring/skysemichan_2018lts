@@ -114,8 +114,8 @@ namespace Skysemi.With.Scenes
 			localEnemyStatusWindow.Init();
 			//Eventの登録
 			game.eventManager.RegisterEvent();
-			game.eventManager.AddSenderEvent(EEvent.SyncEnemyStatus, new StandartEventSender());
-			game.eventManager.AddReceiver(EEvent.SyncEnemyStatus, localEnemyStatusWindow.SyncEnemyStatusReceiver);
+//			game.eventManager.AddSenderEvent(EEvent.SyncEnemyStatus, new StandartEventSender());
+//			game.eventManager.AddReceiver(EEvent.SyncEnemyStatus, localEnemyStatusWindow.SyncEnemyStatusReceiver);
 			
 			//自UIのステータス反映
 			SyncStatusEventArgs syncStatusEventArgs = new SyncStatusEventArgs(game.GetPlayer().param);
@@ -502,6 +502,16 @@ namespace Skysemi.With.Scenes
 	    public EnemyStatusWindow GetEnemyStatusWindow()
 	    {
 		    return enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
+	    }
+
+	    public void SetEnemyMsgTextString(string text)
+	    {
+		    GetBtnNavigationWindow().GetComponentInChildren<Text>().text = text;
+	    }
+
+	    public Text GetEnemyMsgText()
+	    {
+		    return GetBtnNavigationWindow().GetComponentInChildren<Text>();
 	    }
 
     }

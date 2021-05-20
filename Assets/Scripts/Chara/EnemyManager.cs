@@ -8,6 +8,7 @@ using Skysemi.With.Core;
 using Skysemi.With.Enum;
 using Skysemi.With.Events;
 using Skysemi.With.Scenes;
+using StatusUI;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
@@ -111,7 +112,10 @@ namespace Skysemi.With.Chara
             CalculateEquipmentActionCardsReceiver(new Skysemi.With.Events.CalculateActionCardsEventArgs(equipmentCardFieldUi));
 //            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardFieldUi)));
             RecoveryHp();
-            game.FireEvent(EEvent.SyncEnemyStatus, new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
+//            game.FireEvent(EEvent.SyncEnemyStatus, new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
+            EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
+            EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
+            localEnemyStatusWindow.SyncEnemyStatusReceiver(new SyncStatusEnemyEventArgs(GetEnemy().param));
         }
         /// <summary>
         /// ステータスを同期させる
@@ -123,7 +127,12 @@ namespace Skysemi.With.Chara
             Game game = Game.instance;
 //            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardFieldUi)));
             CalculateEquipmentActionCardsReceiver(new CalculateActionCardsEventArgs(equipmentCardFieldUi));
-            game.FireEvent(EEvent.SyncEnemyStatus, new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
+//            game.FireEvent(EEvent.SyncEnemyStatus, new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
+            EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
+            EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
+//            localEnemyStatusWindow.Init();
+            localEnemyStatusWindow.SyncEnemyStatusReceiver(new SyncStatusEnemyEventArgs(GetEnemy().param));
+
         }
 
         public void createEnemy(MonoBehaviour mono, IEquipmentCardFieldUi inEquipmentCardFieldUi)

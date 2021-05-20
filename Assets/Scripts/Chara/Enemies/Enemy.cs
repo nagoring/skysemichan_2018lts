@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Skysemi.With.Chara.DamageLogic;
+using Skysemi.With.Core;
 using Skysemi.With.Enum;
+using Skysemi.With.Scenes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,12 +25,6 @@ namespace Skysemi.With.Chara.Enemies
 		public string CharaName{get {return param.charaName;}set{param.charaName = value;}}
 	
 		public string enemyName;
-//		public int maxhp;
-//		public int maxmp;
-//		public int hp;
-//		public int mp;
-//		public int atk;
-//		public int def;
 		public int spirit = 0;
 		public int maxspirit = 10;
 		public string msg;
@@ -104,18 +101,20 @@ namespace Skysemi.With.Chara.Enemies
 	
 		public void Act(IChara target)
 		{
-//			GameMainManager game = GameMainManager.instance;
-//			if (eBattleAction == EBattleAction.ATK)
-//			{
-//				int damage = CalcDamage(target);
-//				target.Hp -= damage;
-//				game.playerManager.textHp.text = target.Hp.ToString();
-//				
-//				//ナビゲーションメッセージ
-//				Text navText = game.uiManager.btnNavigationWindow.GetComponentInChildren<Text>();
-//				navText.color = new Color(0, 0, 0);
-//				navText.text = string.Format("{0}は{1}のダメージをうけた", target.CharaName, damage);
-//			}
+			Game game = Game.instance;
+			if (eBattleAction == EBattleAction.ATK)
+			{
+				IDmageLogic iDamageLogic = DamageLogicFactory.create(target, this);
+				int damage = iDamageLogic.CalcDamage(target, this);
+				target.Hp -= damage;
+				IPlayerStatusWindow iPlayerStatusWindow = game.GetPlayerStatusWindow();
+				iPlayerStatusWindow.GetPlayerStatusWindow().Hp.text = target.Hp.ToString();
+				
+				//ナビゲーションメッセージ
+				Text navText = World.instance.GetEnemyMsgText();
+				navText.color = new Color(0, 0, 0);
+				navText.text = string.Format("{0}は{1}のダメージをうけた", target.CharaName, damage);
+			}
 			
 		}
 	
@@ -125,13 +124,13 @@ namespace Skysemi.With.Chara.Enemies
 //			game.enemyManager.SayDamageAfterMsg(this);
 		}
 	
-		private int CalcDamage(IChara target)
-		{
-			int damage = Atk - target.Def;
-			damage += (int)Random.Range(-3.0f, 3.0f);
-			if (damage < 0) damage = 0;
-			return damage;
-		}
+//		private int CalcDamage(IChara target)
+//		{
+//			int damage = Atk - target.Def;
+//			damage += (int)Random.Range(-3.0f, 3.0f);
+//			if (damage < 0) damage = 0;
+//			return damage;
+//		}
 		public float BeforeActStartWait()
 		{
 			return 0;

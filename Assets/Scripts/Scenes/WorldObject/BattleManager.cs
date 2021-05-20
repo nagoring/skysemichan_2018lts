@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Skysemi.With.Chara.Enemies;
+using Skysemi.With.Chara;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
 using UnityEngine;
@@ -53,9 +54,9 @@ namespace Skysemi.With.Scenes.WorldObject
 				/////////////
 //				PlayerManager.instance.SyncUpdationParameter();
 				eBattleStatus = EBattleStatus.ACTIVE;
-				Debug.Log(game);
-				Debug.Log(game.enemyManager);
 				enemy = game.enemyManager.GetEnemy();
+				Debug.Log("enemy.Hp:" + enemy.Hp);
+
 				//行動順番を決める
 				OrderAttackTurn();
 				BattleFlow(0);
@@ -197,12 +198,16 @@ namespace Skysemi.With.Scenes.WorldObject
 		/// </summary>
 		private void OrderAttackTurn()
 		{
+			//しずね
 //			SkysemiChan skysemiChan = game.skysemiChanManager.skysemiChan;
-//			charaActOrderList = new List<IChara>();
-//			charaActOrderList.Add(Player.instance);
-//			charaActOrderList.Add(enemy);
+			charaActOrderList = new List<IChara>();
+			charaActOrderList.Add(game.GetPlayer());
+			charaActOrderList.Add(enemy);
+			IChara chara = charaActOrderList[0];
+			Debug.Log(chara);
+			Debug.Log("END OrderAttackTurn");
 //			charaActOrderList.Add(skysemiChan);
-//			charaActOrderList.Sort((a, b) => b.Mp - a.Mp);
+			charaActOrderList.Sort((a, b) => b.Agi - a.Agi);
 		}
 
 		public void PushBtnEscape()

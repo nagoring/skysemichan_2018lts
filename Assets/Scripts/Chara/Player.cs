@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using Skysemi.With.Chara.DamageLogic;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
 using Skysemi.With.Events;
@@ -121,6 +122,8 @@ namespace Skysemi.With.Chara
 	
 		public void PlayActionSound()
 		{
+			Game game = Game.instance;
+			SoundManager.instance.PlaySingleRepeat(game.clipPanch, 3, 0.3f);
 	//		GameMainManager game = GameMainManager.instance;
 	//		SoundManager.instance.PlaySingleRepeat(game.clipPanch, 3, 0.3f);
 		}
@@ -137,7 +140,8 @@ namespace Skysemi.With.Chara
 	//		
 			if (eBattleAction == EBattleAction.ATK)
 			{
-				int damage = CalcDamage(target);
+				IDmageLogic iDamageLogic = DamageLogicFactory.create(target, this);
+				int damage = iDamageLogic.CalcDamage(target, this);
 				Debug.Log("damage:" + damage);
 				Debug.Log("target.Hp:" + target.Hp);
 				target.Hp -= damage;
