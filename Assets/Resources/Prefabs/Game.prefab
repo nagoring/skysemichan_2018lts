@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5532060001486562138
+--- !u!1 &4986932541794399449
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3675593125030491578}
-  - component: {fileID: 9147631843800980485}
+  - component: {fileID: 4986932541794399451}
+  - component: {fileID: 4986932541794399450}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -17,27 +17,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3675593125030491578
+--- !u!4 &4986932541794399451
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5532060001486562138}
+  m_GameObject: {fileID: 4986932541794399449}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16764508, y: -0.3762621, z: -9.551286}
+  m_LocalPosition: {x: -0.11377388, y: 1.2939394, z: 97.90856}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9147631843800980485
+--- !u!114 &4986932541794399450
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5532060001486562138}
+  m_GameObject: {fileID: 4986932541794399449}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a7922c06e3045a44b8c593998a5c432, type: 3}
@@ -45,3 +45,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: 0
   destinationPlace: 0
+  clipPanch: {fileID: 8300000, guid: 45a96a9e74eefe24091a816a53edea0a, type: 3}
+  clipLpUp: {fileID: 8300000, guid: 26ebd676d5e79b340814a3f03e7ca6cd, type: 3}
+  clipLoser: {fileID: 8300000, guid: ffec6e3e4904347429981340020cca2d, type: 3}
+  clipEscape: {fileID: 8300000, guid: f0768f7c8fd050343a9b7b86449a38f1, type: 3}
+  clipEnemyAtk1: {fileID: 8300000, guid: 0096a9e037a0c4f4380786d617272337, type: 3}
+  clipEnemyBlade1: {fileID: 8300000, guid: b66b335ba7557b8498b06bf75546dff6, type: 3}
+  clipSoundWalking: {fileID: 8300000, guid: 12abb7040fe4174409ba20f926c43f95, type: 3}
+  musicWalking: {fileID: 8300000, guid: aacf90b1c7bf3934fa7e9011cf2adbe1, type: 3}
+  musicStageField4: {fileID: 8300000, guid: cc3152be35095894daeab56d6245edbf, type: 3}
+  musicBattle1: {fileID: 8300000, guid: bb9e72b4941184242a88a8a071439d4a, type: 3}
+  musicBladeRobo: {fileID: 8300000, guid: 201cffc1e6245a845873128a19005f25, type: 3}
+  musicStage4Boss: {fileID: 8300000, guid: c193c904fab064343aa993d831f7880e, type: 3}
