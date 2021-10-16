@@ -65,8 +65,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: a2859ca6c76a43546aeff4e7245ebd1c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -88,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a4e82fbdf56e141881da04046d44e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eActionCardName: 0
+  eActionCardName: -1
   cardUsageText: 
 --- !u!114 &-1867185342809732907
 MonoBehaviour:

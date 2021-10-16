@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6944608453315966109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6944608453315966099}
+  - component: {fileID: 6944608453315966098}
+  m_Layer: 0
+  m_Name: World
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6944608453315966099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6944608453315966109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6944608453315966098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6944608453315966109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8abf1b7f0f0aef5468329934409a91e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aaaaa: 0
+  cardBoard: {fileID: 0}
+  enemyLayer: {fileID: 0}
+  canvasUI: {fileID: 0}
+  enemyStatusWindow: {fileID: 0}
+  btnGoFront: {fileID: 0}
+  btnNavigationWindow: {fileID: 0}
+  btnBattleFlow: {fileID: 0}
+  imageRoads:
+  - {fileID: 21300000, guid: 9c1c317961a3c11479799a0cea37f3cb, type: 3}
+  - {fileID: 21300000, guid: d88f38fca52517a47a217e0189aac81c, type: 3}
+  - {fileID: 21300000, guid: 3a820c88f18ef1e4b8283fb3bd1e0346, type: 3}
+  roadLayer: {fileID: 0}
+  effectManager: {fileID: 0}
+  musicWalking: {fileID: 8300000, guid: aacf90b1c7bf3934fa7e9011cf2adbe1, type: 3}
