@@ -6,6 +6,7 @@
         Daikon,Brocoli,Suica,
         Hourensou,Tomato,BladeRobo,
         CameraStabilizer,PowerShovel,CableReel,DoroDoroHukai,
-        Niwatori
+        Niwatori,
+        JusticeRobo,JusticeLivingSplit,JusticeGroup,
     }    
 }

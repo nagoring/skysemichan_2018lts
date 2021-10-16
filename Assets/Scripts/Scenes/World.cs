@@ -19,7 +19,8 @@ namespace Skysemi.With.Scenes
     {
 		public static World instance;
 		public static Game game;
-	    private CardBoard _cardBoard;
+	    // private CardBoard _cardBoard;
+	    public CardBoardScrollView cardBoard;
 	    private Skysemi.With.CardUI.EquipmentCardFieldUi _equipmentCardFieldUi;
 	    private PlayerStatusWindow _playerStatusWindow;
 	    private Skysemi.With.CardUI.EquipmentCardFieldMiniUi _equipmentCardFieldMiniUi;
@@ -29,17 +30,16 @@ namespace Skysemi.With.Scenes
 	    [FormerlySerializedAs("buttonGoFront")] public GameObject btnGoFront;
 	    public GameObject btnNavigationWindow;
 	    public GameObject btnBattleFlow;
-
+	    public GameObject enemeyLayer;
 	    public EWorldMode WorldMode {get;set;}
-	    private EWorldMode _worldMode = EWorldMode.WALKING;
 	    public Sprite[] imageRoads = new Sprite[3];
 
 		public Image roadLayer;
 //		private int _randomEncount = 5;
-		private bool _isBoss = false;
+		[FormerlySerializedAs("_isBoss")] public bool isBoss = false;
 
 //		public SkysemiChanManager skysemiChanManager;
-//		public SkysemiChanMsg skysemiChanMsg;
+//		public ShizuneMsg skysemiChanMsg;
 //		public EventManager eventManager;
 //		public EnemyManager enemyManager;
 //		public UIManager uiManager;
@@ -55,8 +55,8 @@ namespace Skysemi.With.Scenes
 		private ETurn _turn = ETurn.PLAYER;
 
 		private IEncountRule _encountRule;
-//		public ETurn turn = ETurn.PLAYER;
-//		public bool _isBoss = false;
+		public ETurn turn = ETurn.PLAYER;
+//		public bool isBoss = false;
 //	
 //		//効果音
 //		public AudioClip clipPanch;
@@ -68,8 +68,8 @@ namespace Skysemi.With.Scenes
 //		public AudioClip clipSoundWalking;
 //	
 //		//ミュージック
-//		public AudioClip musicWalking;
-//		public AudioClip musicStageField4;
+		public AudioClip musicWalking;
+		public AudioClip musicStageField4;
 //		public AudioClip musicBattle1;
 //		public AudioClip musicBladeRobo;
 //		public AudioClip musicStage4Boss;
@@ -103,9 +103,10 @@ namespace Skysemi.With.Scenes
 			game.SetCardUiController(this);
 			game.SetPlayerStatusWindow(this);
 			_playerStatusWindow = PlayerStatusWindow.CreatePlayerStatusWindowInCanvasUI(canvasUI);
-			_cardBoard = CardBoard.CreateCardBoardInCanvasUI(canvasUI);
-			_cardBoard.Init();
-			_cardBoard.gameObject.SetActive(false);
+			// cardBoard = CardBoard.CreateCardBoardInCanvasUI(canvasUI);
+			cardBoard = CardBoardScrollView.CreateCardBoardInCanvasUI(canvasUI);
+			cardBoard.Init();
+			cardBoard.gameObject.SetActive(false);
 			_equipmentCardFieldUi = EquipmentCardFieldUi.CreateEquipmentCardFieldInCanvas(canvasUI, -240, -300);
 			_equipmentCardFieldUi.Init();
 			
@@ -113,7 +114,7 @@ namespace Skysemi.With.Scenes
 			EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
 			localEnemyStatusWindow.Init();
 			//Eventの登録
-			game.eventManager.RegisterEvent();
+			// game.eventManager.RegisterEvent();
 //			game.eventManager.AddSenderEvent(EEvent.SyncEnemyStatus, new StandartEventSender());
 //			game.eventManager.AddReceiver(EEvent.SyncEnemyStatus, localEnemyStatusWindow.SyncEnemyStatusReceiver);
 			
@@ -147,13 +148,13 @@ namespace Skysemi.With.Scenes
 
 			
 			
-			_worldMode = EWorldMode.WALKING;
+			WorldMode = EWorldMode.WALKING;
 			_encountRule = EncountRuleFactory.Create((IGoFrontStateChangeParameter)this);
 			
 //			PlayerManager.instance.LoadData();
 //			Player player = Player.instance;
 //			player.Progress = 0;
-//			PlayMusicField();
+			PlayMusicField();
 //			SetBackGround();
 //			playerManager.SyncUpdationParameter();
 		}
@@ -197,22 +198,23 @@ namespace Skysemi.With.Scenes
 //			}
 //		}
 //		
-//		public void PlayMusicField()
-//		{
-//			EStage eStage = Game.instance.destinationPlace;
-//			if (eStage == EStage.OUTSIDE_ROAD)
-//			{
-//				SoundManager.instance.PlayMusic(musicStageField4);
-//			}
-//			else if (eStage == EStage.OTHER_STAGE1)
-//			{
-//				SoundManager.instance.StopMusic();
-//			}
-//			else
-//			{
-//				SoundManager.instance.PlayMusic(musicWalking);
-//			}
-//		}
+		public void PlayMusicField()
+		{
+			SoundManager.instance.PlayMusic(musicWalking);
+			EStage eStage = Game.instance.destinationPlace;
+			if (eStage == EStage.OUTSIDE_ROAD)
+			{
+				SoundManager.instance.PlayMusic(musicStageField4);
+			}
+			else if (eStage == EStage.OTHER_STAGE1)
+			{
+				SoundManager.instance.StopMusic();
+			}
+			else
+			{
+				SoundManager.instance.PlayMusic(musicWalking);
+			}
+		}
 //	
 //	
 //		// Update is called once per frame
@@ -245,45 +247,6 @@ namespace Skysemi.With.Scenes
 //			}
 //		}
 //	
-//		public void GoHomeForWinner()
-//		{
-//			Game gs = Game.instance;
-//			EGameProgress eGameProgress = (EGameProgress)PlayerPrefs.GetInt(ESave.GameProgress.ToString());
-//			if (eGameProgress == EGameProgress.SHOW_STAGE_1)
-//			{
-//				//ステージ２をオープン
-//				gs.SetGameProgress(EGameProgress.SHOW_STAGE_2);
-//			}
-//			if (eGameProgress == EGameProgress.SHOW_STAGE_2)
-//			{
-//				//ステージ３をオープン
-//				gs.SetGameProgress(EGameProgress.SHOW_STAGE_3);
-//			}
-//			if (eGameProgress == EGameProgress.SHOW_STAGE_3)
-//			{
-//				//ステージ４をオープン予定
-//				gs.SetGameProgress(EGameProgress.SHOW_STAGE_4);
-//			}
-//			if (eGameProgress == EGameProgress.SHOW_STAGE_4)
-//			{
-//				//異なる拠点エリアへ
-//				gs.SetGameProgress(EGameProgress.SHOW_OTHER_STAGE_1);
-//				Game.instance.Save();
-//				SceneManager.LoadScene("Scenes/HomeSecondScene");
-//				return;
-//			}
-//			if (eGameProgress == EGameProgress.SHOW_OTHER_STAGE_1)
-//			{
-//				//外道狩りステージへ
-//				gs.SetGameProgress(EGameProgress.SHOW_OTHER_STAGE_GEDOUGARI);
-//				Game.instance.Save();
-//				SceneManager.LoadScene("Scenes/GameMainScene");
-//				return;
-//			}
-//			
-//			Game.instance.Save();
-//			SceneManager.LoadScene("Scenes/HomeScene");
-//		}
 //		public void GoHomeForLoser()
 //		{
 //			Game.instance.Save();
@@ -294,22 +257,22 @@ namespace Skysemi.With.Scenes
 //		{
 //	//		GameMainManager game = GameMainManager.instance;
 //	//		if (game._worldMode != EWorldMode.WALKING) return;
-//	//		SkysemiChanMsg.instance.msgOther[EMsgOther.PushItem]();
+//	//		ShizuneMsg.instance.msgOther[EMsgOther.PushItem]();
 //		}
 //		public void PushBtnHome()
 //		{
 //	//		GameMainManager game = GameMainManager.instance;
 //	//		if (game._worldMode != EWorldMode.WALKING) return;
-//	//		SkysemiChanMsg.instance.msgOther[EMsgOther.PushHome]();
+//	//		ShizuneMsg.instance.msgOther[EMsgOther.PushHome]();
 //		}
 	    public ISceneController GetSelfController()
 	    {
 		    return this;
 	    }
 
-	    public CardBoard GetCardBoard()
+	    public CardBoardScrollView GetCardBoard()
 	    {
-		    return _cardBoard;
+		    return cardBoard;
 	    }
 
 	    public EquipmentCardFieldUi GetEquipmentCardField()
@@ -324,7 +287,7 @@ namespace Skysemi.With.Scenes
 	    
 		public void PushGoFrontButton()
 		{
-//			if (game.mode == EWorldMode.BOSS_BATTLE_AFTER) return;
+			if (WorldMode == EWorldMode.BOSS_BATTLE_AFTER) return;
 //			if (GameSystem.instance.destinationPlace == EStage.OTHER_STAGE1)
 //			{
 //				SoundManager.instance.PlaySingle(game.clipSoundWalking);
@@ -337,30 +300,37 @@ namespace Skysemi.With.Scenes
 			_playerStatusWindow.Progress.text = player.Progress.ToString();
 			player.NaturalHealingByWalk();
 			
-//			CheckingProgress();
+			// CheckingProgress();
 
 			/// encountRule EncountNormalRule
 			_encountRule.Run();
-			_worldMode = _encountRule.GetWorldMode();
-//			_randomEncount = _encountRule.GetRandomEncount();
-			_isBoss = _encountRule.IsBoss();
+			WorldMode = _encountRule.GetWorldMode();
+			// _randomEncount = _encountRule.GetRandomEncount();
+			isBoss = _encountRule.IsBoss();
 			if (_encountRule.IsBoss())
 			{
-				
+				WorldMode = _encountRule.GetWorldMode();
+				_encountRule.OutputEnemy(this);
+				btnGoFront.SetActive(false);
+				btnNavigationWindow.SetActive(true);
+				btnBattleFlow.SetActive(true);
+				_turn = ETurn.PLAYER;
+				EventManager.instance.EncountEnemyBoss(this);
 			}
 			else if (_encountRule.IsEncount())
 			{
-				_worldMode = _encountRule.GetWorldMode();
+				WorldMode = _encountRule.GetWorldMode();
 				_encountRule.OutputEnemy(this);
 				btnGoFront.SetActive(false);
-//				btnNavigationWindow.SetActive(true);
+				btnNavigationWindow.SetActive(true);
 				btnBattleFlow.SetActive(true);
 				_turn = ETurn.PLAYER;
-				
+				EventManager.instance.EncountEnemy(this);
+
 ////			this.WayEvent += game.enemyManager.createEnemy;
 ////			this.WayEvent += game.uiManager.EncountEnemeyBegin;
 ////			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
-				
+
 			}
 		}
 //		public void CheckingProgress()
@@ -393,23 +363,14 @@ namespace Skysemi.With.Scenes
 //		}
 		public void EncountEnemy()
 		{
-			_isBoss = false;
-//			game.PlayMusicBattle();
-			_worldMode = EWorldMode.BATTLE;
+			game.eventManager.EncountEnemy(this);
+			// isBoss = false;
+			// game.PlayMusicBattle();
+			// WorldMode = EWorldMode.BATTLE;
 //			WayEventParam param = new WayEventParam();
 //			this.WayEvent(param);
 //			EncountEvent();
 		}
-//		public void EncountEnemyBoss()
-//		{
-//			game.isBoss = true;
-//
-//			game.PlayMusicBossBattle();
-//		
-//			game.mode = EMode.BATTLE;
-//			WayEventParam param = new WayEventParam();
-//			this.WayEvent(param);
-//		}
 
 //		private void EncountEvent()
 //		{
@@ -447,12 +408,12 @@ namespace Skysemi.With.Scenes
 
 		public void SetWorldMode(EWorldMode eWorldMode)
 		{
-			_worldMode = eWorldMode;
+			WorldMode = eWorldMode;
 		}
 
 		public EWorldMode GetWorldMode()
 		{
-			return _worldMode;
+			return WorldMode;
 		}
 
 //		public int GetRandomEncount()
@@ -471,12 +432,12 @@ namespace Skysemi.With.Scenes
 //		}
 		public bool IsBoss()
 		{
-			return _isBoss;
+			return isBoss;
 		}
 
 		public void SetIsBoss(bool isBoss)
 		{
-			_isBoss = isBoss;
+			this.isBoss = isBoss;
 		}
 
 		public MonoBehaviour GetMonoBehaviour()

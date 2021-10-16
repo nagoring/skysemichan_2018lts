@@ -28,9 +28,10 @@ namespace StatusUI
                 GameObject obj = (GameObject)Resources.Load (PrefabPath);
                 obj.SetActive(true);
                 GameObject instance = (GameObject)Instantiate(obj,Vector2.zero,Quaternion.identity);
-                instance.transform.parent = canvasUI.transform;
+                instance.transform.SetParent(canvasUI.transform);
+                // instance.transform.parent = canvasUI.transform;
                 instance.transform.localScale = new Vector3(1,1,1);
-                instance.transform.localPosition = new Vector3(399,-70, 0);
+                instance.transform.localPosition = new Vector3(399,-60, 0);
                 PlayerStatusWindow playerStatusWindow = instance.GetComponent<PlayerStatusWindow>();
                 playerStatusWindow.Init();
                 _playerStatusWindow = playerStatusWindow;

@@ -19,7 +19,7 @@ namespace Skysemi.With.Scenes
         }
         public void PushBtnTalk()
         {
-//        SkysemiChanMsg.instance.msgHome[EMsgHome.Second](msgCounter);
+//        ShizuneMsg.instance.msgHome[EMsgHome.Second](msgCounter);
             msgCounter++;
             if (msgCounter >= 5)
             {

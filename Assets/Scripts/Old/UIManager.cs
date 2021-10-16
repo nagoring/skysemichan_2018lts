@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Skysemi.With.Chara;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
+using Skysemi.With.Scenes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class UIManager : MonoBehaviour
 	public GameObject buttonGoFront;
 	public GameObject btnNavigationWindow;
 	public GameObject btnBattleFlow;
+	//旧アクションコマンド 現 CardView
 	public GameObject  panelActionCommandSelect;
 	public GameObject[] btnActionCommands = new GameObject[4];
 	
@@ -76,13 +78,13 @@ public class UIManager : MonoBehaviour
 //		btnBattleFlow.SetActive(true);
 //		game.turn = ETurn.PLAYER;
 //	}
-//	public void EncountEnemeyEnd(BattleEndEventParam param) {
-//		//GoFrontButton Begin
-//		btnGoFront.SetActive(true);
-//		//ActionCommand End
-//		btnNavigationWindow.SetActive(false);
-//		btnBattleFlow.SetActive(false);
-//	}
+	public void EncountEnemeyEnd(BattleEndEventParam param) {
+		//GoFrontButton Begin
+		World.instance.btnGoFront.SetActive(true);
+		//ActionCommand End
+		btnNavigationWindow.SetActive(false);
+		btnBattleFlow.SetActive(false);
+	}
 //
 //	private void SetActionComanndInteractable(EActionCommandActive eActionCommandActive)
 //	{
@@ -138,93 +140,94 @@ public class UIManager : MonoBehaviour
 //		btn.colors = cbBtn;
 //	}
 //
-//	public void ShowActionCommandArea(Player player)
-//	{
-//		
-//		
-//		
-//		if (player.Lv >= 10)
-//		{
-//			PlayerManager.instance.metalBat.SetActive(true);
-//			PlayerManager.instance.strongPanch.SetActive(true);
-//			PlayerManager.instance.strongShield.SetActive(true);
-//			PlayerManager.instance.shield.SetActive(true);
-//			PlayerManager.instance.magic.SetActive(true);
-//			PlayerManager.instance.pan.SetActive(true);
-//			btnActionCommands[1].SetActive(true);
-//			btnActionCommands[2].SetActive(true);
-//			btnActionCommands[3].SetActive(true);
-//		}
-//		if (player.Lv >= 9)
-//		{
-//			PlayerManager.instance.strongPanch.SetActive(true);
-//			PlayerManager.instance.strongShield.SetActive(true);
-//			PlayerManager.instance.shield.SetActive(true);
-//			PlayerManager.instance.magic.SetActive(true);
-//			PlayerManager.instance.pan.SetActive(true);
-//			btnActionCommands[1].SetActive(true);
-//			btnActionCommands[2].SetActive(true);
-//			btnActionCommands[3].SetActive(true);
-//		}
-//		else if (player.Lv >= 7)
-//		{
-//			PlayerManager.instance.strongPanch.SetActive(true);
-//			PlayerManager.instance.shield.SetActive(true);
-//			PlayerManager.instance.magic.SetActive(true);
-//			PlayerManager.instance.pan.SetActive(true);
-//			btnActionCommands[1].SetActive(true);
-//			btnActionCommands[2].SetActive(true);
-//			btnActionCommands[3].SetActive(true);
-//		}
-//		else if (player.Lv >= 6)
-//		{
-//			PlayerManager.instance.shield.SetActive(true);
-//			PlayerManager.instance.magic.SetActive(true);
-//			PlayerManager.instance.pan.SetActive(true);
-//			btnActionCommands[1].SetActive(true);
-//			btnActionCommands[2].SetActive(true);
-//			btnActionCommands[3].SetActive(true);
-//		}
-//		else if (player.Lv >= 5)
-//		{
-//			PlayerManager.instance.shield.SetActive(true);
-//			PlayerManager.instance.magic.SetActive(true);
-//			PlayerManager.instance.pan.SetActive(true);
-//			btnActionCommands[1].SetActive(true);
-//			btnActionCommands[2].SetActive(true);
-//		}
-//		else if (player.Lv >= 4)
-//		{
-//			PlayerManager.instance.shield.SetActive(true);
-//			PlayerManager.instance.magic.SetActive(true);
-//			btnActionCommands[1].SetActive(true);
-//			btnActionCommands[2].SetActive(true);
-//		}
-//		else if (player.Lv >= 3)
-//		{
-//			PlayerManager.instance.shield.SetActive(true);
-//			btnActionCommands[1].SetActive(true);
-//			btnActionCommands[2].SetActive(true);
-//		}
-//		else if (player.Lv >= 2)
-//		{
-//			PlayerManager.instance.shield.SetActive(true);
-//			btnActionCommands[1].SetActive(true);
-//		}
-//		else if (player.Lv >= 1)
-//		{
-//			PlayerManager.instance.shield.SetActive(true);
-//			btnActionCommands[1].SetActive(true);
-//		}
-//		
-//		GameSystem gs = GameSystem.instance;
-//		if (gs.progress >= (int) EGameProgress.SHOW_STAGE_4)
-//		{
-//			PlayerManager.instance.roboBlade.SetActive(true);
-//		}
-//		
-//		
-//	}
+	public void ShowActionCommandArea(Player player)
+	{
+		if (false)
+		{
+			
+		}
+		// if (player.Lv >= 10)
+		// {
+		// 	PlayerManager.instance.metalBat.SetActive(true);
+		// 	PlayerManager.instance.strongPanch.SetActive(true);
+		// 	PlayerManager.instance.strongShield.SetActive(true);
+		// 	PlayerManager.instance.shield.SetActive(true);
+		// 	PlayerManager.instance.magic.SetActive(true);
+		// 	PlayerManager.instance.pan.SetActive(true);
+		// 	btnActionCommands[1].SetActive(true);
+		// 	btnActionCommands[2].SetActive(true);
+		// 	btnActionCommands[3].SetActive(true);
+		// }
+		// if (player.Lv >= 9)
+		// {
+		// 	PlayerManager.instance.strongPanch.SetActive(true);
+		// 	PlayerManager.instance.strongShield.SetActive(true);
+		// 	PlayerManager.instance.shield.SetActive(true);
+		// 	PlayerManager.instance.magic.SetActive(true);
+		// 	PlayerManager.instance.pan.SetActive(true);
+		// 	btnActionCommands[1].SetActive(true);
+		// 	btnActionCommands[2].SetActive(true);
+		// 	btnActionCommands[3].SetActive(true);
+		// }
+		// else if (player.Lv >= 7)
+		// {
+		// 	PlayerManager.instance.strongPanch.SetActive(true);
+		// 	PlayerManager.instance.shield.SetActive(true);
+		// 	PlayerManager.instance.magic.SetActive(true);
+		// 	PlayerManager.instance.pan.SetActive(true);
+		// 	btnActionCommands[1].SetActive(true);
+		// 	btnActionCommands[2].SetActive(true);
+		// 	btnActionCommands[3].SetActive(true);
+		// }
+		else if (player.Lv >= 6)
+		{
+			// PlayerManager.instance.shield.SetActive(true);
+			// PlayerManager.instance.magic.SetActive(true);
+			// PlayerManager.instance.pan.SetActive(true);
+			btnActionCommands[1].SetActive(true);
+			btnActionCommands[2].SetActive(true);
+			btnActionCommands[3].SetActive(true);
+		}
+		else if (player.Lv >= 5)
+		{
+			// PlayerManager.instance.shield.SetActive(true);
+			// PlayerManager.instance.magic.SetActive(true);
+			// PlayerManager.instance.pan.SetActive(true);
+			btnActionCommands[1].SetActive(true);
+			btnActionCommands[2].SetActive(true);
+		}
+		else if (player.Lv >= 4)
+		{
+			// PlayerManager.instance.shield.SetActive(true);
+			// PlayerManager.instance.magic.SetActive(true);
+			btnActionCommands[1].SetActive(true);
+			btnActionCommands[2].SetActive(true);
+		}
+		else if (player.Lv >= 3)
+		{
+			// PlayerManager.instance.shield.SetActive(true);
+			btnActionCommands[1].SetActive(true);
+			btnActionCommands[2].SetActive(true);
+		}
+		else if (player.Lv >= 2)
+		{
+			// PlayerManager.instance.shield.SetActive(true);
+			btnActionCommands[1].SetActive(true);
+		}
+		else if (player.Lv >= 1)
+		{
+			// PlayerManager.instance.shield.SetActive(true);
+			btnActionCommands[1].SetActive(true);
+		}
+		//
+		// GameSystem gs = GameSystem.instance;
+		// if (gs.progress >= (int) EGameProgress.SHOW_STAGE_4)
+		// {
+		// 	PlayerManager.instance.roboBlade.SetActive(true);
+		// }
+		//
+		
+	}
 
 }
 

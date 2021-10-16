@@ -9,6 +9,10 @@ namespace Skysemi.With.Scenes.WorldObject
     {
         public static IEncountRule Create(IGoFrontStateChangeParameter worldParameter)
         {
+            if(Constants.Debug == 1)
+            {
+                return new EncountDebugRule(worldParameter);
+            }
             Game game = Game.instance;
             Player player = game.GetPlayer();
             EStage eStage = game.destinationPlace;

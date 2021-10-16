@@ -23,7 +23,7 @@ namespace Skysemi.With.Chara.Enemies
             this.Def = 0;
             this.Agi = 0;
             this.Spirit = 1;
-            this.MaxSpirit = 0;
+            this.MaxSpirit = 1;
             this.msg = "うひひ、わたしを食べれるかな";
             //msgDamageAfterDict.Add(id)
 

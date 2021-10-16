@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Skysemi.With.Chara.Enemies;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
+using Skysemi.With.Scenes;
 using UnityEngine;
 
 namespace Skysemi.With.Chara
@@ -20,7 +21,10 @@ namespace Skysemi.With.Chara
         }
         public Enemy Factory(MonoBehaviour mono)
         {
-            return CreateCharaObject(mono, EChara.Nasu);
+            if (Constants.Debug == 1)
+            {
+                // return CreateCharaObject(mono, EChara.Nasu);
+            }
             Game game = Game.instance;
             
             EStage eStage = game.destinationPlace;
@@ -29,10 +33,10 @@ namespace Skysemi.With.Chara
             {
                 case EStage.WALKING_COURSE:
                     //雑魚：なす、きゅうり　BOSS：りんご
-//                    if (game.isBoss)
-//                    {
-//                        return enemyRingo;
-//                    }
+                    if (World.instance.isBoss)
+                    {
+                        return CreateCharaObject(mono, EChara.Ringo);
+                    }
                     if (randomValue >= 60)
                     {
                         return CreateCharaObject(mono, EChara.Nasu);
@@ -135,6 +139,7 @@ namespace Skysemi.With.Chara
             {
                 {EChara.Nasu, typeof(EnemyNasu)},
                 {EChara.Kyuuri, typeof(EnemyKyuuri)},
+                {EChara.Ringo, typeof(EnemyRingo)},
             };
             return mono.gameObject.AddComponent(dict[eChara]) as Enemy;
         }

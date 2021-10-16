@@ -10,7 +10,7 @@ namespace Skysemi.With.Scenes.WorldObject
 	public class BattleManager : MonoBehaviour
 	{
 		public static BattleManager instance = null;
-		private World _world = World.instance;
+		private World _world;
 		private Game game = Game.instance;
 		private Enemy enemy;
 		private List<IChara> charaActOrderList;
@@ -34,7 +34,7 @@ namespace Skysemi.With.Scenes.WorldObject
 
 		void Start()
 		{
-
+			_world = World.instance;
 		}
 
 		// Update is called once per frame
@@ -140,7 +140,16 @@ namespace Skysemi.With.Scenes.WorldObject
 		{
 //			game.skysemiChanMsg.msgBattleWinner[target.Id](this);
 //			game.eventManager.DoBattleEndEvent();
+////=====
+//		1. this.BattleEndEvent += game.enemyManager.EncountEnemeyEnd;
+//		2. this.BattleEndEvent += game.playerManager.EncountEnemeyEnd;
+//		3. this.BattleEndEvent += game.uiManager.EncountEnemeyEnd;
+//		4. this.BattleEndEvent += game.skysemiChanMsg.EncountEnemeyEnd;
+//		5. this.BattleEndEvent += game.enemyManager.EncountEnemeyEndDestroy;
+///=====
 			eBattleStatus = EBattleStatus.IDLE;
+			game.eventManager.DoBattleEndEvent();
+			
 		}
 
 		/// <summary>
@@ -199,7 +208,7 @@ namespace Skysemi.With.Scenes.WorldObject
 		private void OrderAttackTurn()
 		{
 			//しずね
-//			SkysemiChan skysemiChan = game.skysemiChanManager.skysemiChan;
+//			Shizune skysemiChan = game.skysemiChanManager.skysemiChan;
 			charaActOrderList = new List<IChara>();
 			charaActOrderList.Add(game.GetPlayer());
 			charaActOrderList.Add(enemy);
@@ -236,6 +245,18 @@ namespace Skysemi.With.Scenes.WorldObject
 //				BattleEndForEscape();
 //			}
 		}
+		/// <summary>
+		/// 5. 
+		/// </summary>
+		/// <param name="param"></param>
+		public void EncountEnemeyEndDestroy(BattleEndEventParam param) {
+			// Destroy(this.enemyGameObject);
+			Destroy(this.enemy);
+			param.enemy = null;
+			// imageEnemeyStatusWindow.SetActive(false);
+			World.instance.GetEnemyStatusWindow().gameObject.SetActive(false);
+		}
+		
 //	private void ToTarget(IChara actionChara, IChara targetChara)
 //	{
 //		//行動アニメーション
@@ -353,7 +374,7 @@ namespace Skysemi.With.Scenes.WorldObject
 //	private void TurnSkysemiChan() {
 //		Player player = Player.instance;
 //		Enemy enemy = game.enemyManager.enemy;
-//		SkysemiChan skysemiChan = game.skysemiChanManager.skysemiChan;
+//		Shizune skysemiChan = game.skysemiChanManager.skysemiChan;
 //		//スカゼミちゃんのメッセージ
 //		game.skysemiChanMsg.msgAttakDict[enemy.Id]();
 //		//0.3秒後に実行する
@@ -394,7 +415,7 @@ namespace Skysemi.With.Scenes.WorldObject
 //			}));
 //		}));
 //	}
-//	private int AttackSkysemiChanToEnemy(SkysemiChan skysemiChan, Enemy enemy) {
+//	private int AttackSkysemiChanToEnemy(Shizune skysemiChan, Enemy enemy) {
 //		//ダメージ処理
 //		int damage = skysemiChan.atk - enemy.def;
 //		damage += (int)Random.Range(0.0f, 6.0f);

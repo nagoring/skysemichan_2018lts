@@ -6,24 +6,37 @@ using UnityEngine.UI;
 namespace Skysemi.With.Scenes.WorldObject
 {
     public class EffectManager : MonoBehaviour {
-        public World world;
+        public static EffectManager instance = null;
+        // public World world;
         public GameObject imageEffectScreen;
         public Text text;
         public GameObject attackEffect1;
+        void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+            DontDestroyOnLoad(gameObject);
+        }
 
         // Use this for initialization
         void Start () {
-		
         }
 	
         // Update is called once per frame
         void Update () {
-		
         }
-        public IEnumerator attackPunchAnimation() {
+        public IEnumerator attackPunchAnimation()
+        {
+            World world = World.instance;
             GameObject damageEffect = Instantiate(attackEffect1);
             damageEffect.SetActive(true);
-//            damageEffect.transform.SetParent(world.enemeyLayer.transform, false);
+            damageEffect.transform.SetParent(world.enemeyLayer.transform, false);
 
             float animationFrame = 0.05f;
             float[][] animTbl =  {
@@ -53,10 +66,11 @@ namespace Skysemi.With.Scenes.WorldObject
             float animationFrame = 0.15f;
             //攻撃回数
             int attackNumber = 3;
-            for (int j = 0; j <= attackNumber; j++)
+            for (int j = 0; j <= attackNumber; j++)    
             {
                 float alpha = alphaTbl[j % 2];
-                image.color =  new Color(1.0f, 1.0f, 1.0f, alpha);
+                // image.color =  new Color(1.0f, 1.0f, 1.0f, alpha);
+                image.color =  new Color(0.5f, 0f, 0f, alpha);
                 yield return new WaitForSeconds((float)animationFrame);
             }
             imageEffectScreen.SetActive(false);

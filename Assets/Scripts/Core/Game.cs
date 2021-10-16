@@ -10,16 +10,34 @@ using Skysemi.With.Chara;
 using Skysemi.With.Enum;
 using Skysemi.With.Events;
 using Skysemi.With.Scenes;
+using Skysemi.With.Scenes.WorldObject;
 using Skysemi.With.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.Experimental.PlayerLoop;
+using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.Video;
 
 namespace Skysemi.With.Core
 {
+ 
     public class Game : AppMonoBehaviour, IPlayer
     {
+        private Dictionary<EGameProgress, EGameProgress> _gameProgressDict = new Dictionary<EGameProgress, EGameProgress>()
+            { 
+                {EGameProgress.ZERO,EGameProgress.GAME_START},
+                {EGameProgress.GAME_START,EGameProgress.SHOW_STAGE_1},
+                {EGameProgress.SHOW_STAGE_1,EGameProgress.SHOW_STAGE_2},
+                {EGameProgress.SHOW_STAGE_2,EGameProgress.SHOW_STAGE_3},
+                {EGameProgress.SHOW_STAGE_3,EGameProgress.SHOW_STAGE_4},
+                {EGameProgress.SHOW_STAGE_4,EGameProgress.SHOW_OTHER_STAGE_1},
+                {EGameProgress.SHOW_OTHER_STAGE_1,EGameProgress.SHOW_OTHER_STAGE_GEDOUGARI},
+            }
+            ;
+            
+
 //        public event EventHandler CalculateActionCardsEvent;
 //	public delegate void WayDelegate(WayEventParam param);
 //	public event WayDelegate WayEvent = delegate (WayEventParam param) { };
@@ -28,10 +46,12 @@ namespace Skysemi.With.Core
 //        private CalculateActionCardsEventSender _calculateActionCardsEventSender;
         
         public static Game instance = null;
-        private Player _player = null;
+        [FormerlySerializedAs("_player")] public Player player = null;
+        public ShizuneMsg shizuneMsg = null;
         public EventManager eventManager = null;
         public EnemyManager enemyManager = null;
-        public int progress;
+        public EffectManager effectManager = null;
+        public EGameProgress gameProgress;
         public Dictionary<string, UnityEvent> events;
         public EStage destinationPlace;
 //        public string SecneName {get {return _sceneName;}set{_sceneName = value;}}
@@ -72,10 +92,14 @@ namespace Skysemi.With.Core
 		
             if (instance == null)
             {
+                GameObject obj = new GameObject();
                 instance = this;
                 destinationPlace = EStage.NONE;
-                eventManager = new EventManager();
+                eventManager = obj.AddComponent<EventManager>();
                 enemyManager = new EnemyManager();
+                shizuneMsg = obj.AddComponent<ShizuneMsg>();
+                // effectManager = obj.AddComponent<EffectManager>();
+                
             }
             else if (instance != this)
             {
@@ -85,9 +109,13 @@ namespace Skysemi.With.Core
         }
 	
         // Use this for initialization
-        void Start () {
+        void Start ()
+        {
+            effectManager = EffectManager.instance;
+            // EffectManager.instance
+            // Instantiate(effectManager);
 //            eventManager = this.gameObject.AddComponent<EventManager>();
-            progress = PlayerPrefs.GetInt("GameProgress");
+            // gameProgress = PlayerPrefs.GetInt("GameProgress");
         }
 	
         // Update is called once per frame
@@ -95,13 +123,9 @@ namespace Skysemi.With.Core
 		
         }
 
-        public void CheckProgress()
-        {
-            progress = PlayerPrefs.GetInt("GameProgress");
-        }
         public void DeleteSaveData()
         {
-            PlayerPrefs.DeleteAll();
+            // PlayerPrefs.DeleteAll();
         }
         //FirstInputManagerとHomeManagerとBattleManaterのシーン切替時に呼ばれる
         public void Save()
@@ -119,7 +143,10 @@ namespace Skysemi.With.Core
         }
         public void Load()
         {
-//            Player player = Player.instance;
+            SetGameProgress(EGameProgress.SHOW_STAGE_1);
+            
+            // Player player = player;
+            // player.Progress;
 //            Player.Param param = PlayerPrefsUtils.GetObject<Player.Param>(ESave.Player.ToString());
 //            Debug.Log("LV:" + param.lv);
 //            player.SetParam(param);
@@ -127,8 +154,13 @@ namespace Skysemi.With.Core
 
         public void SetGameProgress(EGameProgress eGameProgress)
         {
-            PlayerPrefs.SetInt(ESave.GameProgress.ToString(), (int) eGameProgress);
-            progress = (int) eGameProgress;
+            // PlayerPrefs.SetInt(ESave.GameProgress.ToString(), (int) eGameProgress);
+            gameProgress = eGameProgress;
+        }
+        public void SetNextGameProgress(EGameProgress eGameProgress)
+        {
+            gameProgress = _gameProgressDict[eGameProgress];
+            // PlayerPrefs.SetInt(ESave.GameProgress.ToString(), (int) eGameProgress);
         }
 
         public void SetCardUiController(IPlayerCardUiController ctrl)
@@ -161,21 +193,21 @@ namespace Skysemi.With.Core
 
         public void InitPlayer(string playerName)
         {
-            if (_player == null)
+            if (player == null)
             {
-                _player = gameObject.AddComponent<Player>();
-                _player.Init(playerName);
+                player = gameObject.AddComponent<Player>();
+                player.Init(playerName);
             }
         }
 
         public Player GetPlayer()
         {
-            if (_player == null)
+            if (player == null)
             {
-                _player = gameObject.AddComponent<Player>();
-                _player.Init("名無し");
+                player = gameObject.AddComponent<Player>();
+                player.Init("名無し");
             }
-            return _player;
+            return player;
         }
 
         public EnemyManager GetEnemyManager()
@@ -254,6 +286,56 @@ namespace Skysemi.With.Core
                 SoundManager.instance.PlayMusic(musicWalking);
             }
         }
+        public void GoHomeForWinner()
+        {
+            
+            // SetGameProgress(EGameProgress.SHOW_STAGE_1);
+            SetNextGameProgress(gameProgress);
+
+            if (gameProgress == EGameProgress.SHOW_OTHER_STAGE_1)
+            {
+            	SceneManager.LoadScene("Scenes/HomeSecondScene");
+            	return;
+            }            
+            
+            // Game gs = Game.instance;
+            // EGameProgress eGameProgress = (EGameProgress)PlayerPrefs.GetInt(ESave.GameProgress.ToString());
+            // if (eGameProgress == EGameProgress.SHOW_STAGE_1)
+            // {
+            // 	//ステージ２をオープン
+            // 	gs.SetGameProgress(EGameProgress.SHOW_STAGE_2);
+            // }
+            // if (eGameProgress == EGameProgress.SHOW_STAGE_2)
+            // {
+            // 	//ステージ３をオープン
+            // 	gs.SetGameProgress(EGameProgress.SHOW_STAGE_3);
+            // }
+            // if (eGameProgress == EGameProgress.SHOW_STAGE_3)
+            // {
+            // 	//ステージ４をオープン予定
+            // 	gs.SetGameProgress(EGameProgress.SHOW_STAGE_4);
+            // }
+            // if (eGameProgress == EGameProgress.SHOW_STAGE_4)
+            // {
+            // 	//異なる拠点エリアへ
+            // 	gs.SetGameProgress(EGameProgress.SHOW_OTHER_STAGE_1);
+            // 	Game.instance.Save();
+            // 	SceneManager.LoadScene("Scenes/HomeSecondScene");
+            // 	return;
+            // }
+            // if (eGameProgress == EGameProgress.SHOW_OTHER_STAGE_1)
+            // {
+            // 	//外道狩りステージへ
+            // 	gs.SetGameProgress(EGameProgress.SHOW_OTHER_STAGE_GEDOUGARI);
+            // 	Game.instance.Save();
+            // 	SceneManager.LoadScene("Scenes/GameMainScene");
+            // 	return;
+            // }
+            //
+            // Game.instance.Save();
+            // SceneManager.LoadScene("Scenes/HomeScene");
+        }
+        
     }
 }
 

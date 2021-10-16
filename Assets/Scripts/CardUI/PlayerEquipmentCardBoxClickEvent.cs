@@ -17,8 +17,8 @@ namespace Skysemi.With.CardUI
             int index = int.Parse(name.Replace("EquipmentCardBoxUi", ""));
 
             Game game = Game.instance;
-            IPlayerCardUiController cardUiController =  game.GetCardUiController();
-            CardBoard cardBoardUi = cardUiController.GetCardBoard();
+            IPlayerCardUiController cardUiController = game.GetCardUiController();
+            CardBoardScrollView cardBoardUi = cardUiController.GetCardBoard();
             bool active = cardBoardUi.gameObject.activeSelf;
             cardBoardUi.gameObject.SetActive(!active);
 

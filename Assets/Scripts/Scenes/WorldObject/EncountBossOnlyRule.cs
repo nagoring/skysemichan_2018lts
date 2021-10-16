@@ -24,7 +24,8 @@ namespace Skysemi.With.Scenes.WorldObject
 			EStage eStage = game.destinationPlace;
 			if (player.Progress == boss_encount_progress)
 			{
-//				eventManager.EncountEnemyBoss();
+                // game.eventManager.EncountEnemyBoss
+				// eventManager.EncountEnemyBoss();
 			}
             
         }

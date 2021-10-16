@@ -24,7 +24,7 @@ namespace Skysemi.With.Chara.Enemies
 		public EChara Id{get {return param.id;}set{param.id = value;}}
 		public string CharaName{get {return param.charaName;}set{param.charaName = value;}}
 	
-		public string enemyName;
+		// public string enemyName;
 		public int spirit = 0;
 		public int maxspirit = 10;
 		public string msg;
@@ -84,14 +84,14 @@ namespace Skysemi.With.Chara.Enemies
 	
 		public void PlayActionAnimation()
 		{
-//			GameMainManager game = GameMainManager.instance; 
-//			StartCoroutine(game.effectManager.attackAnimationNormalByEnemy());
+			Game game = Game.instance; 
+			StartCoroutine(game.effectManager.attackAnimationNormalByEnemy());
 		}
 	
 		public virtual void PlayActionSound()
 		{
-//			GameMainManager game = GameMainManager.instance;
-//			SoundManager.instance.PlaySingleRepeat(game.clipEnemyAtk1, 1, 0.3f);
+			Game game = Game.instance;
+			SoundManager.instance.PlaySingleRepeat(game.clipEnemyAtk1, 1, 0.3f);
 		}
 	
 		public float GetWaitTimeByAnimation()

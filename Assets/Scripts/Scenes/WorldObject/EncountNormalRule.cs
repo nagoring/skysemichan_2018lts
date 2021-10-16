@@ -32,7 +32,7 @@ namespace Skysemi.With.Scenes.WorldObject
 //				eventManager.EncountEnemyBoss();
             }
             else if(_random_encount <= 0){
-//			game.PlayMusicBattle();
+		    	game.PlayMusicBattle();
 //                _random_encount = Random.Range(1, 8) + 10;
                 _is_boss = false;
                 _eWorldMode = EWorldMode.BATTLE;
@@ -64,12 +64,8 @@ namespace Skysemi.With.Scenes.WorldObject
             Game game = Game.instance;
 //            if (_worldParameter.GetWorldMode() != EWorldMode.BATTLE) return;
             
-            // Activeで初期化されてしまうため一番始めにActiveにしておく
-            iSetUpEnemy.GetEnemyLayer().SetActive(true);
-            game.enemyManager.createEnemy(iSetUpEnemy.GetMonoBehaviour(), iSetUpEnemy.GetEquipmentCardFieldUi());
-            game.enemyManager.displayEnemy(iSetUpEnemy.GetEnemyLayer());
+            game.eventManager.DoWayEvent(iSetUpEnemy);
             Enemy enemy = game.enemyManager.GetEnemy();
-			
 			//ナビゲーションウィンドウの表示
             iSetUpEnemy.GetBtnNavigationWindow().SetActive(true);
 			Text navText = iSetUpEnemy.GetBtnNavigationWindow().GetComponentInChildren<Text>();
@@ -84,6 +80,7 @@ namespace Skysemi.With.Scenes.WorldObject
 //			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
             
         }
+        
         
 //        private void EncountEvent()
 //        {

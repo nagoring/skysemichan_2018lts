@@ -29,7 +29,7 @@ namespace Skysemi.With.Core
                 Destroy (gameObject);
             }
 		
-            DontDestroyOnLoad (gameObject);
+            // DontDestroyOnLoad (gameObject);
         }
 
         public void PlayMusic(AudioClip clip)

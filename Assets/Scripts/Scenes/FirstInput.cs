@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace Skysemi.With.Scenes
 {
-    public class FirstInputManager : MonoBehaviour {
+    public class FirstInput : MonoBehaviour {
         public InputField inputField;
         public Button btnApply;
         public GameObject textError;

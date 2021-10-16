@@ -30,7 +30,8 @@ namespace Skysemi.With.CardUI
             obj.SetActive(true);
             // プレハブを元にEquipmentCardFieldを生成して、CanvasUIの子供にする
             GameObject instance = (GameObject)Instantiate(obj,Vector2.zero,Quaternion.identity);
-            instance.transform.parent = canvasUi.transform;
+            // instance.transform.parent = canvasUi.transform;
+            instance.transform.SetParent(canvasUi.transform);
             instance.transform.localScale = new Vector3(1,1,1);
             instance.transform.localPosition = new Vector3(x, y, 0);
             return instance.GetComponent<EquipmentCardFieldUi>();
@@ -48,7 +49,8 @@ namespace Skysemi.With.CardUI
             GameObject actionCardPrefab = (GameObject)Resources.Load(prefabFilePath);
             GameObject instance = (GameObject)Instantiate(actionCardPrefab,Vector2.zero,Quaternion.identity);
             instance.name = "EquipmentCardBoxUi" + index;
-            instance.transform.parent = transform;
+            // instance.transform.parent = transform;
+            instance.transform.SetParent(transform);
             instance.transform.localScale = new Vector3(1,1,1);
             float x = _xTbl[index];
             instance.transform.localPosition = new Vector3(x, 0, 0);

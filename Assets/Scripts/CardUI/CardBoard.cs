@@ -28,11 +28,13 @@ namespace Skysemi.With.CardUI
 
         public static CardBoard CreateCardBoardInCanvasUI(Canvas canvasUI)
         {
+            
             GameObject obj = (GameObject)Resources.Load (PrefabPath);
             obj.SetActive(true);
             // プレハブを元にCardBoardを生成して、CanvasUIの子供にする
             GameObject instance = (GameObject)Instantiate(obj,Vector2.zero,Quaternion.identity);
-            instance.transform.parent = canvasUI.transform;
+            // instance.transform.parent = canvasUI.transform;
+            instance.transform.SetParent(canvasUI.transform);
             instance.transform.localScale = new Vector3(1,1,1);
             instance.transform.localPosition = new Vector3(-241,95,0);
             return instance.GetComponent<CardBoard>();;
@@ -43,7 +45,8 @@ namespace Skysemi.With.CardUI
             SetCardOnBoard(index, actionCard, type);
 //            this.SetCardImage(index, actionCard);
             _cardArray[index] = new Card();
-            _cardArray[index].Init(index, actionCard);
+            // _cardArray[index].Init(index, actionCard);
+            _cardArray[index].Init( actionCard);
         }
 
         public Card GetCard(int index)
@@ -61,7 +64,8 @@ namespace Skysemi.With.CardUI
             GameObject actionCardPrefab = (GameObject)Resources.Load(prefabFilePath);
             GameObject instance = (GameObject)Instantiate(actionCardPrefab,Vector2.zero,Quaternion.identity);
             instance.name = "BoardArea" + index;
-            instance.transform.parent = transform;
+            // instance.transform.parent = transform;
+            instance.transform.SetParent(transform);
             instance.transform.localScale = new Vector3(1,1,1);
             float[] xy = _areaPositionTbl[index];
             instance.transform.localPosition = new Vector3(xy[0], xy[1], 0);
@@ -78,7 +82,7 @@ namespace Skysemi.With.CardUI
             GameObject child = transform.Find("BoardArea" + index).gameObject;
             child.SetActive(true);
             Image childImage = child.GetComponent<Image>();
-            childImage.sprite = Sprite.Create(tex2d, new Rect(0,0,tex2d.width,tex2d.height), Vector2.zero);;
+            childImage.sprite = Sprite.Create(tex2d, new Rect(0,0,tex2d.width,tex2d.height), Vector2.zero);
             // material.mainTextureは何故かすべてのBoardArea[0-9]{1,2}が同じものに変わってしまう
 //            GameObject child = transform.Find("BoardArea2").gameObject;
 //            Image image = child.GetComponent<Image>();

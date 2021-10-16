@@ -5,6 +5,7 @@ namespace Skysemi.With.Core
     public class Loader : MonoBehaviour {
         //GameManagerのプレファブを指定
         public GameObject game;
+        // public GameObject sound;
 	
         void Awake ()
         {
@@ -12,5 +13,9 @@ namespace Skysemi.With.Core
             if (Game.instance == null) {
                 Instantiate (game);
             }
+            // if (SoundManager.instance == null) {
+            //     Instantiate (sound);
+            // }
+            
         }
     }}
