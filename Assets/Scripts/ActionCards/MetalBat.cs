@@ -37,5 +37,9 @@ namespace Skysemi.With.ActionCards
 		{
 			return "Prefabs/ActionCards/MetalBat";
 		}
+		public EGroup GetGroup()
+		{
+			return EGroup.Mukibutu;
+		}
 	}
 }

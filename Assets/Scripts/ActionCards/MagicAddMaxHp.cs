@@ -36,6 +36,10 @@ namespace Skysemi.With.ActionCards
 		{
 			return "Prefabs/ActionCards/MagicAddMaxHp";
 		}
+		public EGroup GetGroup()
+		{
+			return EGroup.Meruhen;
+		}
 		
 	}
 }

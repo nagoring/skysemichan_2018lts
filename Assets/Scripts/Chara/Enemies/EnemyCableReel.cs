@@ -52,4 +52,8 @@ public class EnemyCableReel : Enemy
     {
         throw new System.NotImplementedException();
     }
+    public EGroup GetGroup()
+    {
+        return EGroup.Mukibutu;
+    }
 }

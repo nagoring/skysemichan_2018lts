@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Skysemi.With.ActionCards;
 using Skysemi.With.Chara.DamageLogic;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
@@ -11,6 +12,8 @@ namespace Skysemi.With.Chara.Enemies
 {
 	abstract public class Enemy : MonoBehaviour, IChara
 	{
+		public Dictionary<EActionCardName, ABase> cardDict;
+		public Dictionary<EActionCardName, ABase> cardSpareDict;
 		public CharaParameter param;
 		public int Hp{get {return param.hp;}set{param.hp = value;}}
 		public int MaxHp{get {return param.maxhp;}set{param.maxhp = value;}}
@@ -81,7 +84,11 @@ namespace Skysemi.With.Chara.Enemies
 		{
 			return ECharaType.ENEMY;
 		}
-	
+
+		public EGroup GetGroup()
+		{
+			return EGroup.Namamono;
+		}
 		public void PlayActionAnimation()
 		{
 			Game game = Game.instance; 
@@ -113,7 +120,7 @@ namespace Skysemi.With.Chara.Enemies
 				//ナビゲーションメッセージ
 				Text navText = World.instance.GetEnemyMsgText();
 				navText.color = new Color(0, 0, 0);
-				navText.text = string.Format("{0}は{1}のダメージをうけた", target.CharaName, damage);
+				navText.text = $"{target.CharaName}は{damage}のダメージをうけた";
 			}
 			
 		}

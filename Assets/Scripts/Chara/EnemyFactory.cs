@@ -78,7 +78,7 @@ namespace Skysemi.With.Chara
 //                    }
 //                    break;
 //                case EStage.METAL_DEFENCE:
-//                    //雑魚:ダイコン、ブロッコリ、ほうれんそう、トマト BOSS:スイカ
+//                    //雑魚:ダイコン、ブロッコリ、ほうれんそう、トマト BOSS:ブレードロボ
 //                    if (game.isBoss)
 //                    {
 //                        return enemyBladeRobo;

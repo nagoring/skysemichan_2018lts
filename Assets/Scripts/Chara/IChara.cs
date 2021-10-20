@@ -9,6 +9,7 @@ public interface IChara
     void SetBattleAction(IChara chara);
     EBattleAction GetBattleAction();
     ECharaType GetCharaType();
+    EGroup GetGroup();
     void PlayActionAnimation();
     void PlayActionSound();
     float GetWaitTimeByAnimation();

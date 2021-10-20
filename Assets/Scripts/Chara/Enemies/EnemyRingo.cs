@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Skysemi.With.ActionCards;
 using UnityEngine;
 using Skysemi.With.Enum;
 
@@ -29,6 +30,20 @@ namespace Skysemi.With.Chara.Enemies
 				"この程度じゃ食べられてやれんな",
 				"俺様を食べるにふさわしいヤツかも知れん",
 			};
+			
+			
+			
+			cardDict = new Dictionary<EActionCardName, ABase>();
+			cardDict.Add(EActionCardName.NasuHeart, gameObject.AddComponent<RingoHeart>());
+			
+			cardSpareDict = new Dictionary<EActionCardName, ABase>();
+			cardSpareDict.Add(EActionCardName.NasuHeart, gameObject.AddComponent<Punch>());
+			
+			// Equip(0, mono.gameObject.AddComponent<NasuHeart>());
+			// Equip(1, mono.gameObject.AddComponent<MagicAddMaxHp>());
+			// Equip(2, mono.gameObject.AddComponent<Punch>());
+			// Equip(3, mono.gameObject.AddComponent<StrongPunch>());
+
 		}
 		void OnEnable()
 		{

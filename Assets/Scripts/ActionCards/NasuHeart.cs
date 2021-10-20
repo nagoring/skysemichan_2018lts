@@ -39,5 +39,9 @@ namespace Skysemi.With.ActionCards
         {
             return "Prefabs/ActionCards/NasuHeart";
         }
+        public EGroup GetGroup()
+        {
+            return EGroup.Meruhen;
+        }
     }
 }

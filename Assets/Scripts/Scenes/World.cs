@@ -36,7 +36,7 @@ namespace Skysemi.With.Scenes
 
 		public Image roadLayer;
 //		private int _randomEncount = 5;
-		[FormerlySerializedAs("_isBoss")] public bool isBoss = false;
+		public bool isBoss = false;
 
 //		public SkysemiChanManager skysemiChanManager;
 //		public ShizuneMsg skysemiChanMsg;

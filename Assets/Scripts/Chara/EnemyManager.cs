@@ -140,12 +140,18 @@ namespace Skysemi.With.Chara
             EnemyFactory enemyFactory = EnemyFactory.GetInstance();
             Enemy targetEnemy = enemyFactory.Factory(mono);
             Init(targetEnemy, inEquipmentCardFieldUi);
-            Equip(0, mono.gameObject.AddComponent<NasuHeart>());
-            Equip(1, mono.gameObject.AddComponent<MagicAddMaxHp>());
-            Equip(2, mono.gameObject.AddComponent<Punch>());
-            Equip(3, mono.gameObject.AddComponent<Punch>());
+            int loopIndex = 0;
+            foreach (KeyValuePair<EActionCardName, ActionCards.ABase> kv in targetEnemy.cardDict)
+            {
+                Equip(loopIndex, targetEnemy.cardDict[kv.Key]);
+                loopIndex++;
+                if (loopIndex >= 3) break;
+            }
+            // Equip(0, mono.gameObject.AddComponent<NasuHeart>());
+            // Equip(1, mono.gameObject.AddComponent<MagicAddMaxHp>());
+            // Equip(2, mono.gameObject.AddComponent<Punch>());
+            // Equip(3, mono.gameObject.AddComponent<StrongPunch>());
             SyncRecoveryHpInclude();
-            
             
 //            Game game = Game.instance;
 //            if (world.WorldMode != EWorldMode.BATTLE) return;

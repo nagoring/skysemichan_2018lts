@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Skysemi.With.ActionCards;
 using Skysemi.With.Chara;
 using Skysemi.With.Enum;
 using UnityEngine;
@@ -30,7 +31,15 @@ namespace Skysemi.With.Chara.Enemies
             this.msgDamageAfterList = new List<string>();
             this.msgDamageAfterList.Add("まだまだだねぇ");
             this.msgDamageAfterList.Add("うひひ、きゅうりのつけものになりそうなよかん");
+            
+            cardDict = new Dictionary<EActionCardName, ABase>();
+            cardSpareDict = new Dictionary<EActionCardName, ABase>();
+            
+            cardDict.Add(EActionCardName.NasuHeart, gameObject.AddComponent<KyuuriHeart>());
+            cardSpareDict.Add(EActionCardName.NasuHeart, gameObject.AddComponent<Punch>());
+            
         }
+        
         void OnEnable()
         {
             Init();

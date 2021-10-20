@@ -51,5 +51,9 @@ public class EnemyJusticeLivingSplit : Enemy
     {
         throw new System.NotImplementedException();
     }
+    public EGroup GetGroup()
+    {
+        return EGroup.Meruhen;
+    }
 
 }

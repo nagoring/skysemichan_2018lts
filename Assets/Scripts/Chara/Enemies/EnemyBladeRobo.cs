@@ -58,5 +58,9 @@ public class EnemyBladeRobo : Enemy
     void Update () {
 		
     }
+    public EGroup GetGroup()
+    {
+        return EGroup.Mukibutu;
+    }
 
 }

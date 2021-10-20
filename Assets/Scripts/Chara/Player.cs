@@ -197,6 +197,11 @@ namespace Skysemi.With.Chara
             return ECharaType.PLAYER;
         }
 
+        public EGroup GetGroup()
+        {
+            return EGroup.Namamono;
+        }
+
         public void PlayActionAnimation()
         {
             Game game = Game.instance;

@@ -42,9 +42,6 @@ namespace Skysemi.With.CardUI
             PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
             playerStatusWindow.SyncPlayerStatusReceiver(syncStatusEventArgs);
 
-            
-            
-            
 
 //            game.OnCalculateActionCardsEvent(calculateActionCardsEventArgs);
 //            EventReturnVars calculatedVars = eventObject->fire(new EventArgs);

@@ -34,6 +34,9 @@ namespace Skysemi.With.ActionCards
 		{
 			return "Prefabs/ActionCards/RoboBlade";
 		}
-
+		public EGroup GetGroup()
+		{
+			return EGroup.Mukibutu;
+		}
 	}
 }

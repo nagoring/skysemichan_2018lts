@@ -52,4 +52,9 @@ public class EnemyPowerShovel : Enemy
     {
         throw new System.NotImplementedException();
     }
+    public EGroup GetGroup()
+    {
+        return EGroup.Mukibutu;
+    }
+    
 }
