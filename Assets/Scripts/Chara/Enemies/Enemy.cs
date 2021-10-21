@@ -12,7 +12,8 @@ namespace Skysemi.With.Chara.Enemies
 {
 	abstract public class Enemy : MonoBehaviour, IChara
 	{
-		public Dictionary<EActionCardName, ABase> cardDict;
+		
+		protected ActionCards.ABase[] _enemyActionCard = new ActionCards.ABase[4];
 		public Dictionary<EActionCardName, ABase> cardSpareDict;
 		public CharaParameter param;
 		public int Hp{get {return param.hp;}set{param.hp = value;}}
@@ -24,6 +25,7 @@ namespace Skysemi.With.Chara.Enemies
 		public int Agi{get {return param.agi;}set{param.agi = value;}}	
 		public int Spirit { get { return param.spirit; } set { param.spirit = value; } }
 		public int MaxSpirit { get { return param.maxspirit; } set { param.maxspirit = value; } }
+
 		public EChara Id{get {return param.id;}set{param.id = value;}}
 		public string CharaName{get {return param.charaName;}set{param.charaName = value;}}
 	
@@ -148,5 +150,18 @@ namespace Skysemi.With.Chara.Enemies
 		public void SayAtkAfter(IChara target){}
 		public abstract string GetImageFilePath();
 		public abstract string GetPrefabFilePath();
+		public ABase GetActionCard(int index)
+		{
+			return _enemyActionCard[index];
+		}
+		public Enemy SetActionCard(int index, ActionCards.ABase actionCard)
+		{
+			_enemyActionCard[index] = actionCard;
+			return this;
+		}
+		public ABase[] GetActionCards()
+		{
+			return _enemyActionCard;
+		}
 	}
 }

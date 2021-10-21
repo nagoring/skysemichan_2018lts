@@ -16,11 +16,11 @@ namespace Skysemi.With.Chara
 {
     public class EnemyManager : CardUI.IEquipmentCardFieldUi
     {
-        private Skysemi.With.CardUI.IEquipmentCardFieldUi _equipmentCardFieldUi;
+        private Skysemi.With.CardUI.EquipmentCardFieldMiniUi _equipmentCardFieldUi;
         private Enemy _enemy;
 //        private GameObject _enemyGameObject;
 
-        public void Init(Enemy enemy, Skysemi.With.CardUI.IEquipmentCardFieldUi equipmentCardFieldUiMini)
+        public void Init(Enemy enemy, Skysemi.With.CardUI.EquipmentCardFieldMiniUi equipmentCardFieldUiMini)
         {
             _enemy = enemy;
             _equipmentCardFieldUi = equipmentCardFieldUiMini;
@@ -47,7 +47,7 @@ namespace Skysemi.With.Chara
             _equipmentCardFieldUi.Equip(index, actionCard);
         }
 
-        private void SetEquipmentCardField(Skysemi.With.CardUI.IEquipmentCardFieldUi equipmentCardFieldUi)
+        private void SetEquipmentCardField(Skysemi.With.CardUI.EquipmentCardFieldMiniUi equipmentCardFieldUi)
         {
             _equipmentCardFieldUi = equipmentCardFieldUi;
         }
@@ -59,11 +59,8 @@ namespace Skysemi.With.Chara
         {
             _enemy.Hp = _enemy.MaxHp;
         }
-//        public void CalculateEquipmentActionCardsReceiver(BaseEventArgs e)
-        public void CalculateEquipmentActionCardsReceiver(CalculateActionCardsEventArgs eventArgs)
+        public void CalculateEquipmentActionCardsReceiver(ActionCards.ABase[] actionCards)
         {
-            Debug.Log("CALL     CalculateEquipmentActionCardsReceiverCalculateEquipmentActionCardsReceiver");
-//            CalculateActionCardsEventArgs eventArgs = (CalculateActionCardsEventArgs)e.GetObject();
             int tmpMaxHp = 0;
             int tmpAtk = 0;
             int tmpDef = 0;
@@ -71,7 +68,7 @@ namespace Skysemi.With.Chara
             _enemy.param.spirit = 0;
             int tmpAgi = _enemy.param.agi;
             _enemy.param.agi = 0;
-            ActionCards.ABase[] actionCards = eventArgs.GetActionCards();
+            // ActionCards.ABase[] actionCards = eventArgs.GetActionCards();
             foreach (ActionCards.ABase actionCard in actionCards)
             {
                 if (actionCard == null) continue;
@@ -105,14 +102,11 @@ namespace Skysemi.With.Chara
         /// </summary>
         public void SyncRecoveryHpInclude()
         {
-            Skysemi.With.CardUI.IEquipmentCardFieldUi equipmentCardFieldUi = _equipmentCardFieldUi;
+            Skysemi.With.CardUI.EquipmentCardFieldMiniUi equipmentCardFieldUi = _equipmentCardFieldUi;
             SetEquipmentCardField(equipmentCardFieldUi);
             Game game = Game.instance;
-//            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardFieldUi)));
-            CalculateEquipmentActionCardsReceiver(new Skysemi.With.Events.CalculateActionCardsEventArgs(equipmentCardFieldUi));
-//            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardFieldUi)));
+            CalculateEquipmentActionCardsReceiver(_enemy.GetActionCards());
             RecoveryHp();
-//            game.FireEvent(EEvent.SyncEnemyStatus, new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
             EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
             EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
             localEnemyStatusWindow.SyncEnemyStatusReceiver(new SyncStatusEnemyEventArgs(GetEnemy().param));
@@ -122,28 +116,29 @@ namespace Skysemi.With.Chara
         /// </summary>
         public void Sync()
         {
-            Skysemi.With.CardUI.IEquipmentCardFieldUi equipmentCardFieldUi = _equipmentCardFieldUi;
+            Skysemi.With.CardUI.EquipmentCardFieldMiniUi equipmentCardFieldUi = _equipmentCardFieldUi;
             SetEquipmentCardField(equipmentCardFieldUi);
             Game game = Game.instance;
-//            game.FireEvent(EEvent.CalculateActionCardsByEnemy, new BaseEventArgs(new CalculateActionCardsEventArgs(equipmentCardFieldUi)));
-            CalculateEquipmentActionCardsReceiver(new CalculateActionCardsEventArgs(equipmentCardFieldUi));
-//            game.FireEvent(EEvent.SyncEnemyStatus, new BaseEventArgs(new SyncStatusEnemyEventArgs(GetEnemy().param)));
+            CalculateEquipmentActionCardsReceiver(_enemy.GetActionCards());
             EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
             EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
-//            localEnemyStatusWindow.Init();
             localEnemyStatusWindow.SyncEnemyStatusReceiver(new SyncStatusEnemyEventArgs(GetEnemy().param));
 
         }
 
-        public void createEnemy(MonoBehaviour mono, IEquipmentCardFieldUi inEquipmentCardFieldUi)
+        public void CreateEnemy(MonoBehaviour mono, EquipmentCardFieldMiniUi inEquipmentCardFieldUi)
         {
             EnemyFactory enemyFactory = EnemyFactory.GetInstance();
             Enemy targetEnemy = enemyFactory.Factory(mono);
             Init(targetEnemy, inEquipmentCardFieldUi);
             int loopIndex = 0;
-            foreach (KeyValuePair<EActionCardName, ActionCards.ABase> kv in targetEnemy.cardDict)
+            ;
+            foreach (ActionCards.ABase card in targetEnemy.GetActionCards())
             {
-                Equip(loopIndex, targetEnemy.cardDict[kv.Key]);
+                if (card == null) continue;
+                Debug.Log($"index{loopIndex}");
+                Debug.Log(card);
+                Equip(loopIndex, card);
                 loopIndex++;
                 if (loopIndex >= 3) break;
             }

@@ -6,7 +6,7 @@ namespace Skysemi.With.Scenes.WorldObject
     public interface ISetUpEnemy
     {
         MonoBehaviour GetMonoBehaviour();
-        IEquipmentCardFieldUi GetEquipmentCardFieldUi();
+        EquipmentCardFieldMiniUi GetEquipmentCardFieldUi();
         GameObject GetEnemyLayer();
         GameObject GetBtnNavigationWindow();
     }

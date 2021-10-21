@@ -327,7 +327,7 @@ namespace Skysemi.With.Scenes
 				_turn = ETurn.PLAYER;
 				EventManager.instance.EncountEnemy(this);
 
-////			this.WayEvent += game.enemyManager.createEnemy;
+////			this.WayEvent += game.enemyManager.CreateEnemy;
 ////			this.WayEvent += game.uiManager.EncountEnemeyBegin;
 ////			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
 
@@ -375,11 +375,11 @@ namespace Skysemi.With.Scenes
 //		private void EncountEvent()
 //		{
 //            if (_worldMode != EWorldMode.BATTLE) return;
-//			game.enemyManager.createEnemy(this, _equipmentCardFieldMiniUi);
+//			game.enemyManager.CreateEnemy(this, _equipmentCardFieldMiniUi);
 //			game.enemyManager.displayEnemy(enemyLayer);
 //			
 ////			EncountEnemeyBegin(game.enemyManager.GetEnemy());
-////			this.WayEvent += game.enemyManager.createEnemy;
+////			this.WayEvent += game.enemyManager.CreateEnemy;
 ////			this.WayEvent += game.uiManager.EncountEnemeyBegin;
 ////			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
 //
@@ -445,7 +445,7 @@ namespace Skysemi.With.Scenes
 			return this;
 		}
 
-		public IEquipmentCardFieldUi GetEquipmentCardFieldUi()
+		public EquipmentCardFieldMiniUi GetEquipmentCardFieldUi()
 		{
 			return _equipmentCardFieldMiniUi;
 		}

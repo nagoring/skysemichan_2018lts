@@ -82,10 +82,10 @@ namespace Skysemi.With.Core
             400, 600, 900, 1500, 2200,   3000, 4000, 5000, 6000, 7000, 
         };
 
-        public void OnCalculateActionCardsEvent(CalculateActionCardsEventArgs e)
-        {
-//            CalculateActionCardsEvent(e);
-        }
+//         public void OnCalculateActionCardsEvent(CalculateActionCardsEventArgs e)
+//         {
+// //            CalculateActionCardsEvent(e);
+//         }
 	
         void Awake()
         {

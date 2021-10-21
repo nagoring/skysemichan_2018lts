@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using Skysemi.With.ActionCards;
+using Skysemi.With.CardUI;
 using Skysemi.With.Chara.DamageLogic;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
@@ -20,6 +22,7 @@ namespace Skysemi.With.Chara
 //		public static Player instance;
         public CharaParameter param;
         private EBattleAction eBattleAction;
+        protected ActionCards.ABase[] _actionCard = new ActionCards.ABase[4];
 
         public string CharaName
         {
@@ -275,7 +278,7 @@ namespace Skysemi.With.Chara
         }
 
 //		public void CalculateEquipmentActionCardsReceiver(BaseEventArgs e)
-        public void CalculateEquipmentActionCardsReceiver(CalculateActionCardsEventArgs eventArgs)
+        public void CalculateEquipmentActionCardsReceiver(ActionCards.ABase[] actionCards)
         {
 //			CalculateActionCardsEventArgs eventArgs = (CalculateActionCardsEventArgs)e.GetObject();
             int tmpMaxHp = 0;
@@ -285,7 +288,6 @@ namespace Skysemi.With.Chara
             param.spirit = 0;
             int tmpAgi = param.agi;
             param.agi = 0;
-            ActionCards.ABase[] actionCards = eventArgs.GetActionCards();
             foreach (ActionCards.ABase actionCard in actionCards)
             {
                 if (actionCard == null) continue;
@@ -537,6 +539,32 @@ namespace Skysemi.With.Chara
             // textDef.text = player.Def.ToString();
             // textExp.text = player.Exp.ToString();
             // textProgress.text = player.Progress.ToString();
+        }
+
+        public ActionCards.ABase GetActionCard(int index)
+        {
+            return _actionCard[index];
+            // Game game = Game.instance;
+            // Skysemi.With.Scenes.IPlayerCardUiController cardUiController =  game.GetCardUiController();
+            // EquipmentCardFieldUi equipmentCardFieldUi = cardUiController.GetEquipmentCardField();
+            // return equipmentCardFieldUi.GetActionCard(index);
+        }
+        public Player SetActionCard(int index, ActionCards.ABase actionCard)
+        {
+            _actionCard[index] = actionCard;
+            return this;
+            // Game game = Game.instance;
+            // Skysemi.With.Scenes.IPlayerCardUiController cardUiController =  game.GetCardUiController();
+            // EquipmentCardFieldUi equipmentCardFieldUi = cardUiController.GetEquipmentCardField();
+            // return equipmentCardFieldUi.GetActionCard(index);
+        }
+        public ActionCards.ABase[] GetActionCards()
+        {
+            return _actionCard;
+            // Game game = Game.instance;
+            // Skysemi.With.Scenes.IPlayerCardUiController cardUiController =  game.GetCardUiController();
+            // EquipmentCardFieldUi equipmentCardFieldUi = cardUiController.GetEquipmentCardField();
+            // return equipmentCardFieldUi.GetActionCards();
         }
     }
 }

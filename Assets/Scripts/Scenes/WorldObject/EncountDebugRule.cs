@@ -82,7 +82,7 @@ namespace Skysemi.With.Scenes.WorldObject
 
 //			game.turn = ETurn.PLAYER;
 
-//			this.WayEvent += game.enemyManager.createEnemy;
+//			this.WayEvent += game.enemyManager.CreateEnemy;
 //			this.WayEvent += game.uiManager.EncountEnemeyBegin;
 //			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
         }
@@ -152,7 +152,7 @@ namespace Skysemi.With.Scenes.WorldObject
 //             
 //             game.eventManager.DoWayEvent(iSetUpEnemy);
 //             World.instance.turn = ETurn.PLAYER;
-// //			this.WayEvent += game.enemyManager.createEnemy;
+// //			this.WayEvent += game.enemyManager.CreateEnemy;
 // //			this.WayEvent += game.uiManager.EncountEnemeyBegin;
 // //			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
 //         }

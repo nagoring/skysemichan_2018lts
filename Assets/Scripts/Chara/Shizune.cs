@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Skysemi.With.ActionCards;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
 using UnityEngine;
@@ -239,5 +240,15 @@ namespace Skysemi.With.Chara
         void Update()
         {
         }
+        public ABase GetActionCard(int index)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ABase[] GetActionCards()
+        {
+            throw new System.NotImplementedException();
+        }
+        
     }
 }

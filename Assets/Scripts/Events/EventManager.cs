@@ -31,14 +31,14 @@ namespace Skysemi.With.Events
         {
 	        //
 	        //
-//		1. this.WayEvent += game.enemyManager.createEnemy;
+//		1. this.WayEvent += game.enemyManager.CreateEnemy;
 //		2. this.WayEvent += game.uiManager.EncountEnemeyBegin;
 //		3. this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
 	        
 	        // Activeで初期化されてしまうため一番始めにActiveにしておく
 	        iSetUpEnemy.GetEnemyLayer().SetActive(true);
-	        // 1.　敵の生成(内部) -> createEnemy in EncountNormalRule.OutputEnemyで変更 
-	        game.enemyManager.createEnemy(iSetUpEnemy.GetMonoBehaviour(), iSetUpEnemy.GetEquipmentCardFieldUi());
+	        // 1.　敵の生成(内部) -> CreateEnemy in EncountNormalRule.OutputEnemyで変更 
+	        game.enemyManager.CreateEnemy(iSetUpEnemy.GetMonoBehaviour(), iSetUpEnemy.GetEquipmentCardFieldUi());
 	        // 2.　敵のUI作成(外部) -> displayEnemy in EncountNormalRule.OutputEnemey 
 	        game.enemyManager.displayEnemy(iSetUpEnemy.GetEnemyLayer()); 
 	        // 3.　スカゼミちゃんの敵に対するコメント 
@@ -192,7 +192,7 @@ namespace Skysemi.With.Events
 //		
 //	}
 //	void Register() {
-//		this.WayEvent += game.enemyManager.createEnemy;
+//		this.WayEvent += game.enemyManager.CreateEnemy;
 //		this.WayEvent += game.uiManager.EncountEnemeyBegin;
 //		this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
 //

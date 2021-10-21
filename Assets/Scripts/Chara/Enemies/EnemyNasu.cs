@@ -33,11 +33,13 @@ namespace Skysemi.With.Chara.Enemies
             this.msgDamageAfterList = new List<string>();
             this.msgDamageAfterList.Add("そんなんじゃまだまだ食べられないよ！");
             this.msgDamageAfterList.Add("もうちょいで食べれるね！");
-		
-            cardDict = new Dictionary<EActionCardName, ABase>();
+
+            _enemyActionCard[0] = gameObject.AddComponent<NasuHeart>();
+            _enemyActionCard[1] = gameObject.AddComponent<Punch>();
+            // cardDict = new Dictionary<EActionCardName, ABase>();
             cardSpareDict = new Dictionary<EActionCardName, ABase>();
             
-            cardDict.Add(EActionCardName.NasuHeart, gameObject.AddComponent<NasuHeart>());
+            // cardDict.Add(EActionCardName.NasuHeart, gameObject.AddComponent<NasuHeart>());
             cardSpareDict.Add(EActionCardName.NasuHeart, gameObject.AddComponent<Punch>());
         }
         void OnEnable()

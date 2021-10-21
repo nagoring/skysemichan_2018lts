@@ -1,4 +1,5 @@
 ﻿using System;
+using Skysemi.With.Chara;
 using Skysemi.With.Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,7 @@ namespace Skysemi.With.CardUI
         public Image SelectedIconImage { get; set; }
 
         private EquipmentCardBoxUi[] _equipmentCardBoxsUi;
-        private ActionCards.ABase[] _actionCard = new ActionCards.ABase[4];
+        // private ActionCards.ABase[] _actionCard = new ActionCards.ABase[4];
 
         void Start()
         {
@@ -80,7 +81,9 @@ namespace Skysemi.With.CardUI
         public void Equip(int index, ActionCards.ABase actionCard)
         {
             EquipmentCardBoxUi equipmentCardBoxUi = _equipmentCardBoxsUi[index];
-            _actionCard[index] = actionCard;
+            Game game = Game.instance;;
+            // _actionCard[index] = actionCard;
+            game.player.SetActionCard(index, actionCard);
             GameObject childGameObject = _equipmentCardBoxsUi[index].transform.Find("ImageInvisibleSprite").gameObject;
             Sprite sprite = Resources.Load<Sprite>(actionCard.GetImageFilePath());
             Image childImage = childGameObject.GetComponent<Image>();
@@ -89,13 +92,13 @@ namespace Skysemi.With.CardUI
             childImage.SetAlpha( 1.0f );
         }
 
-        public ActionCards.ABase GetActionCard(int index)
-        {
-            return _actionCard?[index];
-        }
-        public ActionCards.ABase[] GetActionCards()
-        {
-            return _actionCard;
-        }
+        // public ActionCards.ABase GetActionCard(int index)
+        // {
+        //     return _actionCard?[index];
+        // }
+        // public ActionCards.ABase[] GetActionCards()
+        // {
+        //     return _actionCard;
+        // }
     }
 }

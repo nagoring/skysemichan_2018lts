@@ -33,9 +33,7 @@ namespace Skysemi.With.Chara.Enemies
 			
 			
 			
-			cardDict = new Dictionary<EActionCardName, ABase>();
-			cardDict.Add(EActionCardName.NasuHeart, gameObject.AddComponent<RingoHeart>());
-			
+            _enemyActionCard[0] = gameObject.AddComponent<RingoHeart>();
 			cardSpareDict = new Dictionary<EActionCardName, ABase>();
 			cardSpareDict.Add(EActionCardName.NasuHeart, gameObject.AddComponent<Punch>());
 			

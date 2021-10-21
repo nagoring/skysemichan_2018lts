@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Skysemi.With.ActionCards;
 using Skysemi.With.Enum;
 using UnityEngine;
 
@@ -33,5 +34,7 @@ public interface IChara
     int Spirit	{get;set;}
     //最大値は10固定
     int MaxSpirit	{get;set;}
+    ABase GetActionCard(int index);
+    ABase[] GetActionCards();
     
 }
