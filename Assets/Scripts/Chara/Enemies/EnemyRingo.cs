@@ -12,16 +12,27 @@ namespace Skysemi.With.Chara.Enemies
 			Init();
 		}
 
-		void Init()
+		public override void Init()
 		{
 			this.Id = EChara.Ringo;
 			this.CharaName = "りんご";
-			this.MaxHp = 60;
-			this.Hp = this.MaxHp;
-			this.Atk = 6;
-			this.Def = 0;
-			this.Spirit = 1;
-			this.MaxSpirit = 1;
+			// this.MaxHp = 60;
+			// this.Hp = this.MaxHp;
+			// this.Atk = 6;
+			// this.Def = 0;
+			// this.Spirit = 1;
+			// this.MaxSpirit = 1;
+			param.maxhp = 100;
+			param.hp = param.maxhp;
+			
+			param.str = 1;
+			param.vit = 0;
+			param.spirit = 0;
+			param.agi = 0;
+			
+			// param.def = 0;
+
+			
 			this.exp =16;
 			this.msg = "俺様は果物だ。おいしいぞ。";
 			//msgDamageAfterDict.Add(id)

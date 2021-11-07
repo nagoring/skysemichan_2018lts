@@ -22,7 +22,7 @@ namespace Skysemi.With.ActionCards
 		{
 			lv = 0;
 			atk = 3;
-			eActionCardName = EActionCardName.Panch;
+			eActionCardName = EActionCardName.Punch;
 			cardUsageText = $" [拳] \n 攻撃 {atk}";
 		}
 	

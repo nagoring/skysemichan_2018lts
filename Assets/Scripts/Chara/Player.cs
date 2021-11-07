@@ -277,10 +277,13 @@ namespace Skysemi.With.Chara
         {
         }
 
-//		public void CalculateEquipmentActionCardsReceiver(BaseEventArgs e)
-        public void CalculateEquipmentActionCardsReceiver(ActionCards.ABase[] actionCards)
+        /// <summary>
+        ///  装備したときのカードの数値を内部パラメータに再計算する
+        /// </summary>
+        /// <param name="actionCards"></param>
+        public void RecalculateEquipmentActionCards()
         {
-//			CalculateActionCardsEventArgs eventArgs = (CalculateActionCardsEventArgs)e.GetObject();
+            ActionCards.ABase[] actionCards = this.GetActionCards();
             int tmpMaxHp = 0;
             int tmpAtk = 0;
             int tmpDef = 0;
@@ -299,7 +302,7 @@ namespace Skysemi.With.Chara
             }
 
             param.tmpMaxHp = tmpMaxHp;
-            param.atk = param.str + 1 + tmpAtk;
+            param.atk = param.str + tmpAtk;
             param.def = param.vit + tmpDef;
             param.spirit = param.spirit + tmpSpirit;
             param.agi = param.agi + tmpAgi;
@@ -558,6 +561,11 @@ namespace Skysemi.With.Chara
             // EquipmentCardFieldUi equipmentCardFieldUi = cardUiController.GetEquipmentCardField();
             // return equipmentCardFieldUi.GetActionCard(index);
         }
+
+        public Player Eqpt(int index, ActionCards.ABase actionCard)
+        {
+            return SetActionCard(index, actionCard);
+        }
         public ActionCards.ABase[] GetActionCards()
         {
             return _actionCard;
@@ -566,6 +574,11 @@ namespace Skysemi.With.Chara
             // EquipmentCardFieldUi equipmentCardFieldUi = cardUiController.GetEquipmentCardField();
             // return equipmentCardFieldUi.GetActionCards();
         }
+        public float DamageRate(IChara target)
+        {
+            return DamageRating.Calc(target, this);
+        }
+        
     }
 }
 //	//未定

@@ -20,7 +20,7 @@ namespace Skysemi.With.ActionCards
             spirit = 0;
             agi = 5;
 
-            eActionCardName = EActionCardName.NasuHeart;
+            eActionCardName = EActionCardName.HourensouHeart;
             cardUsageText = $" [ほうれん草の心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n";
         }
 	

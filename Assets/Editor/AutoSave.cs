@@ -62,7 +62,7 @@ namespace Editor
 
                         if (IsSaveScene)
                         {
-                            Debug.Log("save scene " + System.DateTime.Now);
+                            // Debug.Log("save scene " + System.DateTime.Now);
                             EditorApplication.SaveScene();
                         }
                     }

@@ -11,7 +11,7 @@ public class EnemyPowerShovel : Enemy
         Init();
     }
 
-    void Init()
+    public override void Init()
     {
         this.id = EChara.PowerShovel;
         this.CharaName = "パワーショベル";

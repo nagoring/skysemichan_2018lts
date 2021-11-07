@@ -11,7 +11,7 @@ public class EnemyCableReel : Enemy
         Init();
     }
 
-    void Init()
+    public override void Init()
     {
         this.id = EChara.CableReel;
         this.CharaName = "電工ドラム";

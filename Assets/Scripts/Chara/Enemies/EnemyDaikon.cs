@@ -10,7 +10,7 @@ public class EnemyDaikon : Enemy
     {
         Init();
     }
-    void Init()
+    public override void Init()
     {
         this.id = EChara.Daikon;
         this.CharaName = "ダイコン";

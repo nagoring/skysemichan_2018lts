@@ -14,19 +14,22 @@ namespace Skysemi.With.Chara.Enemies
             Init();
         }
 
-        void Init()
+        public override void Init()
         {
             this.Id = EChara.Nasu;
             this.CharaName = "ナス";
-//            this.MaxHp = 15;
             this.MaxHp = 1;
             this.Hp = MaxHp;
 //            this.Atk = 5;
-            this.Atk = 1;
-            this.Def = 0;
-            this.Agi = 0;
+            // this.Atk = 1;
+            // this.Def = 0;
+            // this.Agi = 0;
             this.Spirit = 1;
             this.MaxSpirit = 0;
+            param.str = 1;
+            param.def = 0;
+            param.agi = 0;
+            
             this.exp =4;
             this.msg = "ぼくをたべて！ぼくをたべて！";
             //msgDamageAfterDict.Add(id)
@@ -34,13 +37,21 @@ namespace Skysemi.With.Chara.Enemies
             this.msgDamageAfterList.Add("そんなんじゃまだまだ食べられないよ！");
             this.msgDamageAfterList.Add("もうちょいで食べれるね！");
 
-            _enemyActionCard[0] = gameObject.AddComponent<NasuHeart>();
-            _enemyActionCard[1] = gameObject.AddComponent<Punch>();
-            // cardDict = new Dictionary<EActionCardName, ABase>();
+            // _enemyActionCard[0] = gameObject.AddComponent<NasuHeart>();
+            GameObject _obj = new GameObject();
+            // _obj.AddComponent(typeof(NasuHeart));
+            _enemyActionCard[0] = (ABase)_obj.AddComponent(typeof(NasuHeart));
+            // _enemyActionCard[0] = gameObject.AddComponent<NasuHeart>();
+            // _enemyActionCard[1] = gameObject.AddComponent<Punch>();
             cardSpareDict = new Dictionary<EActionCardName, ABase>();
             
             // cardDict.Add(EActionCardName.NasuHeart, gameObject.AddComponent<NasuHeart>());
-            cardSpareDict.Add(EActionCardName.NasuHeart, gameObject.AddComponent<Punch>());
+            ActionCards.ABase spareCard = _obj.AddComponent(typeof(NasuHeart)) as ActionCards.ABase;
+            cardSpareDict.Add(EActionCardName.NasuHeart, spareCard);
+            // cardSpareDict = new Dictionary<EActionCardName, ABase>();
+            // _enemyActionCard[0] = gameObject.AddComponent<KyuuriHeart>();
+            // cardSpareDict.Add(EActionCardName.NasuHeart, gameObject.AddComponent<Punch>());
+
         }
         void OnEnable()
         {

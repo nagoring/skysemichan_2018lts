@@ -36,5 +36,5 @@ public interface IChara
     int MaxSpirit	{get;set;}
     ABase GetActionCard(int index);
     ABase[] GetActionCards();
-    
+    float DamageRate(IChara target);
 }

@@ -11,7 +11,7 @@ public class EnemyJusticeGroup : Enemy
         Init();
     }
 
-    void Init()
+    public override void Init()
     {
         this.id = EChara.JusticeGroup;
         this.CharaName = "正義の集団";

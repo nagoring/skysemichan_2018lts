@@ -81,11 +81,10 @@ namespace Skysemi.With.Chara
             
             
             _enemy.param.maxhp = _enemy.param.maxhp + tmpMaxHp;
-            _enemy.param.atk = _enemy.param.str + 1 + tmpAtk;
+            _enemy.param.atk = _enemy.param.str + tmpAtk;
             _enemy.param.def = _enemy.param.vit + tmpDef;
             _enemy.param.spirit = _enemy.param.spirit + tmpSpirit;
             _enemy.param.agi = _enemy.param.agi + tmpAgi;
-            Debug.Log("tmpMaxHp:" + tmpMaxHp);
             //		GameMainManager game = GameMainManager.instance;
             //
             //		game.playerManager.textAtk.text = param.atk.ToString();
@@ -109,7 +108,6 @@ namespace Skysemi.With.Chara
             RecoveryHp();
             EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
             EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
-            localEnemyStatusWindow.SyncEnemyStatusReceiver(new SyncStatusEnemyEventArgs(GetEnemy().param));
         }
         /// <summary>
         /// ステータスを同期させる
@@ -122,8 +120,7 @@ namespace Skysemi.With.Chara
             CalculateEquipmentActionCardsReceiver(_enemy.GetActionCards());
             EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
             EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
-            localEnemyStatusWindow.SyncEnemyStatusReceiver(new SyncStatusEnemyEventArgs(GetEnemy().param));
-
+            localEnemyStatusWindow.SyncEnemyStatusReceiver(GetEnemy().param);
         }
 
         public void CreateEnemy(MonoBehaviour mono, EquipmentCardFieldMiniUi inEquipmentCardFieldUi)
@@ -136,8 +133,6 @@ namespace Skysemi.With.Chara
             foreach (ActionCards.ABase card in targetEnemy.GetActionCards())
             {
                 if (card == null) continue;
-                Debug.Log($"index{loopIndex}");
-                Debug.Log(card);
                 Equip(loopIndex, card);
                 loopIndex++;
                 if (loopIndex >= 3) break;

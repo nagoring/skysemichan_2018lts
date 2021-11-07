@@ -11,7 +11,7 @@ public class EnemyJusticeRobo : Enemy
         Init();
     }
 
-    void Init()
+    public override void Init()
     {
         this.id = EChara.JusticeRobo;
         this.CharaName = "正義の怒れるロボ";

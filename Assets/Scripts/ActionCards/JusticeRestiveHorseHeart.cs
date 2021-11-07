@@ -2,7 +2,7 @@ using Skysemi.With.Enum;
 
 namespace Skysemi.With.ActionCards
 {
-    public class JusticeRampageHeart : ABase
+    public class JusticeRestiveHorseHeart : ABase
     {
         // Use this for initialization
         void Start ()
@@ -19,9 +19,9 @@ namespace Skysemi.With.ActionCards
             // maxhp = 1400;
             spirit = 0;
             agi = 5;
-
-            eActionCardName = EActionCardName.JusticeRampageHeart;
-            cardUsageText = $" [正義の乱暴者の心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n";
+            
+            eActionCardName = EActionCardName.JusticeRestiveHorseHeart;
+            cardUsageText = $" [正義の暴れ馬の心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n";
         }
 	
         // Update is called once per frame
@@ -30,11 +30,11 @@ namespace Skysemi.With.ActionCards
         }
         public override string GetImageFilePath()
         {
-            return "ActionCards/JusticeRampageHeart";
+            return "ActionCards/JusticeRestiveHorseHeart";
         }
         public override string GetPrefabFilePath()
         {
-            return "Prefabs/ActionCards/JusticeRampageHeart";
+            return "Prefabs/ActionCards/JusticeRestiveHorseHeart";
         }
         public EGroup GetGroup()
         {

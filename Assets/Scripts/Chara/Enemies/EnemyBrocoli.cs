@@ -11,7 +11,7 @@ public class EnemyBrocoli : Enemy
         Init();
     }
 
-    void Init()
+    public override void Init()
     {
         this.id = EChara.Brocoli;
         this.CharaName = "ブロッコリー";

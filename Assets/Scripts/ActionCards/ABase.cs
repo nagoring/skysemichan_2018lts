@@ -58,5 +58,10 @@ namespace Skysemi.With.ActionCards
 		public abstract string GetImageFilePath();
 		public abstract string GetPrefabFilePath();
 		public abstract void Init();
+
+		public virtual EGroup GetGroup()
+		{
+			return EGroup.Namamono;
+		}
 	}
 }

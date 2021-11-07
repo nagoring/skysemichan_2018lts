@@ -104,8 +104,8 @@ namespace Skysemi.With.Events
 //            AddSenderEvent(EEvent.SyncPlayerStatus, new StandartEventSender());
 //            Player player = game.GetPlayer();
 //            EnemyManager enemyManager = game.GetEnemyManager();
-//            AddReceiver(EEvent.CalculateActionCards, player.CalculateEquipmentActionCardsReceiver);
-//            AddReceiver(EEvent.CalculateActionCardsByEnemy, enemyManager.CalculateEquipmentActionCardsReceiver);
+//            AddReceiver(EEvent.CalculateActionCards, player.RecalculateEquipmentActionCards);
+//            AddReceiver(EEvent.CalculateActionCardsByEnemy, enemyManager.RecalculateEquipmentActionCards);
             
 //            PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
 //            AddReceiver(EEvent.SyncPlayerStatus, playerStatusWindow.SyncPlayerStatusReceiver);

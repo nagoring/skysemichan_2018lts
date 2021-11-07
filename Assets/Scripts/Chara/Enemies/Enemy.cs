@@ -10,9 +10,8 @@ using UnityEngine.UI;
 
 namespace Skysemi.With.Chara.Enemies
 {
-	abstract public class Enemy : MonoBehaviour, IChara
+	abstract public class Enemy : CharaBase, IChara
 	{
-		
 		protected ActionCards.ABase[] _enemyActionCard = new ActionCards.ABase[4];
 		public Dictionary<EActionCardName, ABase> cardSpareDict;
 		public CharaParameter param;
@@ -87,7 +86,7 @@ namespace Skysemi.With.Chara.Enemies
 			return ECharaType.ENEMY;
 		}
 
-		public EGroup GetGroup()
+		public virtual EGroup GetGroup()
 		{
 			return EGroup.Namamono;
 		}
@@ -124,7 +123,6 @@ namespace Skysemi.With.Chara.Enemies
 				navText.color = new Color(0, 0, 0);
 				navText.text = $"{target.CharaName}は{damage}のダメージをうけた";
 			}
-			
 		}
 	
 		public void SayDamageAfterMsg()
@@ -162,6 +160,11 @@ namespace Skysemi.With.Chara.Enemies
 		public ABase[] GetActionCards()
 		{
 			return _enemyActionCard;
+		}
+
+		public float DamageRate(IChara target)
+		{
+			return DamageRating.Calc(target, this);
 		}
 	}
 }

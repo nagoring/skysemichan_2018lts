@@ -11,7 +11,7 @@ public class EnemyJusticeLivingSplit : Enemy
         Init();
     }
 
-    void Init()
+    public override void Init()
     {
         this.id = EChara.JusticeLivingSplit;
         this.CharaName = "正義の生霊";
@@ -51,7 +51,7 @@ public class EnemyJusticeLivingSplit : Enemy
     {
         throw new System.NotImplementedException();
     }
-    public EGroup GetGroup()
+    public override EGroup GetGroup()
     {
         return EGroup.Meruhen;
     }

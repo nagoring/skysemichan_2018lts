@@ -12,7 +12,7 @@ public class EnemyBladeRobo : Enemy
         Init();
     }
 	
-    void Init()
+    public override void Init()
     {
         this.id = EChara.BladeRobo;
         this.CharaName = "ブレードロボ";
@@ -25,6 +25,7 @@ public class EnemyBladeRobo : Enemy
         this.exp = 300;
         this.msg = "不審者発見。排除する。";
         //msgDamageAfterDict.Add(id)
+        msgDamageAfterList = new List<string>(); 
         this.msgDamageAfterList.Add("ダメージあり。戦闘続行可能");
         this.msgDamageAfterList.Add("戦闘に支障を来たすダメージを受けている。このままでは破壊される");
     }
@@ -58,8 +59,9 @@ public class EnemyBladeRobo : Enemy
     void Update () {
 		
     }
-    public EGroup GetGroup()
+    public override EGroup GetGroup()
     {
+        Debug.Log("EnemyRobo GetGroup");
         return EGroup.Mukibutu;
     }
 

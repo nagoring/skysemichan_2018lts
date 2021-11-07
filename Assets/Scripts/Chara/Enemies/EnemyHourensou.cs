@@ -11,7 +11,7 @@ public class EnemyHourensou : Enemy
 		Init();
 	}
 
-	void Init()
+	public override void Init()
 	{
 		this.id = EChara.Hourensou;
 		this.CharaName = "ほうれんそう";

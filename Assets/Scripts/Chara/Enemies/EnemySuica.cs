@@ -9,7 +9,7 @@ namespace Skysemi.With.Chara.Enemies
             Init();
         }
 
-        void Init()
+        public override void Init()
         {
             this.id = EChara.Suica;
             this.CharaName = "スイカ";
