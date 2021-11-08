@@ -38,7 +38,7 @@ namespace Skysemi.With.ActionCards
 		{
 			return "Prefabs/ActionCards/Punch";
 		}
-		public EGroup GetGroup()
+		public override EGroup GetGroup()
 		{
 			return EGroup.Namamono;
 		}

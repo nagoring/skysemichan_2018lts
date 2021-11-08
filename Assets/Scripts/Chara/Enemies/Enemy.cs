@@ -32,7 +32,7 @@ namespace Skysemi.With.Chara.Enemies
 		public int spirit = 0;
 		public int maxspirit = 10;
 		public string msg;
-		public List<string> msgDamageAfterList;
+		public List<string> msgDamageAfterList = new List<string>();
 		public int exp;
 		public EChara id;
 	

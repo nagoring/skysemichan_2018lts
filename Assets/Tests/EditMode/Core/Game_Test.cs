@@ -34,14 +34,5 @@ namespace Tests
 			Assert.AreEqual("ナス", enemy.CharaName);
 		}
 
-		// A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-		// `yield return null;` to skip a frame.
-		// [UnityTest]
-		// public IEnumerator Game_TestWithEnumeratorPasses()
-		// {
-		// 	// Use the Assert class to test conditions.
-		// 	// Use yield to skip a frame.
-		// 	yield return null;
-		// }
 	}
 }

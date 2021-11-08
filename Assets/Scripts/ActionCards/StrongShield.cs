@@ -34,7 +34,7 @@ namespace Skysemi.With.ActionCards
 		{
 			return "Prefabs/ActionCards/StrongShield";
 		}
-		public EGroup GetGroup()
+		public override EGroup GetGroup()
 		{
 			return EGroup.Mukibutu;
 		}

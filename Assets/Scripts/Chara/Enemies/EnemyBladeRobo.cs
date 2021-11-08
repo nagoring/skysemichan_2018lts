@@ -61,7 +61,6 @@ public class EnemyBladeRobo : Enemy
     }
     public override EGroup GetGroup()
     {
-        Debug.Log("EnemyRobo GetGroup");
         return EGroup.Mukibutu;
     }
 

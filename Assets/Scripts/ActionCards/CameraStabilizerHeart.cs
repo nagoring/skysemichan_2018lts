@@ -36,7 +36,7 @@ namespace Skysemi.With.ActionCards
         {
             return "Prefabs/ActionCards/CameraStabilizerHeart";
         }
-        public EGroup GetGroup()
+        public override EGroup GetGroup()
         {
             return EGroup.Mukibutu;
         }

@@ -36,7 +36,7 @@ namespace Skysemi.With.ActionCards
         {
             return "Prefabs/ActionCards/SuicaHeart";
         }
-        public EGroup GetGroup()
+        public override EGroup GetGroup()
         {
             return EGroup.Namamono;
         }

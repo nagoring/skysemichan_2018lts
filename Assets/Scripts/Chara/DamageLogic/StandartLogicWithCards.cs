@@ -67,13 +67,13 @@ namespace Skysemi.With.Chara.DamageLogic
 			{
 				if (_targetCard == null)
 				{
-					Debug.Log("targetCard is Null");
+					// Debug.Log("targetCard is Null");
 					continue;
 				}
 
 				if (_selfCard == null)
 				{
-					Debug.Log("seflCard is Null");
+					// Debug.Log("seflCard is Null");
 					continue;
 				}
 
@@ -84,6 +84,10 @@ namespace Skysemi.With.Chara.DamageLogic
 				baseDefAccumulator += _targetCard.Def;
 				
 			}
+
+			Debug.Log($"target.Def:{target.Def}");
+			Debug.Log($"baseDefAccumulator:{baseDefAccumulator}");
+			Debug.Log($"cardDefAccumulator:{cardDefAccumulator}");
 			float _result = self.Atk - (target.Def - baseDefAccumulator + cardDefAccumulator);
 			int damage = (int)Math.Round(_result, 1, MidpointRounding.AwayFromZero);
 

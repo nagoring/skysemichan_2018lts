@@ -30,6 +30,7 @@ namespace Skysemi.With.Chara.DamageLogic
 			}
 			if (selfGroup == EGroup.Mukibutu)
 			{
+				Debug.Log("私はムキブツ");
 				return logic.DamageRateMukibutu(targetGroup);
 			}
 			if (selfGroup == EGroup.Namamono)

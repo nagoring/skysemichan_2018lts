@@ -39,7 +39,7 @@ namespace Skysemi.With.ActionCards
             return "Prefabs/ActionCards/JusticeRoboHeart";
         }
 
-        public EGroup GetGroup()
+        public override EGroup GetGroup()
         {
             return EGroup.Mukibutu;
         }

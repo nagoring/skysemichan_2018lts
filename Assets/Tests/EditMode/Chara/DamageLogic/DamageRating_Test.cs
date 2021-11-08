@@ -17,7 +17,7 @@ namespace Tests
 	{
 		// A Test behaves as an ordinary method
 		[UnityTest]
-		public IEnumerator DamageRating_TestSimplePasses()
+		public IEnumerator DamageRating_TestDamageRating_Calc()
 		{
 			yield return new EnterPlayMode();
 			Game game = Game.instance;
@@ -29,21 +29,19 @@ namespace Tests
 			game.enemyManager.CreateEnemy(World.instance, equipmentCardFiled);
 			Player player = game.GetPlayer();
 			player.Init("なまえ");
-			EnemyNasu nasu = new EnemyNasu();
-			nasu.Init();
-			yield return new ExitPlayMode();
 			
-			
+			Enemy nasu = game.CreateEnemy(typeof(EnemyNasu));
 			float result = DamageRating.Calc(nasu, player);
 			Assert.AreEqual(1.0f, result);
-			EnemyBladeRobo robo = new EnemyBladeRobo();
-			robo.Init();
+			
+			Enemy robo = game.CreateEnemy(typeof(EnemyBladeRobo));
 			float resultRobo = DamageRating.Calc(robo, player);
 			Assert.AreEqual(1.5f, resultRobo);
 			
-			EnemyJusticeLivingSplit split = new EnemyJusticeLivingSplit();
+			Enemy split = game.CreateEnemy(typeof(EnemyJusticeLivingSplit));
 			float resultSplit = DamageRating.Calc(split, player);
 			Assert.AreEqual(0.5f, resultSplit);
+			yield return new ExitPlayMode();
 		}
 	}
 }

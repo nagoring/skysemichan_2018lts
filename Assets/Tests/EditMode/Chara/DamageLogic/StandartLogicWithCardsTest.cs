@@ -52,8 +52,7 @@ namespace Tests.Chara.DamageLogic
 			
 			player.RecalculateEquipmentActionCards();
 			
-			EnemyNasu nasu = new EnemyNasu();
-			nasu.Init();
+			Enemy nasu = game.CreateEnemy(typeof(EnemyNasu));
 			game.enemyManager.Init(nasu, _equipmentCardFieldMiniUi);
 			
 			for (int i=0;i<nasu.GetActionCards().Length;i++)
@@ -64,17 +63,29 @@ namespace Tests.Chara.DamageLogic
 			}
 
 			game.enemyManager.SyncRecoveryHpInclude();
-			yield return new ExitPlayMode();
 			int resultDamage = 0;
 			
 			// ナマモノ同志
 			StandartLogicWithCards logic = StandartLogicWithCards.GetInstance();
-			ABase[] nasuCards = nasu.GetActionCards();
+			// ABase[] nasuCards = nasu.GetActionCards();
 			ABase playerCard = player.GetActionCard(0);
-			resultDamage = logic.DamageMidCalulate(nasuCards, playerCard, nasu, player);
+			resultDamage = logic.DamageMidCalulate(nasu.GetActionCards(), playerCard, nasu, player);
 			Assert.AreEqual(6, resultDamage);
 
 			nasu.SetActionCard(1, game.CreateActionCard(typeof(Shield)));
+			nasu.RecalculateEquipmentActionCards();
+			resultDamage = logic.DamageMidCalulate(nasu.GetActionCards(), playerCard, nasu, player);
+			Assert.AreEqual(3, resultDamage);
+
+			player.SetActionCard(0, game.CreateActionCard(typeof(RoboBlade)));
+			player.RecalculateEquipmentActionCards();
+			nasu.SetActionCard(1, game.CreateActionCard(typeof(StrongShield)));
+			nasu.RecalculateEquipmentActionCards();
+			resultDamage = logic.DamageMidCalulate(nasu.GetActionCards(), playerCard, nasu, player);
+			Assert.AreEqual(10, resultDamage);
+			
+			yield return new ExitPlayMode();
+			
 		}
 
 		// [Test]
