@@ -166,5 +166,45 @@ namespace Skysemi.With.Chara.Enemies
 		{
 			return DamageRating.Calc(target, this);
 		}
+		public virtual void RecalculateEquipmentActionCards()
+		{
+			ABase[] actionCards = GetActionCards(); 
+			int tmpMaxHp = 0;
+			int tmpAtk = 0;
+			int tmpDef = 0;
+			int tmpSpirit = this.param.spirit;
+			this.param.spirit = 0;
+			int tmpAgi = this.param.agi;
+			this.param.agi = 0;
+			// ActionCards.ABase[] actionCards = eventArgs.GetActionCards();
+			foreach (ActionCards.ABase actionCard in actionCards)
+			{
+				if (actionCard == null) continue;
+				tmpMaxHp += actionCard.MaxHp;
+				tmpAtk += actionCard.Atk;
+				tmpDef += actionCard.Def;
+				tmpSpirit += actionCard.Spirit;
+				tmpAgi += actionCard.Agi;
+			}
+            
+            
+			this.param.maxhp = this.param.maxhp + tmpMaxHp;
+			this.param.atk = this.param.str + tmpAtk;
+			this.param.def = this.param.vit + tmpDef;
+			this.param.spirit = this.param.spirit + tmpSpirit;
+			this.param.agi = this.param.agi + tmpAgi;
+			//		GameMainManager game = GameMainManager.instance;
+			//
+			//		game.playerManager.textAtk.text = param.atk.ToString();
+			//		game.playerManager.textDef.text = param.def.ToString();
+			//
+			//		
+			//		//ActionCardやUIのステータスとパラメータを一致させる
+			//		UIManager.instance.ShowActionCardArea(this);
+			//		PlayerManager.instance.SyncUiStatusByPlayer(this);
+			
+		}
+		
+		
 	}
 }

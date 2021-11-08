@@ -429,10 +429,9 @@ namespace Skysemi.With.Chara
                 Hp += 1;
             }
 
-            SyncStatusEventArgs syncStatusEventArgs = new SyncStatusEventArgs(param);
-//			game.FireEvent(EEvent.SyncPlayerStatus, new BaseEventArgs(syncStatusEventArgs));
+            //自UIのステータス反映
             PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
-            playerStatusWindow.SyncPlayerStatusReceiver(syncStatusEventArgs);
+            playerStatusWindow.SyncPlayerStatusReceiver(param);
         }
 
         public void EncountEnemeyEnd(BattleEndEventParam param)

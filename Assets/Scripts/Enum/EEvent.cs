@@ -4,7 +4,7 @@
     {
         CalculateActionCards,
         CalculateActionCardsByEnemy,
-        SyncPlayerStatus,
-        SyncEnemyStatus,
+        // SyncPlayerStatus,
+        // SyncEnemyStatus,
     }
 }

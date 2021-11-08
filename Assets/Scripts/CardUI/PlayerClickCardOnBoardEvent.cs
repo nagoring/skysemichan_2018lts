@@ -32,14 +32,12 @@ namespace Skysemi.With.CardUI
             //イベントを発火させる
 //            EquipmentCardFieldにあるActionCardを計算するイベントを発生させる
 //            EquipmentCardBoxUi[] equipmentCardBoxs = equipmentCardFieldUi.GetEquipmentCardBoxs();
-//            game.FireEvent(EEvent.CalculateActionCards, new BaseEventArgs(calculateActionCardsEventArgs));
             Player player = game.GetPlayer();
             player.RecalculateEquipmentActionCards();
             
             //計算後PlayerStatusUiに反映させる
-            SyncStatusEventArgs syncStatusEventArgs = new SyncStatusEventArgs(game.GetPlayer().param);
             PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
-            playerStatusWindow.SyncPlayerStatusReceiver(syncStatusEventArgs);
+            playerStatusWindow.SyncPlayerStatusReceiver(game.GetPlayer().param);
 
 
 //            game.OnCalculateActionCardsEvent(calculateActionCardsEventArgs);

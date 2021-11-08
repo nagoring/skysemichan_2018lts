@@ -114,15 +114,10 @@ namespace Skysemi.With.Scenes
 			EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
 			localEnemyStatusWindow.Init();
 			//Eventの登録
-			// game.eventManager.RegisterEvent();
-//			game.eventManager.AddSenderEvent(EEvent.SyncEnemyStatus, new StandartEventSender());
-//			game.eventManager.AddReceiver(EEvent.SyncEnemyStatus, localEnemyStatusWindow.SyncEnemyStatusReceiver);
 			
 			//自UIのステータス反映
-			SyncStatusEventArgs syncStatusEventArgs = new SyncStatusEventArgs(game.GetPlayer().param);
-//			game.FireEvent(EEvent.SyncPlayerStatus, new BaseEventArgs(syncStatusEventArgs));
 			PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
-			playerStatusWindow.SyncPlayerStatusReceiver(syncStatusEventArgs);
+			playerStatusWindow.SyncPlayerStatusReceiver(game.GetPlayer().param);
 
 			
 			//＊実験＊ 敵の装備をセットする

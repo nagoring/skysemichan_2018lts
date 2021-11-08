@@ -43,7 +43,6 @@ namespace Skysemi.With.Core
 //        public event EventHandler CalculateActionCardsEvent;
 //	public delegate void WayDelegate(WayEventParam param);
 //	public event WayDelegate WayEvent = delegate (WayEventParam param) { };
-//        public delegate void CalculateActionCardsDelegate(CalculateActionCardsEventArgs param);
 //        public event CalculateActionCardsDelegate CalculateActionCardsEvent = delegate (CalculateActionCardsEventArgs param) { };
 //        private CalculateActionCardsEventSender _calculateActionCardsEventSender;
 
@@ -85,11 +84,6 @@ namespace Skysemi.With.Core
 			7, 16, 36, 50, 60, 70, 100, 140, 180, 220,
 			400, 600, 900, 1500, 2200, 3000, 4000, 5000, 6000, 7000,
 		};
-
-//         public void OnCalculateActionCardsEvent(CalculateActionCardsEventArgs e)
-//         {
-// //            CalculateActionCardsEvent(e);
-//         }
 
 		void Awake()
 		{
@@ -190,15 +184,6 @@ namespace Skysemi.With.Core
 		}
 
 
-//        public void RegisterEvent()
-//        {
-//            if(_calculateActionCardsEventSender == null)
-//            {
-//                _calculateActionCardsEventSender = new CalculateActionCardsEventSender();
-//            }
-//            Player player = GetPlayer();
-//            _calculateActionCardsEventSender.CalculateActionCardsEvent += player.RecalculateEquipmentActionCards;
-//        }
 
 		public void InitPlayer(string playerName)
 		{
@@ -225,27 +210,7 @@ namespace Skysemi.With.Core
 			return enemyManager;
 		}
 
-		public void FireEvent(EEvent eventKey, BaseEventArgs args)
-		{
-			eventManager.EventSenderFactory(eventKey).Send(args);
-		}
 
-//        public void SetEvent(string key, UnityAction call)
-//        {
-//            if (!events.ContainsKey(key))
-//            {
-//                events[key] = new UnityEvent();
-//            }
-//            events[key].AddListener(call);
-//        }
-//
-//        public void FireEvent(string key)
-//        {
-//            if (events.ContainsKey(key))
-//            {
-//                events[key].Invoke();
-//            }
-//        }
 		public void GetBtnNavigationWindow()
 		{
 			throw new NotImplementedException();
