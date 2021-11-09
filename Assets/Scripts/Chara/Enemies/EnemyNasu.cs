@@ -30,7 +30,7 @@ namespace Skysemi.With.Chara.Enemies
             param.def = 0;
             param.agi = 0;
             
-            this.exp =4;
+            this.Exp =4;
             this.msg = "ぼくをたべて！ぼくをたべて！";
             //msgDamageAfterDict.Add(id)
             this.msgDamageAfterList = new List<string>();

@@ -19,7 +19,7 @@ namespace Skysemi.With.Chara.Enemies
             this.Def = 3;
             this.Spirit = 1;
             this.MaxSpirit = 1;
-            this.exp = 40;
+            this.Exp = 40;
             this.msg = "シャリシャリ！！食えたらおいしいだろう？シャリシャリ！！";
             //msgDamageAfterDict.Add(id)
             this.msgDamageAfterList.Add("シャリシャリ！お前にはスイカの皮がおにあいさ！");

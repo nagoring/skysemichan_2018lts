@@ -22,7 +22,7 @@ public class EnemyPowerShovel : Enemy
         this.Def = 5;
         this.Spirit = 1;
         this.MaxSpirit = 1;
-        this.exp =80;
+        this.Exp =80;
         this.msg = "お前らを解体してやる！！";
         //msgDamageAfterDict.Add(id)
         this.msgDamageAfterList.Add("解体することに変更無し！");

@@ -22,7 +22,7 @@ public class EnemyBladeRobo : Enemy
         this.Def = 9;
         this.Spirit = 1;
         this.MaxSpirit = 1;
-        this.exp = 300;
+        this.Exp = 300;
         this.msg = "不審者発見。排除する。";
         //msgDamageAfterDict.Add(id)
         msgDamageAfterList = new List<string>(); 

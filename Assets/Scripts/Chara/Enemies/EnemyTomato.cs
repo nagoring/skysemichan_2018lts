@@ -23,7 +23,7 @@ public class EnemyTomato : Enemy
         this.Def = 1;
         this.Spirit = 1;
         this.MaxSpirit = 1;
-        this.exp =20;
+        this.Exp =20;
         this.msg = "すべてを赤く染めてやる";
         //msgDamageAfterDict.Add(id)
         this.msgDamageAfterList.Add("そんな力じゃ血反吐もでない");

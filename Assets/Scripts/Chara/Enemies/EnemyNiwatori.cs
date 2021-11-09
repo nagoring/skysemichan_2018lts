@@ -21,7 +21,7 @@ public class EnemyNiwatori : Enemy
         this.Def = 0;
         this.Spirit = 1;
         this.MaxSpirit = 1;
-        this.exp =4;
+        this.Exp =4;
         this.msg = "コケコッコー";
         //msgDamageAfterDict.Add(id)
         this.msgDamageAfterList.Add("コケーっ");

@@ -442,7 +442,7 @@ namespace Skysemi.With.Chara
 
 		public void EncountEnemeyEnd(BattleEndEventParam param)
 		{
-			this.Exp += param.enemy.Ext;
+			this.Exp += param.enemy.Exp;
 			Game game = Game.instance;
 			// Game gs = Game.instance;
 			if (this.NextExp < this.Exp)

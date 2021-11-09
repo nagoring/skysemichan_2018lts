@@ -22,7 +22,7 @@ public class EnemyCableReel : Enemy
         this.Def = 1;
         this.Spirit = 1;
         this.MaxSpirit = 1;
-        this.exp =70;
+        this.Exp =70;
         this.msg = "おまえをコンセントにしてやる！！";
         //msgDamageAfterDict.Add(id)
         this.msgDamageAfterList.Add("俺の差込プラグは痛ってぇぞ！");

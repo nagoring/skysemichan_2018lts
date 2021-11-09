@@ -21,7 +21,7 @@ public class EnemyDaikon : Enemy
         this.Spirit = 1;
         this.MaxSpirit = 1;
 
-        this.exp =10;
+        this.Exp =10;
         this.msg = "ダイコンしゃりしゃり消化に良いんじゃ";
         //msgDamageAfterDict.Add(id)
         this.msgDamageAfterList.Add("これじゃあ、ヒゲすら取れんなぁ");

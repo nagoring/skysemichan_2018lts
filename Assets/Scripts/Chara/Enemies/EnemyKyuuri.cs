@@ -17,9 +17,10 @@ namespace Skysemi.With.Chara.Enemies
         {
             this.Id = EChara.Kyuuri;
             this.CharaName = "きゅうり";
-            this.MaxHp = 10;
+            // this.MaxHp = 10;
+            this.MaxHp = 3;
             this.Hp = MaxHp;
-            this.exp =5;
+            this.Exp = 5;
             this.Atk = 8;
             this.Def = 0;
             this.Agi = 0;

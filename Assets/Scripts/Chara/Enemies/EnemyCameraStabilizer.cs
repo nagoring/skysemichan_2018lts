@@ -22,7 +22,7 @@ public class EnemyCameraStabilizer : Enemy
         this.Def = 7;
         this.Spirit = 1;
         this.MaxSpirit = 1;
-        this.exp =70;
+        this.Exp =70;
         this.msg = "監視カメラに映ったやつ発見！";
         //msgDamageAfterDict.Add(id)
         this.msgDamageAfterList.Add("映像に捕えた奴は倒す。必ず倒す。");

@@ -21,7 +21,7 @@ public class EnemyBrocoli : Enemy
         this.Def = 2;
         this.Spirit = 1;
         this.MaxSpirit = 1;
-        this.exp =16;
+        this.Exp =16;
         this.msg = "ブロッコリーとカリフラワーの区別わかるかな？";
         //msgDamageAfterDict.Add(id)
         this.msgDamageAfterList.Add("そんなに非力じゃもぐこともできそうにないなぁ。\nカッカッカ");

@@ -27,6 +27,11 @@ namespace Skysemi.With.Core
 {
 	public class Game : AppMonoBehaviour, IPlayer
 	{
+		public readonly int[] extTbl = new int[]
+		{
+			7,16,46,50, 60,               70,100, 140, 180, 220,
+			400, 600, 900, 1500, 2200,    3000, 4000, 5000, 6000, 7000
+		};
 		private Dictionary<EGameProgress, EGameProgress> _gameProgressDict =
 			new Dictionary<EGameProgress, EGameProgress>()
 			{

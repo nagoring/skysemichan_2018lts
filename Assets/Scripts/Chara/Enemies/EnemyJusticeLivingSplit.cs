@@ -21,7 +21,7 @@ public class EnemyJusticeLivingSplit : Enemy
         this.Def = 1;
         this.Spirit = 1;
         this.MaxSpirit = 1;
-        this.exp =20;
+        this.Exp =20;
         this.msg = "邪悪な存在許さん許さん";
         //msgDamageAfterDict.Add(id)
         this.msgDamageAfterList.Add("歯向かうな！お前が悪だ！");

@@ -21,7 +21,7 @@ public class EnemyHourensou : Enemy
 		this.Def = 6;
 		this.Spirit = 1;
 		this.MaxSpirit = 1;
-		this.exp =20;
+		this.Exp =20;
 		this.msg = "炒めるんじゃねーぞ。";
 		//msgDamageAfterDict.Add(id)
 		this.msgDamageAfterList.Add("まぁお前らの実力じゃ俺を超えられないのは仕方ないな");

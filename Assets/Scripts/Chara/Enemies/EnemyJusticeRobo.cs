@@ -21,7 +21,7 @@ public class EnemyJusticeRobo : Enemy
         this.Def = 1;
         this.Spirit = 1;
         this.MaxSpirit = 1;
-        this.exp =20;
+        this.Exp =20;
         this.msg = "正義　執行スル";
         //msgDamageAfterDict.Add(id)
         this.msgDamageAfterList.Add("キカナイ　キカナイ");

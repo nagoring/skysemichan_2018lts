@@ -27,6 +27,11 @@ namespace Skysemi.With.Chara.Enemies
 		public int Agi{get {return param.agi;}set{param.agi = value;}}	
 		public int Spirit { get { return param.spirit; } set { param.spirit = value; } }
 		public int MaxSpirit { get { return param.maxspirit; } set { param.maxspirit = value; } }
+		public int Exp
+		{
+			get { return param.exp;}
+			set { param.exp = value; }
+		}
 
 		public EChara Id{get {return param.id;}set{param.id = value;}}
 		public string CharaName{get {return param.charaName;}set{param.charaName = value;}}
@@ -36,7 +41,7 @@ namespace Skysemi.With.Chara.Enemies
 		public int maxspirit = 10;
 		public string msg;
 		public List<string> msgDamageAfterList = new List<string>();
-		public int exp;
+		// public int exp;
 
 		// public EChara id;
 	
@@ -217,7 +222,6 @@ namespace Skysemi.With.Chara.Enemies
 			
 		}
 
-		public int Ext { get; set; }
 
 	}
 }
