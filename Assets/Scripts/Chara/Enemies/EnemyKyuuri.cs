@@ -15,7 +15,7 @@ namespace Skysemi.With.Chara.Enemies
 
         public override void Init()
         {
-            this.id = EChara.Kyuuri;
+            this.Id = EChara.Kyuuri;
             this.CharaName = "きゅうり";
             this.MaxHp = 10;
             this.Hp = MaxHp;

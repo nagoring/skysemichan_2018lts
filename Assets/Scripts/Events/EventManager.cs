@@ -37,14 +37,16 @@ namespace Skysemi.With.Events
 //		3. this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
 
 			// Activeで初期化されてしまうため一番始めにActiveにしておく
-			iSetUpEnemy.GetEnemyLayer().SetActive(true);
-			// 1.　敵の生成(内部) -> CreateEnemy in EncountNormalRule.OutputEnemyで変更 
-			game.enemyManager.CreateEnemy(iSetUpEnemy.GetMonoBehaviour(), iSetUpEnemy.GetEquipmentCardFieldUi());
+			iSetUpEnemy.GetButtonEnemyLayer().SetActive(true);
+			// // 1.　敵の生成(内部) -> CreateEnemy in EncountNormalRule.OutputEnemyで変更 
+			// game.enemyManager.CreateEnemy(
+			// 	iSetUpEnemy.GetMonoBehaviour(), 
+			// 	iSetUpEnemy.GetEquipmentCardFieldUi()
+			// 	);
 			// 2.　敵のUI作成(外部) -> displayEnemy in EncountNormalRule.OutputEnemey 
-			game.enemyManager.displayEnemy(iSetUpEnemy.GetEnemyLayer());
+			game.enemyManager.displayEnemy(iSetUpEnemy.GetButtonEnemyLayer());
 			// 3.　スカゼミちゃんの敵に対するコメント 
 			WayEventParam param = new WayEventParam(game.GetPlayer(), game.enemyManager.GetEnemy());
-			Debug.Log("before EnemyCommentary");
 			ShizuneMsg.instance.EnemyCommentary(param);
 		}
 
@@ -62,7 +64,7 @@ namespace Skysemi.With.Events
 			}
 
 			BattleEndEventParam param = new BattleEndEventParam();
-			param.ICharaEnemy = target;
+			param.enemy = game.enemyManager.GetEnemy();
 //	         0. this.BattleEndEvent(param);
 
 //		1. this.BattleEndEvent += game.enemyManager.EncountEnemeyEnd;
@@ -84,17 +86,16 @@ namespace Skysemi.With.Events
 			world.WorldMode = EWorldMode.WALKING;
 			if (!world.isBoss) return;
 			world.WorldMode = EWorldMode.BOSS_BATTLE_AFTER;
-			// StartCoroutine(this.DelayMethod(2.3f, () =>
-			// {
-			// game.skysemiChanMsg.msgOther[EMsgOther.BossRingo]();
-			// StartCoroutine(this.DelayMethod(2.5f, () =>
-			// {
-			// game.skysemiChanMsg.AreaClearMsg();
-			StartCoroutine(this.DelayMethod(2.5f, () => { game.GoHomeForWinner(); }));
-			// }));
-			// }));
+			StartCoroutine(this.DelayMethod(2.3f, () =>
+			{
+				game.shizuneMsg.msgOther[EMsgOther.BossRingo]();
+				StartCoroutine(this.DelayMethod(2.5f, () =>
+				{
+					game.shizuneMsg.AreaClearMsg();
+					StartCoroutine(this.DelayMethod(2.5f, () => { game.GoHomeForWinner(); }));
+				}));
+			}));
 		}
-
 
 
 		public void EncountEnemyBoss(World world)
@@ -102,7 +103,7 @@ namespace Skysemi.With.Events
 			world.isBoss = true;
 			game.PlayMusicBossBattle();
 			world.WorldMode = EWorldMode.BATTLE;
-			WayEventParam param = new WayEventParam(game.GetPlayer(),game.enemyManager.GetEnemy());
+			WayEventParam param = new WayEventParam(game.GetPlayer(), game.enemyManager.GetEnemy());
 			this.DoWayEvent(world);
 		}
 
@@ -111,18 +112,19 @@ namespace Skysemi.With.Events
 			world.isBoss = false;
 			game.PlayMusicBattle();
 			world.WorldMode = EWorldMode.BATTLE;
-			WayEventParam param = new WayEventParam(game.GetPlayer(),game.enemyManager.GetEnemy());
-			this.DoWayEvent(world);
 		}
 
 		public void EncountEnemeyEnd(BattleEndEventParam param)
 		{
+			Debug.Log("In EncountEnemeyEnd");
 			// param.enemy = this.enemy;
-			StartCoroutine(this.DelayMethod(1.0f, () =>
-			{
-				EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
-				enemyStatusWindow.gameObject.SetActive(false);
-			}));
+			EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
+			enemyStatusWindow.gameObject.SetActive(false);
+			// StartCoroutine(this.DelayMethod(1.0f, () =>
+			// {
+			// 	EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
+			// 	enemyStatusWindow.gameObject.SetActive(false);
+			// }));
 		}
 	}
 }

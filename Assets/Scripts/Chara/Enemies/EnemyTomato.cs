@@ -13,7 +13,7 @@ public class EnemyTomato : Enemy
 
     public override void Init()
     {
-        this.id = EChara.Tomato;
+        this.Id = EChara.Tomato;
         this.CharaName = "トマト";
         this.MaxHp = 54;
         // this.MaxMp = 54;

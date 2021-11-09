@@ -13,7 +13,7 @@ public class EnemyJusticeGroup : Enemy
 
     public override void Init()
     {
-        this.id = EChara.JusticeGroup;
+        this.Id = EChara.JusticeGroup;
         this.CharaName = "正義の集団";
         this.MaxHp = 99;
         this.Hp = MaxHp;

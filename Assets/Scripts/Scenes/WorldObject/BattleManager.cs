@@ -55,7 +55,6 @@ namespace Skysemi.With.Scenes.WorldObject
 //				PlayerManager.instance.SyncUpdationParameter();
 				eBattleStatus = EBattleStatus.ACTIVE;
 				enemy = game.enemyManager.GetEnemy();
-				Debug.Log("enemy.Hp:" + enemy.Hp);
 
 				//行動順番を決める
 				OrderAttackTurn();
@@ -99,7 +98,8 @@ namespace Skysemi.With.Scenes.WorldObject
 
 					StartCoroutine(this.DelayMethod(0.3f, () =>
 					{
-						switch (GetEndBattleStatus(target))
+						EBattleEndStatus eBattleEndStatus = GetEndBattleStatus(target);
+						switch (eBattleEndStatus)
 						{
 							//Player側の勝利時
 							case EBattleEndStatus.WINNER:
@@ -213,8 +213,6 @@ namespace Skysemi.With.Scenes.WorldObject
 			charaActOrderList.Add(game.GetPlayer());
 			charaActOrderList.Add(enemy);
 			IChara chara = charaActOrderList[0];
-			Debug.Log(chara);
-			Debug.Log("END OrderAttackTurn");
 //			charaActOrderList.Add(skysemiChan);
 			charaActOrderList.Sort((a, b) => b.Agi - a.Agi);
 		}
@@ -250,9 +248,11 @@ namespace Skysemi.With.Scenes.WorldObject
 		/// </summary>
 		/// <param name="param"></param>
 		public void EncountEnemeyEndDestroy(BattleEndEventParam param) {
+			World.instance.GetButtonEnemyLayer().SetActive(false);
 			// Destroy(this.enemyGameObject);
 			Destroy(this.enemy);
-			param.ICharaEnemy = null;
+			param.enemy = null;
+
 			// imageEnemeyStatusWindow.SetActive(false);
 			World.instance.GetEnemyStatusWindow().gameObject.SetActive(false);
 		}

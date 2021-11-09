@@ -13,7 +13,7 @@ public class EnemyCableReel : Enemy
 
     public override void Init()
     {
-        this.id = EChara.CableReel;
+        this.Id = EChara.CableReel;
         this.CharaName = "電工ドラム";
         MaxHp = 50;
         MaxHp = 1;

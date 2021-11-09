@@ -12,7 +12,7 @@ public class EnemyDaikon : Enemy
     }
     public override void Init()
     {
-        this.id = EChara.Daikon;
+        this.Id = EChara.Daikon;
         this.CharaName = "ダイコン";
         MaxHp = 40;
         this.Hp = MaxHp;

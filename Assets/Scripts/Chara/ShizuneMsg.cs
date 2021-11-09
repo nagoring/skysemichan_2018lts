@@ -222,9 +222,7 @@ public class ShizuneMsg : MonoBehaviour
 	}
 	public void EnemyCommentary(WayEventParam param) {
 		if (param.enemy == null) return;
-		Debug.Log(param.enemy.CharaName);
 		msg = GetComponentInChildren<Text>();
-		Debug.Log(msg);
 		switch (param.enemy.CharaName)
 		{
 			case "ナス": 
@@ -276,10 +274,7 @@ public class ShizuneMsg : MonoBehaviour
 		}
 	}
 	public void EncountEnemeyEnd(BattleEndEventParam param) {
-		EChara id = param.ICharaEnemy.Id;
-		Debug.Log("====================================");
-		Debug.Log(msgEncountEndDict.Count);
-		Debug.Log("====================================");
+		EChara id = param.enemy.Id;
 		callbackBattleEndEventParam cb = msgEncountEndDict[id];
 		cb(param);
 		SayBattleWinner();

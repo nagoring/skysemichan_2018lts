@@ -7,7 +7,7 @@ namespace Skysemi.With.Scenes.WorldObject
     {
         MonoBehaviour GetMonoBehaviour();
         EquipmentCardFieldMiniUi GetEquipmentCardFieldUi();
-        GameObject GetEnemyLayer();
+        GameObject GetButtonEnemyLayer();
         GameObject GetBtnNavigationWindow();
     }
 }

@@ -5,13 +5,16 @@ using Skysemi.With.Chara.DamageLogic;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
 using Skysemi.With.Scenes;
+using StatusUI;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Skysemi.With.Chara.Enemies
 {
-	abstract public class Enemy : CharaBase, IChara
+	abstract public class Enemy : MonoBehaviour, IChara
 	{
+		
+		public abstract void Init();
 		protected ActionCards.ABase[] _enemyActionCard = new ActionCards.ABase[4];
 		public Dictionary<EActionCardName, ABase> cardSpareDict;
 		public CharaParameter param;
@@ -35,9 +38,9 @@ namespace Skysemi.With.Chara.Enemies
 		public List<string> msgDamageAfterList = new List<string>();
 		public int exp;
 
-		public EChara id;
+		// public EChara id;
 	
-		public GameObject buttonEnemyLayer;
+		// public GameObject buttonEnemyLayer;
 		public Sprite[] imageEnemeies = new Sprite[1];
 	
 		private EBattleAction eBattleAction;
@@ -54,11 +57,11 @@ namespace Skysemi.With.Chara.Enemies
 		void Update() {
 	
 		}
-		public void display() {
-			buttonEnemyLayer.SetActive(true);
-			Sprite sprite = buttonEnemyLayer.GetComponent<Sprite>();
-			sprite = imageEnemeies[0];
-		}
+		// public void display() {
+		// 	buttonEnemyLayer.SetActive(true);
+		// 	Sprite sprite = buttonEnemyLayer.GetComponent<Sprite>();
+		// 	sprite = imageEnemeies[0];
+		// }
 		
 		public IChara GetTarget(List<IChara> targetList)
 		{
@@ -194,6 +197,14 @@ namespace Skysemi.With.Chara.Enemies
 			this.param.def = this.param.vit + tmpDef;
 			this.param.spirit = this.param.spirit + tmpSpirit;
 			this.param.agi = this.param.agi + tmpAgi;
+
+			// TODO 構造が気に入らないから直すかも
+			Game game = Game.instance;;
+			EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
+			EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
+			localEnemyStatusWindow.SyncEnemyStatusReceiver(this.param);
+			
+			// game.enemyManager.Sync();
 			//		GameMainManager game = GameMainManager.instance;
 			//
 			//		game.playerManager.textAtk.text = param.atk.ToString();
@@ -201,7 +212,7 @@ namespace Skysemi.With.Chara.Enemies
 			//
 			//		
 			//		//ActionCardやUIのステータスとパラメータを一致させる
-			//		UIManager.instance.ShowActionCardArea(this);
+					// UIManager.instance.ShowActionCardArea(this);
 			//		PlayerManager.instance.SyncUiStatusByPlayer(this);
 			
 		}

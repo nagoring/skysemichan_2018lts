@@ -13,7 +13,7 @@ public class EnemyDoroDoroHukai : Enemy
 
     public override void Init()
     {
-        this.id = EChara.DoroDoroHukai;
+        this.Id = EChara.DoroDoroHukai;
         this.CharaName = "ドロドロナ不快ナモノ";
         MaxHp = 200;
         MaxHp = 1;

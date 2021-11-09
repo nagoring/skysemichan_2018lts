@@ -5,6 +5,6 @@ using UnityEngine;
 
 public class BattleEndEventParam
 {
-	public IChara ICharaEnemy { get; set; }
+	public Enemy enemy;
 
 }

@@ -24,7 +24,7 @@ namespace Skysemi.With.Scenes
 	    private Skysemi.With.CardUI.EquipmentCardFieldUi _equipmentCardFieldUi;
 	    private PlayerStatusWindow _playerStatusWindow;
 	    private Skysemi.With.CardUI.EquipmentCardFieldMiniUi _equipmentCardFieldMiniUi;
-	    public GameObject enemyLayer;
+	    [FormerlySerializedAs("enemyLayer")] public GameObject buttonEnemyLayer;
 	    public Canvas canvasUI;
 	    public Image enemyStatusWindow;
 	    [FormerlySerializedAs("buttonGoFront")] public GameObject btnGoFront;
@@ -119,7 +119,7 @@ namespace Skysemi.With.Scenes
 
 			
 			//＊実験＊ 敵の装備をセットする
-			Enemy enemy = game.CreateEnemy(typeof(EnemyNasu));
+			// Enemy enemy = game.CreateEnemy(typeof(EnemyNasu));
 			_equipmentCardFieldMiniUi = EquipmentCardFieldMiniUi.CreateEquipmentCardFieldMiniInParentTransform(enemyStatusWindow.transform, 0, -125f);
 //			ICharaEnemy enemy = game.enemyManager.CreateCharaObject(this, EChara.Nasu);
 //			game.enemyManager.Init(enemy, _equipmentCardFieldMiniUi);
@@ -315,14 +315,22 @@ namespace Skysemi.With.Scenes
 			else if (_encountRule.IsEncount())
 			{
 				WorldMode = _encountRule.GetWorldMode();
-				_encountRule.OutputEnemy(this);
 				btnGoFront.SetActive(false);
 				btnNavigationWindow.SetActive(true);
 				btnBattleFlow.SetActive(true);
 				enemyStatusWindow.gameObject.SetActive(true);
 
 				_turn = ETurn.PLAYER;
-				EventManager.instance.EncountEnemy(this);
+				game.eventManager.EncountEnemy(this);
+				// WayEventParam param = new WayEventParam(game.GetPlayer(), game.enemyManager.GetEnemy());
+				// 1.　敵の生成(内部) -> CreateEnemy in EncountNormalRule.OutputEnemyで変更 
+
+				game.enemyManager.CreateEnemy(
+					this, 
+					this.GetEquipmentCardFieldUi()
+				);
+				_encountRule.OutputEnemy(this);
+				game.eventManager.DoWayEvent(this);
 
 ////			this.WayEvent += game.enemyManager.CreateEnemy;
 ////			this.WayEvent += game.uiManager.EncountEnemeyBegin;
@@ -373,7 +381,7 @@ namespace Skysemi.With.Scenes
 //		{
 //            if (_worldMode != EWorldMode.BATTLE) return;
 //			game.enemyManager.CreateEnemy(this, _equipmentCardFieldMiniUi);
-//			game.enemyManager.displayEnemy(enemyLayer);
+//			game.enemyManager.displayEnemy(buttonEnemyLayer);
 //			
 ////			EncountEnemeyBegin(game.enemyManager.GetEnemy());
 ////			this.WayEvent += game.enemyManager.CreateEnemy;
@@ -447,9 +455,9 @@ namespace Skysemi.With.Scenes
 			return _equipmentCardFieldMiniUi;
 		}
 
-		public GameObject GetEnemyLayer()
+		public GameObject GetButtonEnemyLayer()
 		{
-			return enemyLayer;
+			return buttonEnemyLayer;
 		}
 
 		public GameObject GetBtnNavigationWindow()

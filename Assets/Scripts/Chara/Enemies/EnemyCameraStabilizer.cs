@@ -13,7 +13,7 @@ public class EnemyCameraStabilizer : Enemy
 
     public override void Init()
     {
-        this.id = EChara.CameraStabilizer;
+        this.Id = EChara.CameraStabilizer;
         this.CharaName = "カメラスタビライザー";
         this.MaxHp = 30;
         this.MaxHp = 1;

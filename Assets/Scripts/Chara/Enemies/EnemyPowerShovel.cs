@@ -13,7 +13,7 @@ public class EnemyPowerShovel : Enemy
 
     public override void Init()
     {
-        this.id = EChara.PowerShovel;
+        this.Id = EChara.PowerShovel;
         this.CharaName = "パワーショベル";
         this.MaxHp = 50;
         this.MaxHp = 1;

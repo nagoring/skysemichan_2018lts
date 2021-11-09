@@ -13,7 +13,7 @@ public class EnemyJusticeLivingSplit : Enemy
 
     public override void Init()
     {
-        this.id = EChara.JusticeLivingSplit;
+        this.Id = EChara.JusticeLivingSplit;
         this.CharaName = "正義の生霊";
         this.MaxHp = 99;
         this.Hp = MaxHp;

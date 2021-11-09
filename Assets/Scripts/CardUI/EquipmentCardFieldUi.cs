@@ -83,9 +83,9 @@ namespace Skysemi.With.CardUI
 			CreateEquipmentCardBox(2, types);
 			CreateEquipmentCardBox(3, types);
 			
-			_equipmentCardBoxsUi[1].gameObject.SetActive(false);
-			_equipmentCardBoxsUi[2].gameObject.SetActive(false);
-			_equipmentCardBoxsUi[3].gameObject.SetActive(false);
+			// _equipmentCardBoxsUi[1].gameObject.SetActive(false);
+			// _equipmentCardBoxsUi[2].gameObject.SetActive(false);
+			// _equipmentCardBoxsUi[3].gameObject.SetActive(false);
 		}
 
 		public void Equip(int index, ActionCards.ABase actionCard)

@@ -13,7 +13,7 @@ public class EnemyJusticeRobo : Enemy
 
     public override void Init()
     {
-        this.id = EChara.JusticeRobo;
+        this.Id = EChara.JusticeRobo;
         this.CharaName = "正義の怒れるロボ";
         this.MaxHp = 99;
         this.Hp = MaxHp;

@@ -11,7 +11,7 @@ namespace Skysemi.With.Chara.Enemies
 
         public override void Init()
         {
-            this.id = EChara.Suica;
+            this.Id = EChara.Suica;
             this.CharaName = "スイカ";
             this.MaxHp = 110;
             this.Hp = MaxHp;

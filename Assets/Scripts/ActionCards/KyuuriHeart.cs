@@ -18,7 +18,8 @@ namespace Skysemi.With.ActionCards
             lv = 0;
             atk = 4;
             def = 0;
-            maxhp = 24;
+            // maxhp = 24;
+            maxhp = 1;
             // maxhp = 1400;
             spirit = 0;
             agi = 5;

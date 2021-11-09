@@ -14,7 +14,7 @@ public class EnemyBladeRobo : Enemy
 	
     public override void Init()
     {
-        this.id = EChara.BladeRobo;
+        this.Id = EChara.BladeRobo;
         this.CharaName = "ブレードロボ";
         this.MaxHp = 120;
         this.Hp = MaxHp;

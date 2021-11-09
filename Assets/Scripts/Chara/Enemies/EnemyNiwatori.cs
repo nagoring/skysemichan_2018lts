@@ -13,7 +13,7 @@ public class EnemyNiwatori : Enemy
 
     public override void Init()
     {
-        this.id = EChara.Niwatori;
+        this.Id = EChara.Niwatori;
         this.CharaName = "にわとり";
         this.MaxHp = 15;
         this.Hp = MaxHp;

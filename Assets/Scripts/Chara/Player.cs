@@ -238,8 +238,8 @@ namespace Skysemi.With.Chara
 			{
 				IDmageLogic iDamageLogic = DamageLogicFactory.create(target, this);
 				int damage = iDamageLogic.CalcDamage(target, this);
-				Debug.Log("damage:" + damage);
-				Debug.Log("target.Hp:" + target.Hp);
+				// Debug.Log("damage:" + damage);
+				// Debug.Log("target.Hp:" + target.Hp);
 				target.Hp -= damage;
 				EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
 				enemyStatusWindow.Hp.text = target.Hp.ToString();
@@ -442,7 +442,7 @@ namespace Skysemi.With.Chara
 
 		public void EncountEnemeyEnd(BattleEndEventParam param)
 		{
-			this.Exp += param.ICharaEnemy.Ext;
+			this.Exp += param.enemy.Ext;
 			Game game = Game.instance;
 			// Game gs = Game.instance;
 			if (this.NextExp < this.Exp)
