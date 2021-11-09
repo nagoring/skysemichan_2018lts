@@ -148,7 +148,7 @@ namespace Skysemi.With.Scenes.WorldObject
 //		5. this.BattleEndEvent += game.enemyManager.EncountEnemeyEndDestroy;
 ///=====
 			eBattleStatus = EBattleStatus.IDLE;
-			game.eventManager.DoBattleEndEvent();
+			game.eventManager.DoBattleEndEvent(target);
 			
 		}
 
@@ -252,7 +252,7 @@ namespace Skysemi.With.Scenes.WorldObject
 		public void EncountEnemeyEndDestroy(BattleEndEventParam param) {
 			// Destroy(this.enemyGameObject);
 			Destroy(this.enemy);
-			param.enemy = null;
+			param.ICharaEnemy = null;
 			// imageEnemeyStatusWindow.SetActive(false);
 			World.instance.GetEnemyStatusWindow().gameObject.SetActive(false);
 		}
@@ -280,7 +280,7 @@ namespace Skysemi.With.Scenes.WorldObject
 	
 //	private void TurnPlayer() {
 //		Player player = Player.instance;
-//		Enemy enemy = game.enemyManager.enemy;
+//		ICharaEnemy enemy = game.enemyManager.enemy;
 //		//攻撃アニメーション
 //		StartCoroutine(game.effectManager.attackPunchAnimation());
 //		SoundManager.instance.PlaySingleRepeat(game.clipPanch, 3, 0.3f);
@@ -318,20 +318,20 @@ namespace Skysemi.With.Scenes.WorldObject
 //			}));
 //		}));
 //	}
-//	private int AttackPlayerToEnemy(Player player, Enemy enemy) {
+//	private int AttackPlayerToEnemy(Player player, ICharaEnemy enemy) {
 //		int damage = player.atk - enemy.def;
 //		damage += (int)Random.Range(-3.0f, 3.0f);
 //		if (damage < 0) damage = 0;
 //		return damage;
 //	}
-//	private bool IsDeadEnemy(Enemy enemy) {
+//	private bool IsDeadEnemy(ICharaEnemy enemy) {
 //		return enemy.hp <= 0;
 //	}
 
 //	private void TurnEnemy() {
 //		Player player = Player.instance;
 //		
-//		Enemy enemy = game.enemyManager.enemy;
+//		ICharaEnemy enemy = game.enemyManager.enemy;
 //		//攻撃アニメーション
 //		StartCoroutine(game.effectManager.attackAnimationNormalByEnemy());
 //		//0.3秒後に実行する
@@ -361,7 +361,7 @@ namespace Skysemi.With.Scenes.WorldObject
 //		}));
 //
 //	}
-//	private int AttackEnemyToPlayer(Enemy enemy, Player player) {
+//	private int AttackEnemyToPlayer(ICharaEnemy enemy, Player player) {
 //		int damage = enemy.atk - player.def;
 //		damage += (int)Random.Range(-3.0f, 3.0f);
 //		if (damage < 0) damage = 0;
@@ -373,7 +373,7 @@ namespace Skysemi.With.Scenes.WorldObject
 //
 //	private void TurnSkysemiChan() {
 //		Player player = Player.instance;
-//		Enemy enemy = game.enemyManager.enemy;
+//		ICharaEnemy enemy = game.enemyManager.enemy;
 //		Shizune skysemiChan = game.skysemiChanManager.skysemiChan;
 //		//スカゼミちゃんのメッセージ
 //		game.skysemiChanMsg.msgAttakDict[enemy.Id]();
@@ -398,7 +398,7 @@ namespace Skysemi.With.Scenes.WorldObject
 //				StartCoroutine(this.DelayMethod(0.8f, () =>
 //				{
 //					GameMainManager _game = GameMainManager.instance;
-//					Enemy _enemy = _game.enemyManager.enemy;
+//					ICharaEnemy _enemy = _game.enemyManager.enemy;
 //					//敵の死亡判定
 //					if (IsDeadEnemy(_enemy))
 //					{
@@ -415,7 +415,7 @@ namespace Skysemi.With.Scenes.WorldObject
 //			}));
 //		}));
 //	}
-//	private int AttackSkysemiChanToEnemy(Shizune skysemiChan, Enemy enemy) {
+//	private int AttackSkysemiChanToEnemy(Shizune skysemiChan, ICharaEnemy enemy) {
 //		//ダメージ処理
 //		int damage = skysemiChan.atk - enemy.def;
 //		damage += (int)Random.Range(0.0f, 6.0f);

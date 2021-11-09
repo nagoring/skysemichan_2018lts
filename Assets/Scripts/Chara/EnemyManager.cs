@@ -14,7 +14,7 @@ using Object = UnityEngine.Object;
 
 namespace Skysemi.With.Chara
 {
-    public class EnemyManager : CardUI.IEquipmentCardFieldUi
+    public class EnemyManager 
     {
         private Skysemi.With.CardUI.EquipmentCardFieldMiniUi _equipmentCardFieldUi;
         private Enemy _enemy;
@@ -32,19 +32,19 @@ namespace Skysemi.With.Chara
             return _enemy;
         }
 
-        public ABase GetActionCard(int index)
-        {
-            return _equipmentCardFieldUi.GetActionCard(index);
-        }
+        // public ABase GetActionCard(int index)
+        // {
+        //     return _equipmentCardFieldUi.GetActionCard(index);
+        // }
+        //
+        // public ABase[] GetActionCards()
+        // {
+        //     return _equipmentCardFieldUi.GetActionCards();
+        // }
 
-        public ABase[] GetActionCards()
+        public void Equip(Enemy enemy, int index, ActionCards.ABase actionCard)
         {
-            return _equipmentCardFieldUi.GetActionCards();
-        }
-
-        public void Equip(int index, ActionCards.ABase actionCard)
-        {
-            _equipmentCardFieldUi.Equip(index, actionCard);
+            _equipmentCardFieldUi.Equip(enemy, index, actionCard);
         }
 
         private void SetEquipmentCardField(Skysemi.With.CardUI.EquipmentCardFieldMiniUi equipmentCardFieldUi)
@@ -135,7 +135,7 @@ namespace Skysemi.With.Chara
             foreach (ActionCards.ABase card in targetEnemy.GetActionCards())
             {
                 if (card == null) continue;
-                Equip(loopIndex, card);
+                Equip(targetEnemy, loopIndex, card);
                 loopIndex++;
                 if (loopIndex >= 3) break;
             }

@@ -59,7 +59,7 @@ namespace Tests.Chara.DamageLogic
 			{
 				ABase enemyCards = nasu.GetActionCard(i);
 				if (enemyCards == null) continue;
-				game.enemyManager.Equip(i, enemyCards);
+				game.enemyManager.Equip(nasu, i, enemyCards);
 			}
 
 			game.enemyManager.SyncRecoveryHpInclude();
@@ -88,6 +88,17 @@ namespace Tests.Chara.DamageLogic
 			
 		}
 
+		[UnityTest]
+		public IEnumerator CalcDamage_Test()
+		{
+			yield return new EnterPlayMode();
+			Game game = Game.instance;
+			Player player = game.GetPlayer();
+			player.Init("なまえ");
+			
+			yield return new ExitPlayMode();
+			
+		}
 		// [Test]
 		// public void MyClassTest2()
 		// {

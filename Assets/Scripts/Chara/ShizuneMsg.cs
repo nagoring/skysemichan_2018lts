@@ -274,7 +274,7 @@ public class ShizuneMsg : MonoBehaviour
 		}
 	}
 	public void EncountEnemeyEnd(BattleEndEventParam param) {
-		EChara id = param.enemy.id;
+		EChara id = param.ICharaEnemy.Id;
 		Debug.Log("====================================");
 		Debug.Log(msgEncountEndDict.Count);
 		Debug.Log("====================================");
@@ -284,7 +284,8 @@ public class ShizuneMsg : MonoBehaviour
 	}
 	public void SayEncountEndNasuAfter(BattleEndEventParam param) {
 		msg = GetComponentInChildren<Text>();
-		msg.text = $"楽勝でしたね！これで{param.enemy.CharaName}が手に入りました♪";
+		// msg.text = $"楽勝でしたね！これで{param.ICharaEnemy.CharaName}が手に入りました♪";
+		msg.text = $"楽勝でしたね！";
 	}
 	public void SayAttackStandart() {
 		msg = GetComponentInChildren<Text>();

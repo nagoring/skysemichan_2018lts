@@ -23,39 +23,43 @@ namespace Skysemi.With.Chara.DamageLogic
 
 		public int CalcDamage(IChara target, IChara self)
 		{
-			EGroup eSelfGroupCore = self.GetGroup();
-			EGroup eTargetGroupCore = target.GetGroup();
+			// EGroup eSelfGroupCore = self.GetGroup();
+			// EGroup eTargetGroupCore = target.GetGroup();
 			ABase[] selfCards = self.GetActionCards();
 			ABase[] targetCards = target.GetActionCards();
-			float damageAccumulator = 0;
+			int damageAccumulator = 0;
 			float baseDefAccumulator =  0;
 			foreach (ABase _selfCard in selfCards)
 			{
-				damageAccumulator = 0;
-				baseDefAccumulator =  0;
-				float cardDefAccumulator = 0;
-				foreach (ABase _targetCard in targetCards)
-				{
-					cardDefAccumulator = 0;
-					if (_targetCard.GetGroup() == _selfCard.GetGroup())
-					{
-						float damageRating = DamageRating.CalcByCard(_targetCard, _selfCard);
-						float def = _targetCard.Def * damageRating;
-						cardDefAccumulator += def;
-						baseDefAccumulator += _targetCard.Def;
-					}
-				}
-				float _result = self.Atk - (target.Def - baseDefAccumulator + cardDefAccumulator);
-				int damage = (int)Math.Round(_result, 1, MidpointRounding.AwayFromZero);
-				
+				// damageAccumulator = 0;
+				// baseDefAccumulator =  0;
+				// float cardDefAccumulator = 0;
+				// foreach (ABase _targetCard in targetCards)
+				// {
+				// 	cardDefAccumulator = 0;
+				// 	if (_targetCard.GetGroup() == _selfCard.GetGroup())
+				// 	{
+				// 		float damageRating = DamageRating.CalcByCard(_targetCard, _selfCard);
+				// 		float def = _targetCard.Def * damageRating;
+				// 		cardDefAccumulator += def;
+				// 		baseDefAccumulator += _targetCard.Def;
+				// 	}
+				// }
+				// float _result = self.Atk - (target.Def - baseDefAccumulator + cardDefAccumulator);
+				// int damage = (int)Math.Round(_result, 1, MidpointRounding.AwayFromZero);
+				//
+				int damage = DamageMidCalulate(targetCards, _selfCard, target, self);
+				if (damage < 0) damage = 0;
+				damageAccumulator += damage;
 			}
+
+			return damageAccumulator;
 
 			// int damage = self.Atk - target.Def;
 			// damage += (int)Random.Range(-3.0f, 3.0f);
 			// if (damage < 0) damage = 0;
 			// return damage;
-
-			return 0;
+			// return 0;
 		}
 
 		//ダメージ計算の途中

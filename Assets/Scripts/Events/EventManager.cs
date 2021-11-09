@@ -47,7 +47,7 @@ namespace Skysemi.With.Events
 			ShizuneMsg.instance.EnemyCommentary(param);
 		}
 
-		public void DoBattleEndEvent()
+		public void DoBattleEndEvent(IChara target)
 		{
 			World world = World.instance;
 			EStage eStage = Game.instance.destinationPlace;
@@ -61,6 +61,7 @@ namespace Skysemi.With.Events
 			}
 
 			BattleEndEventParam param = new BattleEndEventParam();
+			param.ICharaEnemy = target;
 //	         0. this.BattleEndEvent(param);
 
 //		1. this.BattleEndEvent += game.enemyManager.EncountEnemeyEnd;

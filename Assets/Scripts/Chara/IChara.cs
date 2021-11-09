@@ -37,4 +37,6 @@ public interface IChara
     ABase GetActionCard(int index);
     ABase[] GetActionCards();
     float DamageRate(IChara target);
+    int Ext { get; set; }
+
 }

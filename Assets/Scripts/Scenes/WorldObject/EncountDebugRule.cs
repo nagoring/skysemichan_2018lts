@@ -143,7 +143,7 @@ namespace Skysemi.With.Scenes.WorldObject
 // //            if (_worldParameter.GetWorldMode() != EWorldMode.BATTLE) return;
 //             
 //             game.eventManager.DoWayEvent(iSetUpEnemy);
-//             Enemy enemy = game.enemyManager.GetEnemy();
+//             ICharaEnemy enemy = game.enemyManager.GetEnemy();
 //             //ナビゲーションウィンドウの表示
 //             iSetUpEnemy.GetBtnNavigationWindow().SetActive(true);
 //             Text navText = iSetUpEnemy.GetBtnNavigationWindow().GetComponentInChildren<Text>();

@@ -121,8 +121,9 @@ namespace Skysemi.With.Scenes
 
 			
 			//＊実験＊ 敵の装備をセットする
+			Enemy enemy = game.CreateEnemy(typeof(EnemyNasu));
 			_equipmentCardFieldMiniUi = EquipmentCardFieldMiniUi.CreateEquipmentCardFieldMiniInParentTransform(enemyStatusWindow.transform, 0, -125f);
-//			Enemy enemy = game.enemyManager.CreateCharaObject(this, EChara.Nasu);
+//			ICharaEnemy enemy = game.enemyManager.CreateCharaObject(this, EChara.Nasu);
 //			game.enemyManager.Init(enemy, _equipmentCardFieldMiniUi);
 //			game.enemyManager.Equip(0, gameObject.AddComponent<NasuHeart>());
 //			game.enemyManager.Equip(1, gameObject.AddComponent<MagicAddMaxHp>());
@@ -309,6 +310,7 @@ namespace Skysemi.With.Scenes
 				btnGoFront.SetActive(false);
 				btnNavigationWindow.SetActive(true);
 				btnBattleFlow.SetActive(true);
+				enemyStatusWindow.gameObject.SetActive(true);
 				_turn = ETurn.PLAYER;
 				EventManager.instance.EncountEnemyBoss(this);
 			}
@@ -319,6 +321,8 @@ namespace Skysemi.With.Scenes
 				btnGoFront.SetActive(false);
 				btnNavigationWindow.SetActive(true);
 				btnBattleFlow.SetActive(true);
+				enemyStatusWindow.gameObject.SetActive(true);
+
 				_turn = ETurn.PLAYER;
 				EventManager.instance.EncountEnemy(this);
 
@@ -384,7 +388,7 @@ namespace Skysemi.With.Scenes
 		{
 			return _equipmentCardFieldMiniUi;
 		}
-//		public void EncountEnemeyBegin(Enemy enemy) {
+//		public void EncountEnemeyBegin(ICharaEnemy enemy) {
 //			if (_worldMode != EWorldMode.BATTLE) return;
 //			//GoFrontButton stop
 //			btnGoFront.SetActive(false);

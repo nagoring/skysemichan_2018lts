@@ -52,6 +52,7 @@ namespace Skysemi.With.Chara
 		public int Agi { get; set; }
 		public int Spirit { get; set; }
 		public int MaxSpirit { get; set; }
+		public int Ext { get; set; }
 
 		public EChara Id
 		{

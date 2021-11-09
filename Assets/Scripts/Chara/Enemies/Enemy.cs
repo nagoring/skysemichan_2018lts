@@ -34,6 +34,7 @@ namespace Skysemi.With.Chara.Enemies
 		public string msg;
 		public List<string> msgDamageAfterList = new List<string>();
 		public int exp;
+
 		public EChara id;
 	
 		public GameObject buttonEnemyLayer;
@@ -150,7 +151,7 @@ namespace Skysemi.With.Chara.Enemies
 		public abstract string GetPrefabFilePath();
 		public ABase GetActionCard(int index)
 		{
-			return _enemyActionCard[index];
+			return _enemyActionCard?[index];
 		}
 		public Enemy SetActionCard(int index, ActionCards.ABase actionCard)
 		{
@@ -204,7 +205,8 @@ namespace Skysemi.With.Chara.Enemies
 			//		PlayerManager.instance.SyncUiStatusByPlayer(this);
 			
 		}
-		
-		
+
+		public int Ext { get; set; }
+
 	}
 }
