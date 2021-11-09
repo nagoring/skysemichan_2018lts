@@ -13,6 +13,7 @@ namespace Skysemi.With.CardUI
 {
 	public class PlayerClickCardOnBoardEvent : MonoBehaviour, IPointerClickHandler
 	{
+		private static bool _isPleaseEquipText = true;
 		//　マウスがクリックされた時
 		public void OnPointerClick(PointerEventData eventData)
 		{
@@ -39,6 +40,13 @@ namespace Skysemi.With.CardUI
 			//計算後PlayerStatusUiに反映させる
 			PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
 			playerStatusWindow.SyncPlayerStatusReceiver(game.GetPlayer().param);
+			
+			//「装備して」のテキストを消す
+			if (PlayerClickCardOnBoardEvent._isPleaseEquipText)
+			{
+				PlayerClickCardOnBoardEvent._isPleaseEquipText = false;
+				GameObject.FindWithTag("PleaseEquipText").SetActive(false);
+			}
 		}
 	}
 }
