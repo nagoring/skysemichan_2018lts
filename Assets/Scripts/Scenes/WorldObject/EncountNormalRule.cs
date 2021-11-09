@@ -10,7 +10,7 @@ namespace Skysemi.With.Scenes.WorldObject
     public class EncountNormalRule : IEncountRule
     {
         private int _boss_encount_progress = 100;
-        private int _random_encount = 1;
+        private int _random_encount = 5;
         private bool _is_boss = false;
         private EWorldMode _eWorldMode = EWorldMode.WALKING;
         private IGoFrontStateChangeParameter _worldParameter;

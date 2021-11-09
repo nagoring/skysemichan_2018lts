@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Skysemi.With.Chara;
 using UnityEngine;
 
-public class SkysemiChanManager : MonoBehaviour {
+public class ShizuneManager : MonoBehaviour {
 	public Shizune skysemiChan;
 
 	// Use this for initialization

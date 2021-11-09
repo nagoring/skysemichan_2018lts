@@ -222,7 +222,9 @@ public class ShizuneMsg : MonoBehaviour
 	}
 	public void EnemyCommentary(WayEventParam param) {
 		if (param.enemy == null) return;
+		Debug.Log(param.enemy.CharaName);
 		msg = GetComponentInChildren<Text>();
+		Debug.Log(msg);
 		switch (param.enemy.CharaName)
 		{
 			case "ナス": 

@@ -35,20 +35,18 @@ namespace Skysemi.With.Scenes
 	    public Sprite[] imageRoads = new Sprite[3];
 
 		public Image roadLayer;
-//		private int _randomEncount = 5;
+		private int _randomEncount = 5;
 		public bool isBoss = false;
 
-//		public SkysemiChanManager skysemiChanManager;
-//		public ShizuneMsg skysemiChanMsg;
-//		public EventManager eventManager;
+		public ShizuneManager skysemiChanManager;
+		public ShizuneMsg skysemiChanMsg;
 //		public EnemyManager enemyManager;
 //		public UIManager uiManager;
 //		public PlayerManager playerManager;
-		public EffectManager effectManager;
 
 		private ISetUpEnemy _setUpEnemyImplementation;
-//		public Image imageFlatLand;
-//		public Sprite imageFlatLandEveningSprite;
+		public Image imageFlatLand;
+		public Sprite imageFlatLandEveningSprite;
 //		public Canvas canvas;
 //		public Sprite[] imageRoads = new Sprite[3];
 
@@ -148,21 +146,21 @@ namespace Skysemi.With.Scenes
 			_encountRule = EncountRuleFactory.Create((IGoFrontStateChangeParameter)this);
 			
 //			PlayerManager.instance.LoadData();
-//			Player player = Player.instance;
-//			player.Progress = 0;
+			Player player = game.GetPlayer();
+			player.Progress = 0;
 			PlayMusicField();
-//			SetBackGround();
+			SetBackGround();
 //			playerManager.SyncUpdationParameter();
 		}
-//	
-//		public void SetBackGround()
-//		{
-//			if (Game.instance.destinationPlace == EStage.OTHER_STAGE1)
-//			{
-//				imageFlatLand.sprite = imageFlatLandEveningSprite;
-//			}
-//			
-//		}
+	
+		public void SetBackGround()
+		{
+			if (Game.instance.destinationPlace == EStage.OTHER_STAGE1)
+			{
+				imageFlatLand.sprite = imageFlatLandEveningSprite;
+			}
+			
+		}
 //		public void PlayMusicBattle()
 //		{
 //			if (Game.instance.destinationPlace == EStage.OUTSIDE_ROAD)
@@ -217,31 +215,31 @@ namespace Skysemi.With.Scenes
 //		void Update () {
 //			
 //		}
-//		public void CheckingProgress()
-//		{
-//			int boss_encount_progress = 100;
-//			Player player = Player.instance;
-//			EStage eStage = Game.instance.destinationPlace;
-//			if (eStage == EStage.OTHER_STAGE1)
-//			{
-//				if (player.Progress == boss_encount_progress)
-//				{
-//					eventManager.EncountEnemyBoss();
-//				}
-//				return;
-//			}
-//			
-//			_randomEncount--;
-//			if (player.Progress == 0) return;
-//			if (player.Progress == boss_encount_progress)
-//			{
-//				eventManager.EncountEnemyBoss();
-//			}
-//			else if(_randomEncount <= 0){
-//				_randomEncount = Random.Range(1, 8) + 10;
-//				eventManager.EncountEnemy();
-//			}
-//		}
+		public void CheckingProgress()
+		{
+			int boss_encount_progress = 100;
+			Player player = game.GetPlayer();
+			EStage eStage = Game.instance.destinationPlace;
+			if (eStage == EStage.OTHER_STAGE1)
+			{
+				if (player.Progress == boss_encount_progress)
+				{
+					game.eventManager.EncountEnemyBoss(this);
+				}
+				return;
+			}
+			
+			_randomEncount--;
+			if (player.Progress == 0) return;
+			if (player.Progress == boss_encount_progress)
+			{
+				game.eventManager.EncountEnemyBoss(this);
+			}
+			else if(_randomEncount <= 0){
+				_randomEncount = Random.Range(1, 8) + 10;
+				game.eventManager.EncountEnemy(this);
+			}
+		}
 //	
 //		public void GoHomeForLoser()
 //		{
@@ -296,7 +294,7 @@ namespace Skysemi.With.Scenes
 			_playerStatusWindow.Progress.text = player.Progress.ToString();
 			player.NaturalHealingByWalk();
 			
-			// CheckingProgress();
+			CheckingProgress();
 
 			/// encountRule EncountNormalRule
 			_encountRule.Run();

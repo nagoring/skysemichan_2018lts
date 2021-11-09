@@ -43,7 +43,8 @@ namespace Skysemi.With.Events
 			// 2.　敵のUI作成(外部) -> displayEnemy in EncountNormalRule.OutputEnemey 
 			game.enemyManager.displayEnemy(iSetUpEnemy.GetEnemyLayer());
 			// 3.　スカゼミちゃんの敵に対するコメント 
-			WayEventParam param = new WayEventParam();
+			WayEventParam param = new WayEventParam(game.GetPlayer(), game.enemyManager.GetEnemy());
+			Debug.Log("before EnemyCommentary");
 			ShizuneMsg.instance.EnemyCommentary(param);
 		}
 
@@ -101,7 +102,7 @@ namespace Skysemi.With.Events
 			world.isBoss = true;
 			game.PlayMusicBossBattle();
 			world.WorldMode = EWorldMode.BATTLE;
-			WayEventParam param = new WayEventParam();
+			WayEventParam param = new WayEventParam(game.GetPlayer(),game.enemyManager.GetEnemy());
 			this.DoWayEvent(world);
 		}
 
@@ -110,7 +111,7 @@ namespace Skysemi.With.Events
 			world.isBoss = false;
 			game.PlayMusicBattle();
 			world.WorldMode = EWorldMode.BATTLE;
-			WayEventParam param = new WayEventParam();
+			WayEventParam param = new WayEventParam(game.GetPlayer(),game.enemyManager.GetEnemy());
 			this.DoWayEvent(world);
 		}
 
