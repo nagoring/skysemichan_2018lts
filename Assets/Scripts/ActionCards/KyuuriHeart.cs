@@ -26,7 +26,7 @@ namespace Skysemi.With.ActionCards
             agi = 9;
 
             eActionCardName = EActionCardName.NasuHeart;
-            cardUsageText = $" [胡瓜の心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n";
+            cardUsageText = $" [胡瓜の心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n (ナマモノ)";
         }
 	
         // Update is called once per frame

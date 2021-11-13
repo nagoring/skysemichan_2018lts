@@ -22,7 +22,7 @@ namespace Skysemi.With.ActionCards
 			spirit = 0;
 
 			eActionCardName = EActionCardName.MetalBat;
-			cardUsageText = $" [バット] \n 攻撃 {atk}\n 防御 {def}";
+			cardUsageText = $" [バット] \n 攻撃 {atk}\n 防御 {def}\n (ムキブツ)";
 		}
 	
 		// Update is called once per frame

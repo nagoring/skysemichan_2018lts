@@ -19,7 +19,7 @@ namespace Skysemi.With.ActionCards
 			atk = 15;
 			def = -2;
 			eActionCardName = EActionCardName.RoboBlade;
-			cardUsageText = $" [ロボブレード] \n 攻撃 {atk}\n 防御 {def}";
+			cardUsageText = $" [ロボブレード] \n 攻撃 {atk}\n 防御 {def}\n (ムキブツ)";
 		}
 	
 		// Update is called once per frame

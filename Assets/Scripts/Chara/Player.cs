@@ -124,11 +124,6 @@ namespace Skysemi.With.Chara
 			set { param.tmpMaxHp = value; }
 		}
 
-		public int Ext
-		{
-			get { return param.exp; }
-			set { param.exp = value; }
-		}
 
 		//	
 		//	public EActionCardActive eActionCardActive = EActionCardActive.CMD1;

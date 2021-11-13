@@ -21,7 +21,7 @@ namespace Skysemi.With.ActionCards
             agi = 5;
             
             eActionCardName = EActionCardName.JusticeRestiveHorseHeart;
-            cardUsageText = $" [正義の暴れ馬の心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n";
+            cardUsageText = $" [正義の暴れ馬の心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n (ナマモノ)";
         }
 	
         // Update is called once per frame

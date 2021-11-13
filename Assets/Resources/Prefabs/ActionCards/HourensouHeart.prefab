@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 4960904028311691096}
   - component: {fileID: 4960904028311691101}
   - component: {fileID: 4960904028311691102}
-  - component: {fileID: 4960904028311691100}
-  - component: {fileID: 4960904028311691103}
+  - component: {fileID: 1097877927420315535}
   m_Layer: 5
   m_Name: HourensouHeart
   m_TagString: Untagged
@@ -37,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4960904028311691101
 CanvasRenderer:
@@ -65,7 +64,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5be08852247424c8a8353593c86a8bc2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 23645089bf6504fba891a07f5550f233, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -74,7 +73,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &4960904028311691100
+--- !u!114 &1097877927420315535
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,20 +82,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4960904028311691097}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b6445a4c0a4183b768afcd3ad1fe30, type: 3}
+  m_Script: {fileID: 11500000, guid: df6cb8a8f189401a8ee70b065c35a404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   eActionCardName: 0
   cardUsageText: 
---- !u!114 &4960904028311691103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4960904028311691097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1101a80b4e42a18875ddd10500e569, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

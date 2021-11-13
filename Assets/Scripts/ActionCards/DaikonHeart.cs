@@ -21,7 +21,7 @@ namespace Skysemi.With.ActionCards
             agi = 5;
 
             eActionCardName = EActionCardName.DaikonHeart;
-            cardUsageText = $" [大根の心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n";
+            cardUsageText = $" [大根の心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n (ナマモノ)";
         }
 	
         // Update is called once per frame

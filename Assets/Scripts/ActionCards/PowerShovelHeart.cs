@@ -21,7 +21,7 @@ namespace Skysemi.With.ActionCards
             agi = 5;
 
             eActionCardName = EActionCardName.PowerShovelHeart;
-            cardUsageText = $" [パワーショベルの心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n";
+            cardUsageText = $" [パワーショベルの心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n (ムキブツ)";
         }
 	
         // Update is called once per frame

@@ -21,7 +21,7 @@ namespace Skysemi.With.ActionCards
             agi = 5;
 
             eActionCardName = EActionCardName.JusticeRoboHeart;
-            cardUsageText = $" [正義ロボの心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n";
+            cardUsageText = $" [正義ロボの心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n (ムキブツ)";
         }
 
         // Update is called once per frame

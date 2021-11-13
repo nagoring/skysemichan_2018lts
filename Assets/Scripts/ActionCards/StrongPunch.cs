@@ -20,7 +20,7 @@ namespace Skysemi.With.ActionCards
 			atk = 5;
 			def = -1;
 			eActionCardName = EActionCardName.StrongPanch;
-			cardUsageText = $" [強拳] \n 攻撃 {atk}\n 防御 {def}";
+			cardUsageText = $" [強拳] \n 攻撃 {atk}\n 防御 {def}\n (ナマモノ)";
 		}
 		// Update is called once per frame
 		void Update () {

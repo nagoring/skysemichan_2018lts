@@ -19,7 +19,7 @@ namespace Skysemi.With.ActionCards
 			atk = 0;
 			def = 2;
 			eActionCardName = EActionCardName.Shield;
-			cardUsageText = $" [盾]\n 防御 {def}";
+			cardUsageText = $" [盾]\n 防御 {def}\n (ムキブツ)";
 		}
 
 // Update is called once per frame

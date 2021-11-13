@@ -18,7 +18,7 @@ namespace Skysemi.With.ActionCards
 			atk = 2;
 			def = 1;
 			eActionCardName = EActionCardName.Pan;
-			cardUsageText = $" [フライパン] \n 攻撃 {atk}\n 防御 {def}";
+			cardUsageText = $" [フライパン] \n 攻撃 {atk}\n 防御 {def}\n (ムキブツ)";
 		}
 	
 		// Update is called once per frame

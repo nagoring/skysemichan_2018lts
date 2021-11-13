@@ -11,75 +11,116 @@ namespace Skysemi.With.Chara
 {
 	public class Shizune : MonoBehaviour, IChara
 	{
+		public static Shizune instance;
 		public Game game;
+		public CharaParameter param;
+		protected ActionCards.ABase[] _actionCard = new ActionCards.ABase[4];
+
+		public string CharaName
+		{
+			get { return param.charaName; }
+			set { param.charaName = value; }
+		}
+
+		public EChara Id
+		{
+			get { return param.id; }
+			set { param.id = value; }
+		}
 
 		public int Hp
 		{
-			get { return this.hp; }
-			set { hp = value; }
+			get { return param.hp; }
+			set { param.hp = value; }
 		}
 
 		public int MaxHp
 		{
-			get { return this.maxhp; }
-			set { maxhp = value; }
-		}
-
-		public int Mp
-		{
-			get { return this.mp; }
-			set { mp = value; }
-		}
-
-		public int MaxMp
-		{
-			get { return this.maxmp; }
-			set { maxmp = value; }
+			get { return param.maxhp + param.tmpMaxHp; }
+			set { param.maxhp = value; }
 		}
 
 		public int Atk
 		{
-			get { return this.atk; }
-			set { atk = value; }
+			get { return param.atk; }
+			set { param.atk = value; }
 		}
 
 		public int Def
 		{
-			get { return this.def; }
-			set { def = value; }
+			get { return param.def; }
+			set { param.def = value; }
 		}
 
-		public int Agi { get; set; }
-		public int Spirit { get; set; }
-		public int MaxSpirit { get; set; }
-		public int Exp { get; set; }
-
-		public EChara Id
+		public int MaxSpirit
 		{
-			get { return this.id; }
-			set { id = value; }
+			get { return param.maxspirit; }
+			set { param.maxspirit = value; }
+		}
+
+		public int Agi
+		{
+			get { return param.agi; }
+			set { param.agi = value; }
+		}
+
+		public int Spirit
+		{
+			get { return param.spirit; }
+			set { param.spirit = value; }
+		}
+
+		public int Str
+		{
+			get { return param.str; }
+			set { param.str = value; }
+		}
+
+		public int Vit
+		{
+			get { return param.vit; }
+			set { param.vit = value; }
+		}
+
+		public int Exp
+		{
+			get { return param.exp; }
+			set { param.exp = value; }
+		}
+
+		public int NextExp
+		{
+			get { return param.nextExp; }
+			set { param.nextExp = value; }
+		}
+
+		public int Lv
+		{
+			get { return param.lv; }
+			set { param.lv = value; }
+		}
+
+		public int Progress
+		{
+			get { return param.progress; }
+			set { param.progress = value; }
+		}
+
+		public int TmpMaxHp
+		{
+			get { return param.tmpMaxHp; }
+			set { param.tmpMaxHp = value; }
 		}
 
 		public EChara id = EChara.SkysemiChan;
 		private EBattleAction eBattleAction;
 
-		public string CharaName
-		{
-			get { return this.playerName; }
-			set { playerName = value; }
-		}
 
-		public static Player instance;
+		// public static Player instance;
 		public string playerName;
 		public int maxhp;
 		public int maxmp;
-		public int hp;
-		public int mp;
-		public int atk;
-		public int def;
-		public int progress;
-		public int exp;
-		public int nextExp;
+		// public int atk;
 
 		public int lv;
 
@@ -89,15 +130,26 @@ namespace Skysemi.With.Chara
 		//丈夫さ/生命力
 		public int vit;
 
-		void Awake()
-		{
-			maxhp = 1000;
-			hp = maxhp;
-			maxmp = 8;
-			mp = maxmp;
-			atk = 2;
-			def = 4;
+		void Awake() {
+			if (instance == null)
+			{
+				instance = this;
+			}
+			else if (instance != this)
+			{
+				Destroy(gameObject);
+			}
+			DontDestroyOnLoad(gameObject);
 		}
+
+		public void Init()
+		{
+			MaxHp = 1000;
+			Hp = MaxHp;
+			Atk = 2;
+			Def = 4;
+		}
+		
 
 
 		public IChara GetTarget(List<IChara> targetList)
@@ -178,11 +230,11 @@ namespace Skysemi.With.Chara
 			int damage = 0;
 			if (isWithDefChara(target))
 			{
-				damage = atk + playerLv - target.Def;
+				damage = Atk + playerLv - target.Def;
 			}
 			else
 			{
-				damage = atk + playerLv - (int) (target.Def / 5);
+				damage = Atk + playerLv - (int) (target.Def / 5);
 			}
 
 			damage += (int) Random.Range(-2.0f, 2.0f + playerLv);
@@ -238,6 +290,7 @@ namespace Skysemi.With.Chara
 		void Start()
 		{
 			game = Game.instance;
+			Init();
 		}
 
 		void Update()

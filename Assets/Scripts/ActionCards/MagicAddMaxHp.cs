@@ -22,7 +22,7 @@ namespace Skysemi.With.ActionCards
 			spirit = 0;
 
 			eActionCardName = EActionCardName.MagicAddMaxHp;
-			cardUsageText = $" [最大HP増加魔法] \n 最大HP {maxhp}";
+			cardUsageText = $" [最大HP増加魔法] \n 最大HP {maxhp}\n (メルヘン)";
 		}
 		// Update is called once per frame
 		void Update () {

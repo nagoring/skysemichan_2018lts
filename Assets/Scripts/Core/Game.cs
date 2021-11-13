@@ -48,6 +48,7 @@ namespace Skysemi.With.Core
 		[FormerlySerializedAs("_player")] public Player player = null;
 		public ShizuneMsg shizuneMsg;
 		public GameObject shizuneMsgGameObject;
+		private Shizune _shizune;
 		public EventManager eventManager = null;
 		public EnemyManager enemyManager = null;
 		public EffectManager effectManager = null;
@@ -108,7 +109,9 @@ namespace Skysemi.With.Core
 		void Start()
 		{
 			effectManager = EffectManager.instance;
-			shizuneMsg.msg = shizuneMsgGameObject.GetComponentInChildren<Text>();
+			// shizuneMsg.msg = shizuneMsgGameObject.GetComponentInChildren<Text>();
+			_shizune = shizuneMsgGameObject.GetComponentInChildren<Shizune>();
+			Debug.Log(_shizune.Atk);
 			// EffectManager.instance
 			// Instantiate(effectManager);
 //            eventManager = this.gameObject.AddComponent<EventManager>();
