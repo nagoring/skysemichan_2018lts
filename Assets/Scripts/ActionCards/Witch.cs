@@ -14,16 +14,16 @@ namespace Skysemi.With.ActionCards
 			atk = 6;
 			def = 2;
 			agi = -2;
-			eActionCardName = EActionCardName.BrokenDoll;
+			eActionCardName = EActionCardName.Witch;
 			cardUsageText = $" [魔法使い]\n 攻撃 {atk}\n 防御 {def}\n 速さ {agi}\n (メルヘン)\n ";
 		}
 		public override string GetImageFilePath()
 		{
-			return "ActionCards/BrokenDoll";
+			return "ActionCards/Witch";
 		}
 		public override string GetPrefabFilePath()
 		{
-			return "Prefabs/ActionCards/BrokenDoll";
+			return "Prefabs/ActionCards/Witch";
 		}
 		public override EGroup GetGroup()
 		{

@@ -13,6 +13,7 @@
 		BrokenDoll = 35,
 		MagicAddMaxHp = 40,
 		MetalBat = 50,
+		Witch = 55,
 		StrongPanch = 60,
 		ArmGuard = 65,
 		StrongShield = 70,
