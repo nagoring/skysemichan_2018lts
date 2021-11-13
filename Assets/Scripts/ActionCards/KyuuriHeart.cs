@@ -18,11 +18,12 @@ namespace Skysemi.With.ActionCards
             lv = 0;
             atk = 4;
             def = 0;
-            // maxhp = 24;
-            maxhp = 1;
+            maxhp = 24;
+            // maxhp = 1;
             // maxhp = 1400;
+            // maxhp = 100;
             spirit = 0;
-            agi = 5;
+            agi = 9;
 
             eActionCardName = EActionCardName.NasuHeart;
             cardUsageText = $" [胡瓜の心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n";

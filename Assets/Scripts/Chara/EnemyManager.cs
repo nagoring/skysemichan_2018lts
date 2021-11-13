@@ -42,8 +42,12 @@ namespace Skysemi.With.Chara
 			Skysemi.With.CardUI.EquipmentCardFieldMiniUi equipmentCardFieldUi = _equipmentCardFieldUi;
 			SetEquipmentCardField(equipmentCardFieldUi);
 			_enemy.RecalculateEquipmentActionCardsAAA();
-			_enemy.SyncUiParam();
+			// Debug.Log($"{this.param.maxhp}");
+			// Debug.Log($"MaxHp{_enemy.MaxHp}");
+			// Debug.Log($"param.maxhp{_enemy.param.maxhp}");
+
 			_enemy.RestoreHp();
+			_enemy.SyncUiParam();
 		}
 
 

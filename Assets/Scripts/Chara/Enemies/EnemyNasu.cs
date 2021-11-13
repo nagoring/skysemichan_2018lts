@@ -18,7 +18,7 @@ namespace Skysemi.With.Chara.Enemies
         {
             this.Id = EChara.Nasu;
             this.CharaName = "ナス";
-            this.MaxHp = 1;
+            this.MaxHp = 14;
             this.Hp = MaxHp;
 //            this.Atk = 5;
             // this.Atk = 1;
@@ -27,8 +27,8 @@ namespace Skysemi.With.Chara.Enemies
             this.Spirit = 1;
             this.MaxSpirit = 0;
             param.str = 1;
-            param.def = 0;
-            param.agi = 0;
+            Def = 0;
+            Agi = 2;
             
             this.Exp =4;
             this.msg = "ぼくをたべて！ぼくをたべて！";

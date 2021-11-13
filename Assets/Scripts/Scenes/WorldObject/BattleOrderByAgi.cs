@@ -39,8 +39,6 @@ namespace Skysemi.With.Scenes.WorldObject
 			{
 				charaActOrderList.Add(self);
 			}
-			Debug.Log($"targetAgi={targetAgi}, selfAgi={selfAgi}");
-			Debug.Log($"targetAtkCount:{targetAtkCount},selfAtkCount:{selfAtkCount}");
 			charaActOrderList.Sort((a, b) => b.Agi - a.Agi);
 			return charaActOrderList;
 		}

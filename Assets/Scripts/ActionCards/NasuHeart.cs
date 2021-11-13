@@ -19,9 +19,9 @@ namespace Skysemi.With.ActionCards
             atk = 4;
             def = 0;
             maxhp = 14;
-            // maxhp = 1400;
+            maxhp = 100;
             spirit = 0;
-            agi = 5;
+            agi = 9;
 
             eActionCardName = EActionCardName.NasuHeart;
             cardUsageText = $" [なすの心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n";

@@ -7,20 +7,18 @@ using UnityEngine.UI;
 
 namespace StatusUI
 {
-    public class EnemyStatusWindow : AppMonoBehaviour
-    {
+	public class EnemyStatusWindow : AppMonoBehaviour
+	{
 //        private const string PrefabPath = "Prefabs/StatusUI/EnemyStatusWindow";
-        
-        public Text Name { get; set; }
-        public Text Hp { get; set; }
-        public Text Spirit { get; set; }
-        public Text Atk { get; set; }
-        public Text Def { get; set; }
-        public Text Agi { get; set; }
-        
-        
-        
-        
+
+		public Text Name { get; set; }
+		public Text Hp { get; set; }
+		public Text Spirit { get; set; }
+		public Text Atk { get; set; }
+		public Text Def { get; set; }
+		public Text Agi { get; set; }
+
+
 //        public static EnemyStatusWindow CreateEnemyStatusWindowInCanvasUI(Canvas canvasUI)
 //        {
 //            GameObject obj = (GameObject)Resources.Load (PrefabPath);
@@ -34,44 +32,45 @@ namespace StatusUI
 //            enemyStatusWindow.Init();
 //            return enemyStatusWindow;
 //        }
-        
-        public void Init()
-        {
-            Name = transform.Find("TextEnemyName").GetComponent<Text>();
-            Hp = transform.Find("TextEnemyHp").GetComponent<Text>();
-            Spirit = transform.Find("TextEnemySpirit").GetComponent<Text>();
-            Atk = transform.Find("TextEnemyAtk").GetComponent<Text>();
-            Def = transform.Find("TextEnemyDef").GetComponent<Text>();
-            Agi = transform.Find("TextEnemyAgi").GetComponent<Text>();
-        }
-        
 
-        public void SyncEnemyStatusReceiver(Enemy enemy, CharaParameter _charaParameter)
-        {
-            int hp = _charaParameter.hp;
-            int spirit = _charaParameter.spirit;
-            int atk = _charaParameter.atk;
-            int def = _charaParameter.def;
-            int agi = _charaParameter.agi;
-            Skysemi.With.ActionCards.ABase[] actionCards = enemy.GetActionCards();
-            foreach (Skysemi.With.ActionCards.ABase card in actionCards)
-            {
-                if (card == null) continue;
-                hp += card.MaxHp;
-                spirit += card.Spirit;
-                atk += card.Atk;
-                def += card.Def;
-                agi += card.Agi;
-            }
-            
-            Name.text = _charaParameter.charaName;
-            Hp.text = hp.ToString();
-            Spirit.text = spirit.ToString();
-            Atk.text = atk.ToString();
-            Def.text = def.ToString();
-            Agi.text = agi.ToString();
-        }
-        
-    }
-        
+		public void Init()
+		{
+			Name = transform.Find("TextEnemyName").GetComponent<Text>();
+			Hp = transform.Find("TextEnemyHp").GetComponent<Text>();
+			Spirit = transform.Find("TextEnemySpirit").GetComponent<Text>();
+			Atk = transform.Find("TextEnemyAtk").GetComponent<Text>();
+			Def = transform.Find("TextEnemyDef").GetComponent<Text>();
+			Agi = transform.Find("TextEnemyAgi").GetComponent<Text>();
+		}
+
+
+		public void SyncEnemyStatusReceiver(Enemy enemy, CharaParameter _charaParameter)
+		{
+			int hp = _charaParameter.hp;
+			int spirit = _charaParameter.spirit;
+			int atk = _charaParameter.atk;
+			int def = _charaParameter.def;
+			int agi = _charaParameter.agi;
+
+			// 既に_charaParameterにカード情報は反映されているためカードの加算はいらない
+
+			// Skysemi.With.ActionCards.ABase[] actionCards = enemy.GetActionCards();
+			// foreach (Skysemi.With.ActionCards.ABase card in actionCards)
+			// {
+			//     if (card == null) continue;
+			//     hp += card.MaxHp;
+			//     spirit += card.Spirit;
+			//     atk += card.Atk;
+			//     def += card.Def;
+			//     agi += card.Agi;
+			// }
+
+			Name.text = _charaParameter.charaName;
+			Hp.text = hp.ToString();
+			Spirit.text = spirit.ToString();
+			Atk.text = atk.ToString();
+			Def.text = def.ToString();
+			Agi.text = agi.ToString();
+		}
+	}
 }

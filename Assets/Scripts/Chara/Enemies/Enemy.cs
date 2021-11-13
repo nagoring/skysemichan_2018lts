@@ -181,11 +181,8 @@ namespace Skysemi.With.Chara.Enemies
 			int tmpMaxHp = 0;
 			int tmpAtk = 0;
 			int tmpDef = 0;
-			int tmpSpirit = this.param.spirit;
-			this.param.spirit = 0;
-			int tmpAgi = this.param.agi;
-			this.param.agi = 0;
-			// ActionCards.ABase[] actionCards = eventArgs.GetActionCards();
+			int tmpSpirit = 0;
+			int tmpAgi = 0;
 			foreach (ActionCards.ABase actionCard in actionCards)
 			{
 				if (actionCard == null) continue;
@@ -195,32 +192,11 @@ namespace Skysemi.With.Chara.Enemies
 				tmpSpirit += actionCard.Spirit;
 				tmpAgi += actionCard.Agi;
 			}
-            
-            
 			this.param.maxhp = this.param.maxhp + tmpMaxHp;
 			this.param.atk = this.param.str + tmpAtk;
 			this.param.def = this.param.vit + tmpDef;
 			this.param.spirit = this.param.spirit + tmpSpirit;
 			this.param.agi = this.param.agi + tmpAgi;
-			// TODO 構造が気に入らないから直すかも
-			
-			// Game game = Game.instance;;
-			// EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
-			// enemyStatusWindow.Init();
-			// enemyStatusWindow.SyncEnemyStatusReceiver(this, this.param);
-			// localEnemyStatusWindow.SyncEnemyStatusReceiver(this.param);
-			
-			// game.enemyManager.Sync();
-			//		GameMainManager game = GameMainManager.instance;
-			//
-			//		game.playerManager.textAtk.text = param.atk.ToString();
-			//		game.playerManager.textDef.text = param.def.ToString();
-			//
-			//		
-			//		//ActionCardやUIのステータスとパラメータを一致させる
-					// UIManager.instance.ShowActionCardArea(this);
-			//		PlayerManager.instance.SyncUiStatusByPlayer(this);
-			
 		}
 
 		public void SyncUiParam()
