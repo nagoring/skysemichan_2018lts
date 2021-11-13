@@ -101,37 +101,40 @@ namespace Skysemi.With.Chara
 		/// <summary>
 		/// HPを全回復してステータスを同期させる
 		/// </summary>
-		public void SyncRecoveryHpInclude()
+		public void SyncRecoveryHpIncludeCCC()
 		{
 			Skysemi.With.CardUI.EquipmentCardFieldMiniUi equipmentCardFieldUi = _equipmentCardFieldUi;
 			SetEquipmentCardField(equipmentCardFieldUi);
-			Game game = Game.instance;
+			// Game game = Game.instance;
 			// CalculateEquipmentActionCardsReceiver(_enemy.GetActionCards());
-			_enemy.RecalculateEquipmentActionCards();
+			_enemy.RecalculateEquipmentActionCardsAAA();
 			RecoveryHp();
-			EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
-			EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
+			// EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
+			// EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
+			
 		}
 
 		/// <summary>
 		/// ステータスを同期させる
 		/// </summary>
-		public void Sync()
-		{
-			Skysemi.With.CardUI.EquipmentCardFieldMiniUi equipmentCardFieldUi = _equipmentCardFieldUi;
-			SetEquipmentCardField(equipmentCardFieldUi);
-			Game game = Game.instance;
-			// CalculateEquipmentActionCardsReceiver(_enemy.GetActionCards());
-			_enemy.RecalculateEquipmentActionCards();
-			EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
-			EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
-			localEnemyStatusWindow.SyncEnemyStatusReceiver(GetEnemy().param);
-		}
+		// public void Sync()
+		// {
+		// 	Skysemi.With.CardUI.EquipmentCardFieldMiniUi equipmentCardFieldUi = _equipmentCardFieldUi;
+		// 	SetEquipmentCardField(equipmentCardFieldUi);
+		// 	Game game = Game.instance;
+		// 	// CalculateEquipmentActionCardsReceiver(_enemy.GetActionCards());
+		// 	_enemy.RecalculateEquipmentActionCardsAAA();
+		// 	EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
+		// 	EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
+		// 	Debug.Log("BBBBBBBBBBBBBBBBBBBB");
+		// 	localEnemyStatusWindow.SyncEnemyStatusReceiver(GetEnemy().param);
+		// }
 
 		public void CreateEnemy(MonoBehaviour mono, EquipmentCardFieldMiniUi inEquipmentCardFieldUi)
 		{
 			EnemyFactory enemyFactory = EnemyFactory.GetInstance();
 			Enemy targetEnemy = enemyFactory.Factory(mono);
+			targetEnemy.Init();
 			Init(targetEnemy, inEquipmentCardFieldUi);
 			int loopIndex = 0;
 			foreach (ActionCards.ABase card in targetEnemy.GetActionCards())
@@ -146,7 +149,7 @@ namespace Skysemi.With.Chara
 			// Equip(1, mono.gameObject.AddComponent<MagicAddMaxHp>());
 			// Equip(2, mono.gameObject.AddComponent<Punch>());
 			// Equip(3, mono.gameObject.AddComponent<StrongPunch>());
-			SyncRecoveryHpInclude();
+			SyncRecoveryHpIncludeCCC();
 
 //            Game game = Game.instance;
 //            if (world.WorldMode != EWorldMode.BATTLE) return;

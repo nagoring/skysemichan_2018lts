@@ -62,7 +62,7 @@ namespace Tests.Chara.DamageLogic
 				game.enemyManager.Equip(nasu, i, enemyCards);
 			}
 
-			game.enemyManager.SyncRecoveryHpInclude();
+			game.enemyManager.SyncRecoveryHpIncludeCCC();
 			int resultDamage = 0;
 			
 			// ナマモノ同志
@@ -73,14 +73,14 @@ namespace Tests.Chara.DamageLogic
 			Assert.AreEqual(6, resultDamage);
 
 			nasu.SetActionCard(1, game.CreateActionCard(typeof(Shield)));
-			nasu.RecalculateEquipmentActionCards();
+			nasu.RecalculateEquipmentActionCardsAAA();
 			resultDamage = logic.DamageMidCalulate(nasu.GetActionCards(), playerCard, nasu, player);
 			Assert.AreEqual(3, resultDamage);
 
 			player.SetActionCard(0, game.CreateActionCard(typeof(RoboBlade)));
 			player.RecalculateEquipmentActionCards();
 			nasu.SetActionCard(1, game.CreateActionCard(typeof(StrongShield)));
-			nasu.RecalculateEquipmentActionCards();
+			nasu.RecalculateEquipmentActionCardsAAA();
 			resultDamage = logic.DamageMidCalulate(nasu.GetActionCards(), playerCard, nasu, player);
 			Assert.AreEqual(10, resultDamage);
 			

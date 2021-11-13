@@ -39,10 +39,12 @@ namespace Skysemi.With.Chara
                     }
                     if (randomValue >= 60)
                     {
+                        return game.CreateEnemy(typeof(EnemyNasu));
                         return CreateCharaObject(mono, EChara.Nasu);
                     }
                     else if(randomValue < 60)
                     {
+                        return game.CreateEnemy(typeof(EnemyKyuuri));
                         return CreateCharaObject(mono, EChara.Kyuuri);
                     }
                     break;

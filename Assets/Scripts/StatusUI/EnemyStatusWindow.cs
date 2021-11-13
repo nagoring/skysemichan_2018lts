@@ -1,4 +1,5 @@
 using Skysemi.With.Chara;
+using Skysemi.With.Chara.Enemies;
 using Skysemi.With.Core;
 using Skysemi.With.Events;
 using UnityEngine;
@@ -45,26 +46,26 @@ namespace StatusUI
         }
         
 
-        public void SyncEnemyStatusReceiver(CharaParameter _charaParameter)
+        public void SyncEnemyStatusReceiver(Enemy enemy, CharaParameter _charaParameter)
         {
             int hp = _charaParameter.hp;
             int spirit = _charaParameter.spirit;
             int atk = _charaParameter.atk;
             int def = _charaParameter.def;
             int agi = _charaParameter.agi;
-//            Skysemi.With.ActionCards.ABase[] actionCards = args.EquipmentCardFieldUi.GetActionCards();
-//            foreach (Skysemi.With.ActionCards.ABase card in actionCards)
-//            {
-//                Debug.Log(atk);
-//                if (card == null) continue;
-//                hp += card.MaxHp;
-//                spirit += card.Spirit;
-//                atk += card.Atk;
-//                def += card.Def;
-//                agi += card.Agi;
-//            }
+            Skysemi.With.ActionCards.ABase[] actionCards = enemy.GetActionCards();
+            foreach (Skysemi.With.ActionCards.ABase card in actionCards)
+            {
+                if (card == null) continue;
+                hp += card.MaxHp;
+                spirit += card.Spirit;
+                atk += card.Atk;
+                def += card.Def;
+                agi += card.Agi;
+            }
             
             Name.text = _charaParameter.charaName;
+            Debug.Log(Name.text + "" + hp);
             Hp.text = hp.ToString();
             Spirit.text = spirit.ToString();
             Atk.text = atk.ToString();

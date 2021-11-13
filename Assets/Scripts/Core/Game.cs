@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
-using Boo.Lang;
 using Skysemi.With.ActionCards;
 using Skysemi.With.Chara;
 using Skysemi.With.Chara.Enemies;
@@ -16,11 +11,9 @@ using Skysemi.With.Scenes.WorldObject;
 using Skysemi.With.Utils;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using UnityEngine.Experimental.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
-using UnityEngine.Video;
+using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 namespace Skysemi.With.Core
@@ -53,7 +46,8 @@ namespace Skysemi.With.Core
 
 		public static Game instance = null;
 		[FormerlySerializedAs("_player")] public Player player = null;
-		public ShizuneMsg shizuneMsg = null;
+		public ShizuneMsg shizuneMsg;
+		public GameObject shizuneMsgGameObject;
 		public EventManager eventManager = null;
 		public EnemyManager enemyManager = null;
 		public EffectManager effectManager = null;
@@ -99,7 +93,7 @@ namespace Skysemi.With.Core
 				destinationPlace = EStage.NONE;
 				eventManager = obj.AddComponent<EventManager>();
 				enemyManager = new EnemyManager();
-				shizuneMsg = obj.AddComponent<ShizuneMsg>();
+				// shizuneMsg = obj.AddComponent<ShizuneMsg>();
 				// effectManager = obj.AddComponent<EffectManager>();
 			}
 			else if (instance != this)
@@ -114,6 +108,7 @@ namespace Skysemi.With.Core
 		void Start()
 		{
 			effectManager = EffectManager.instance;
+			shizuneMsg.msg = shizuneMsgGameObject.GetComponentInChildren<Text>();
 			// EffectManager.instance
 			// Instantiate(effectManager);
 //            eventManager = this.gameObject.AddComponent<EventManager>();

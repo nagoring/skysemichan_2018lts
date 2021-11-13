@@ -34,10 +34,12 @@ namespace Skysemi.With.Events
 		{
 //		1. this.WayEvent += game.enemyManager.CreateEnemy;
 //		2. this.WayEvent += game.uiManager.EncountEnemeyBegin;
-//		3. this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
+//		3. this.WayEvent += game.shizuneMsg.EnemyCommentary;
 
 			// Activeで初期化されてしまうため一番始めにActiveにしておく
+			
 			iSetUpEnemy.GetButtonEnemyLayer().SetActive(true);
+			
 			// // 1.　敵の生成(内部) -> CreateEnemy in EncountNormalRule.OutputEnemyで変更 
 			// game.enemyManager.CreateEnemy(
 			// 	iSetUpEnemy.GetMonoBehaviour(), 
@@ -67,23 +69,26 @@ namespace Skysemi.With.Events
 			param.enemy = game.enemyManager.GetEnemy();
 //	         0. this.BattleEndEvent(param);
 
-//		1. this.BattleEndEvent += game.enemyManager.EncountEnemeyEnd;
-//		2. this.BattleEndEvent += game.playerManager.EncountEnemeyEnd;
-//		3. this.BattleEndEvent += game.uiManager.EncountEnemeyEnd;
-//		4. this.BattleEndEvent += game.skysemiChanMsg.EncountEnemeyEnd;
-//		5. this.BattleEndEvent += game.enemyManager.EncountEnemeyEndDestroy;
+//		1. this.BattleEndEvent += game.enemyManager.BattleEnd;
+//		2. this.BattleEndEvent += game.playerManager.BattleEnd;
+//		3. this.BattleEndEvent += game.uiManager.BattleEnd;
+//		4. this.BattleEndEvent += game.shizuneMsg.BattleEnd;
+//		5. this.BattleEndEvent += game.enemyManager.BattleEnd;
 			// 1.
-			this.EncountEnemeyEnd(param);
+			this.BattleEnd(param);
 			// 2. 
-			game.player.EncountEnemeyEnd(param);
+			game.player.BattleEnd(param);
 			// 3. 
-			UIManager.instance.EncountEnemeyEnd(param);
+			UIManager.instance.BattleEnd(param);
 			// 4. 
-			ShizuneMsg.instance.EncountEnemeyEnd(param);
+			ShizuneMsg.instance.BattleEnd(param);
 			// 5. 
-			BattleManager.instance.EncountEnemeyEndDestroy(param);
+			BattleManager.instance.BattleEnd(param);
+			
 
 			world.WorldMode = EWorldMode.WALKING;
+			world.ShuffleRandomEncount();
+			
 			if (!world.isBoss) return;
 			world.WorldMode = EWorldMode.BOSS_BATTLE_AFTER;
 			StartCoroutine(this.DelayMethod(2.3f, () =>
@@ -114,11 +119,12 @@ namespace Skysemi.With.Events
 			world.WorldMode = EWorldMode.BATTLE;
 		}
 
-		public void EncountEnemeyEnd(BattleEndEventParam param)
+		public void BattleEnd(BattleEndEventParam param)
 		{
-			Debug.Log("In EncountEnemeyEnd");
+			Debug.Log("BattleEnd");
 			// param.enemy = this.enemy;
 			EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
+			Debug.Log("EEEEEEEEEEEEEEEEEEE");
 			enemyStatusWindow.gameObject.SetActive(false);
 			// StartCoroutine(this.DelayMethod(1.0f, () =>
 			// {
@@ -158,17 +164,17 @@ namespace Skysemi.With.Events
 //	void Register() {
 //		this.WayEvent += game.enemyManager.CreateEnemy;
 //		this.WayEvent += game.uiManager.EncountEnemeyBegin;
-//		this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
+//		this.WayEvent += game.shizuneMsg.EnemyCommentary;
 //
 //		
-//		this.BattleEndEvent += game.enemyManager.EncountEnemeyEnd;
-//		this.BattleEndEvent += game.playerManager.EncountEnemeyEnd;
-//		this.BattleEndEvent += game.uiManager.EncountEnemeyEnd;
-//		this.BattleEndEvent += game.skysemiChanMsg.EncountEnemeyEnd;
-//		this.BattleEndEvent += game.enemyManager.EncountEnemeyEndDestroy;
+//		this.BattleEndEvent += game.enemyManager.BattleEnd;
+//		this.BattleEndEvent += game.playerManager.BattleEnd;
+//		this.BattleEndEvent += game.uiManager.BattleEnd;
+//		this.BattleEndEvent += game.shizuneMsg.BattleEnd;
+//		this.BattleEndEvent += game.enemyManager.BattleEnd;
 //		
-//		this.BattleEndEventForEscape += game.uiManager.EncountEnemeyEnd;
-//		this.BattleEndEventForEscape += game.enemyManager.EncountEnemeyEndDestroy;
+//		this.BattleEndEventForEscape += game.uiManager.BattleEnd;
+//		this.BattleEndEventForEscape += game.enemyManager.BattleEnd;
 //		
 //	}
 //	public void EncountEnemy()

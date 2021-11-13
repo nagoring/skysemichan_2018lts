@@ -15,6 +15,7 @@ namespace StatusUI
 		public Text Spirit { get; set; }
 		public Text Atk { get; set; }
 		public Text Def { get; set; }
+		public Text Agi { get; set; }
 		public Text Progress { get; set; }
 		public Text Exp { get; set; }
 		public Text MaxHp { get; set; }
@@ -47,6 +48,7 @@ namespace StatusUI
 			Spirit = transform.Find("Spirit").GetComponent<Text>();
 			Atk = transform.Find("Atk").GetComponent<Text>();
 			Def = transform.Find("Def").GetComponent<Text>();
+			Agi = transform.Find("Agi").GetComponent<Text>();
 			Progress = transform.Find("Progress").GetComponent<Text>();
 			Exp = transform.Find("Exp").GetComponent<Text>();
 			MaxHp = transform.Find("MaxHp").GetComponent<Text>();
@@ -61,9 +63,11 @@ namespace StatusUI
 			Spirit.text = param.spirit.ToString();
 			Atk.text = param.atk.ToString();
 			Def.text = param.def.ToString();
+			Agi.text = param.agi.ToString();
 			MaxHp.text = (param.maxhp + param.tmpMaxHp).ToString();
 			MaxSpirit.text = param.maxspirit.ToString();
 			Progress.text = param.progress.ToString();
+			Exp.text = param.exp.ToString();
 		}
 	}
 }

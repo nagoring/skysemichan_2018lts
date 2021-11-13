@@ -138,14 +138,14 @@ namespace Skysemi.With.Scenes.WorldObject
 		/// <param name="target"></param>
 		void BattleEndForWinner(IChara target)
 		{
-//			game.skysemiChanMsg.msgBattleWinner[target.Id](this);
+//			game.shizuneMsg.msgBattleWinner[target.Id](this);
 //			game.eventManager.DoBattleEndEvent();
 ////=====
-//		1. this.BattleEndEvent += game.enemyManager.EncountEnemeyEnd;
-//		2. this.BattleEndEvent += game.playerManager.EncountEnemeyEnd;
-//		3. this.BattleEndEvent += game.uiManager.EncountEnemeyEnd;
-//		4. this.BattleEndEvent += game.skysemiChanMsg.EncountEnemeyEnd;
-//		5. this.BattleEndEvent += game.enemyManager.EncountEnemeyEndDestroy;
+//		1. this.BattleEndEvent += game.enemyManager.BattleEnd;
+//		2. this.BattleEndEvent += game.playerManager.BattleEnd;
+//		3. this.BattleEndEvent += game.uiManager.BattleEnd;
+//		4. this.BattleEndEvent += game.shizuneMsg.BattleEnd;
+//		5. this.BattleEndEvent += game.enemyManager.BattleEnd;
 ///=====
 			eBattleStatus = EBattleStatus.IDLE;
 			game.eventManager.DoBattleEndEvent(target);
@@ -160,7 +160,7 @@ namespace Skysemi.With.Scenes.WorldObject
 			_world.WorldMode = EWorldMode.WALKING;
 //			SoundManager.instance.PlaySingle(game.clipLoser);
 //			//スカゼミちゃんメッセージ
-//			game.skysemiChanMsg.msgOther[EMsgOther.BattleLoser]();
+//			game.shizuneMsg.msgOther[EMsgOther.BattleLoser]();
 //			StartCoroutine(this.DelayMethod(4.2f, () => { game.eventManager.DoBattleEndEventForLoser(); }));
 
 		}
@@ -172,7 +172,7 @@ namespace Skysemi.With.Scenes.WorldObject
 		{
 			_world.WorldMode = EWorldMode.WALKING;
 //			SoundManager.instance.PlaySingle(game.clipEscape);
-//			game.skysemiChanMsg.msgOther[EMsgOther.BattleEscape]();
+//			game.shizuneMsg.msgOther[EMsgOther.BattleEscape]();
 //			StartCoroutine(this.DelayMethod(0.5f, () =>
 //			{
 				eBattleStatus = EBattleStatus.IDLE;
@@ -208,7 +208,7 @@ namespace Skysemi.With.Scenes.WorldObject
 		private void OrderAttackTurn()
 		{
 			//しずね
-//			Shizune skysemiChan = game.skysemiChanManager.skysemiChan;
+//			Shizune skysemiChan = game.shizuneManager.skysemiChan;
 			charaActOrderList = new List<IChara>();
 			charaActOrderList.Add(game.GetPlayer());
 			charaActOrderList.Add(enemy);
@@ -228,7 +228,7 @@ namespace Skysemi.With.Scenes.WorldObject
 //			{
 //				_world.WorldMode = EWorldMode.WALKING;
 //				SoundManager.instance.PlaySingle(game.clipEscape);
-//				game.skysemiChanMsg.msgOther[EMsgOther.BossEscape]();
+//				game.shizuneMsg.msgOther[EMsgOther.BossEscape]();
 //				StartCoroutine(this.DelayMethod(2.0f, () =>
 //				{
 //					//シーン切り替え
@@ -247,7 +247,7 @@ namespace Skysemi.With.Scenes.WorldObject
 		/// 5. 
 		/// </summary>
 		/// <param name="param"></param>
-		public void EncountEnemeyEndDestroy(BattleEndEventParam param) {
+		public void BattleEnd(BattleEndEventParam param) {
 			World.instance.GetButtonEnemyLayer().SetActive(false);
 			// Destroy(this.enemyGameObject);
 			Destroy(this.enemy);
@@ -374,9 +374,9 @@ namespace Skysemi.With.Scenes.WorldObject
 //	private void TurnSkysemiChan() {
 //		Player player = Player.instance;
 //		ICharaEnemy enemy = game.enemyManager.enemy;
-//		Shizune skysemiChan = game.skysemiChanManager.skysemiChan;
+//		Shizune skysemiChan = game.shizuneManager.skysemiChan;
 //		//スカゼミちゃんのメッセージ
-//		game.skysemiChanMsg.msgAttakDict[enemy.Id]();
+//		game.shizuneMsg.msgAttakDict[enemy.Id]();
 //		//0.3秒後に実行する
 //		StartCoroutine(this.DelayMethod(0.5f, () => {
 //			//攻撃アニメーション
@@ -393,7 +393,7 @@ namespace Skysemi.With.Scenes.WorldObject
 //				Text navText = game.uiManager.btnNavigationWindow.GetComponentInChildren<Text>();
 //				navText.color = new Color(0, 0, 0);
 //				navText.text = string.Format("{0}は{1}のダメージをうけた", enemy.enemyName, damage);
-//				game.skysemiChanMsg.msgAttakEndDict[enemy.Id]();
+//				game.shizuneMsg.msgAttakEndDict[enemy.Id]();
 //
 //				StartCoroutine(this.DelayMethod(0.8f, () =>
 //				{
@@ -403,12 +403,12 @@ namespace Skysemi.With.Scenes.WorldObject
 //					if (IsDeadEnemy(_enemy))
 //					{
 //						//スカゼミちゃんメッセージ
-//						_game.skysemiChanMsg.msgBattleWinner[_enemy.Id](this);
+//						_game.shizuneMsg.msgBattleWinner[_enemy.Id](this);
 //						//戦闘終了へ
 //						_game.eventManager.DoBattleEndEvent();
 //						return;
 //					}
-//					_game.skysemiChanMsg.msgPlayerTurnInBattle[_enemy.Id](this);
+//					_game.shizuneMsg.msgPlayerTurnInBattle[_enemy.Id](this);
 //					//敵が生きていればプレイヤーのターンへ
 //					_game.turn = ETurn.PLAYER;
 //				}));

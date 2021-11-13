@@ -366,12 +366,13 @@ namespace Skysemi.With.Chara
 		//		param.mp = param.maxmp;
 		//		param.progress = 0;
 		//	}
-		public void DoLvUp()
+		private void DoLvUp()
 		{
 			param.maxhp += 5;
 			param.str += 1;
 			param.vit += 1;
-			SyncParam();
+			//自UIのステータス反映
+			// SyncUiParam();
 		}
 
 		//
@@ -436,11 +437,10 @@ namespace Skysemi.With.Chara
 			}
 
 			//自UIのステータス反映
-			PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
-			playerStatusWindow.SyncPlayerStatusReceiver(param);
+			SyncUiParam();
 		}
 
-		public void EncountEnemeyEnd(BattleEndEventParam param)
+		public void BattleEnd(BattleEndEventParam param)
 		{
 			this.Exp += param.enemy.Exp;
 			Game game = Game.instance;
@@ -462,13 +462,13 @@ namespace Skysemi.With.Chara
 
 
 				this.DoLvUp();
-				//UIの同期
-				UIManager.instance.ShowActionCommandArea(game.player);
+				
 				SoundManager.instance.Stop();
 				SoundManager.instance.PlaySingle(game.clipLpUp);
 				ShizuneMsg.instance.DelayMsgOther();
 			}
 
+			SyncUiParam();
 			game.player.SyncUiStatusByPlayer(game.player);
 		}
 
@@ -512,29 +512,11 @@ namespace Skysemi.With.Chara
 		//	{
 		//		return _actionCards[index];
 		//	}
-		public void SyncParam()
+		public void SyncUiParam()
 		{
-			// 	int tmpAtk = 0;
-			// 	int tmpDef = 0;
-			// 	int tmpMp = 0;
-			// 	int tmpMaxHp = 0;
-			// 	param.mp = param.maxmp;
-			// 	foreach (ActionCards.ABase actionCard in _actionCards)
-			// 	{
-			// 		if (actionCard == null) continue;
-			// 		tmpAtk += actionCard.Atk;
-			// 		tmpDef += actionCard.Def;
-			// 		tmpMp += actionCard.Mp;
-			// 		tmpMaxHp += actionCard.MaxHp;
-			// 	}
-			// 	param.atk = param.str + 1 + tmpAtk;
-			// 	param.def = param.vit + tmpDef;
-			// 	param.mp = param.mp + tmpMp;
-			// 	param.tmpMaxHp = tmpMaxHp;
-			// 	if (Hp > MaxHp)
-			// 	{
-			// 		Hp = MaxHp;
-			// 	}
+			Game game = Game.instance;
+			PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
+			playerStatusWindow.SyncPlayerStatusReceiver(param);
 		}
 
 		public void SyncUiStatusByPlayer(Player player)

@@ -25,6 +25,8 @@ namespace Skysemi.With.Scenes.WorldObject
 			Game game = Game.instance;
 			Player player = game.GetPlayer();
 			_random_encount--;
+			// Debug.Log($"_random_encount{_random_encount}");
+
 			if (player.Progress == 0) return;
 
 			if (player.Progress == _boss_encount_progress)
@@ -36,7 +38,6 @@ namespace Skysemi.With.Scenes.WorldObject
 			else if (_random_encount <= 0)
 			{
 				game.PlayMusicBattle();
-//                _random_encount = Random.Range(1, 8) + 10;
 				_is_boss = false;
 				_eWorldMode = EWorldMode.BATTLE;
 //			WayEventParam param = new WayEventParam();
@@ -78,7 +79,13 @@ namespace Skysemi.With.Scenes.WorldObject
 
 //			this.WayEvent += game.enemyManager.CreateEnemy;
 //			this.WayEvent += game.uiManager.EncountEnemeyBegin;
-//			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
+//			this.WayEvent += game.shizuneMsg.EnemyCommentary;
+		}
+
+		public virtual void ShuffleRandomEncount()
+		{
+			// _random_encount = Random.Range(1, 8) + 10;
+			_random_encount = Random.Range(1, 2) + 1;
 		}
 	}
 }

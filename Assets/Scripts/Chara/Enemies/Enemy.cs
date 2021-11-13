@@ -39,7 +39,7 @@ namespace Skysemi.With.Chara.Enemies
 		// public string enemyName;
 		public int spirit = 0;
 		public int maxspirit = 10;
-		public string msg;
+		public string msg = "NONE";
 		public List<string> msgDamageAfterList = new List<string>();
 		// public int exp;
 
@@ -175,7 +175,7 @@ namespace Skysemi.With.Chara.Enemies
 		{
 			return DamageRating.Calc(target, this);
 		}
-		public virtual void RecalculateEquipmentActionCards()
+		public virtual void RecalculateEquipmentActionCardsAAA()
 		{
 			ABase[] actionCards = GetActionCards(); 
 			int tmpMaxHp = 0;
@@ -202,12 +202,12 @@ namespace Skysemi.With.Chara.Enemies
 			this.param.def = this.param.vit + tmpDef;
 			this.param.spirit = this.param.spirit + tmpSpirit;
 			this.param.agi = this.param.agi + tmpAgi;
-
 			// TODO 構造が気に入らないから直すかも
 			Game game = Game.instance;;
 			EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
-			EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
-			localEnemyStatusWindow.SyncEnemyStatusReceiver(this.param);
+			enemyStatusWindow.Init();
+			enemyStatusWindow.SyncEnemyStatusReceiver(this, this.param);
+			// localEnemyStatusWindow.SyncEnemyStatusReceiver(this.param);
 			
 			// game.enemyManager.Sync();
 			//		GameMainManager game = GameMainManager.instance;

@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
 //		btnBattleFlow.SetActive(true);
 //		game.turn = ETurn.PLAYER;
 //	}
-	public void EncountEnemeyEnd(BattleEndEventParam param) {
+	public void BattleEnd(BattleEndEventParam param) {
 		//GoFrontButton Begin
 		World.instance.btnGoFront.SetActive(true);
 		//ActionCommand End

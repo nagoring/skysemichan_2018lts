@@ -9,5 +9,6 @@ namespace Skysemi.With.Scenes.WorldObject
         bool IsBoss();
         bool IsEncount();
         void OutputEnemy(ISetUpEnemy iSetUpEnemy);
+        void ShuffleRandomEncount();
     }
 }

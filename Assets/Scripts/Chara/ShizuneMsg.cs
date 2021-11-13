@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 public class ShizuneMsg : MonoBehaviour
 {
 	public static ShizuneMsg instance;
-	public Game game;
+	private Game game;
     public Text msg;
 	public delegate void callbackBattleEndEventParam(BattleEndEventParam param);
 	public delegate void callbackAttackDict();
@@ -53,6 +53,8 @@ public class ShizuneMsg : MonoBehaviour
 
 	void Start ()
 	{
+		// Debug.Log(msg);
+		
 		game = Game.instance;
 		homeMsgTbl = new string[]
 		{
@@ -222,7 +224,9 @@ public class ShizuneMsg : MonoBehaviour
 	}
 	public void EnemyCommentary(WayEventParam param) {
 		if (param.enemy == null) return;
-		msg = GetComponentInChildren<Text>();
+		// msg = GetComponentInChildren<Text>();
+		msg = GetComponent<Text>();
+		Debug.Log(msg);
 		switch (param.enemy.CharaName)
 		{
 			case "ナス": 
@@ -273,7 +277,7 @@ public class ShizuneMsg : MonoBehaviour
 				break;
 		}
 	}
-	public void EncountEnemeyEnd(BattleEndEventParam param) {
+	public void BattleEnd(BattleEndEventParam param) {
 		EChara id = param.enemy.Id;
 		callbackBattleEndEventParam cb = msgEncountEndDict[id];
 		cb(param);
@@ -390,10 +394,13 @@ public class ShizuneMsg : MonoBehaviour
 	}
 	public void DelayMsgOther()
 	{
+		//スカゼミちゃんメッセージ
+		// game.shizuneMsg.msgOther[EMsgOther.LVUP]();
 		StartCoroutine(this.DelayMethod(1.5f, () =>
 		{
 			//スカゼミちゃんメッセージ
-			game.shizuneMsg.msgOther[EMsgOther.LVUP]();
+			// game.shizuneMsg.msgOther[EMsgOther.LVUP]();
+			SayLvUp();
 		}));
 	}
 	public void SayBattleEscape()

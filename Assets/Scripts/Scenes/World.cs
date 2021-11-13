@@ -14,38 +14,44 @@ using UnityEngine.UI;
 
 namespace Skysemi.With.Scenes
 {
-    public class World : AppMonoBehaviour, ISceneController, IPlayerCardUiController, 
-	    IPlayerStatusWindow,IGoFrontStateChangeParameter, ISetUpEnemy
-    {
+	public class World : AppMonoBehaviour, ISceneController, IPlayerCardUiController,
+		IPlayerStatusWindow, IGoFrontStateChangeParameter, ISetUpEnemy
+	{
 		public static World instance;
+
 		public static Game game;
-	    // private CardBoard _cardBoard;
-	    public CardBoardScrollView cardBoard;
-	    private Skysemi.With.CardUI.EquipmentCardFieldUi _equipmentCardFieldUi;
-	    private PlayerStatusWindow _playerStatusWindow;
-	    private Skysemi.With.CardUI.EquipmentCardFieldMiniUi _equipmentCardFieldMiniUi;
-	    [FormerlySerializedAs("enemyLayer")] public GameObject buttonEnemyLayer;
-	    public Canvas canvasUI;
-	    public Image enemyStatusWindow;
-	    [FormerlySerializedAs("buttonGoFront")] public GameObject btnGoFront;
-	    public GameObject btnNavigationWindow;
-	    public GameObject btnBattleFlow;
-	    public GameObject enemeyLayer;
-	    public EWorldMode WorldMode {get;set;}
-	    public Sprite[] imageRoads = new Sprite[3];
+
+		// private CardBoard _cardBoard;
+		public CardBoardScrollView cardBoard;
+		private Skysemi.With.CardUI.EquipmentCardFieldUi _equipmentCardFieldUi;
+		private PlayerStatusWindow _playerStatusWindow;
+		private Skysemi.With.CardUI.EquipmentCardFieldMiniUi _equipmentCardFieldMiniUi;
+		[FormerlySerializedAs("enemyLayer")] public GameObject buttonEnemyLayer;
+		public Canvas canvasUI;
+		public Image enemyStatusWindow;
+
+		[FormerlySerializedAs("buttonGoFront")]
+		public GameObject btnGoFront;
+
+		public GameObject btnNavigationWindow;
+		public GameObject btnBattleFlow;
+		public GameObject enemeyLayer;
+		public EWorldMode WorldMode { get; set; }
+		public Sprite[] imageRoads = new Sprite[3];
 
 		public Image roadLayer;
 		private int _randomEncount = 5;
 		public bool isBoss = false;
 
-		public ShizuneManager skysemiChanManager;
-		public ShizuneMsg skysemiChanMsg;
+		public ShizuneManager shizuneManager;
+		public ShizuneMsg shizuneMsg;
 //		public EnemyManager enemyManager;
 //		public UIManager uiManager;
 //		public PlayerManager playerManager;
 
 		private ISetUpEnemy _setUpEnemyImplementation;
 		public Image imageFlatLand;
+
 		public Sprite imageFlatLandEveningSprite;
 //		public Canvas canvas;
 //		public Sprite[] imageRoads = new Sprite[3];
@@ -53,7 +59,9 @@ namespace Skysemi.With.Scenes
 		private ETurn _turn = ETurn.PLAYER;
 
 		private IEncountRule _encountRule;
+
 		public ETurn turn = ETurn.PLAYER;
+
 //		public bool isBoss = false;
 //	
 //		//効果音
@@ -67,7 +75,9 @@ namespace Skysemi.With.Scenes
 //	
 //		//ミュージック
 		public AudioClip musicWalking;
+
 		public AudioClip musicStageField4;
+
 //		public AudioClip musicBattle1;
 //		public AudioClip musicBladeRobo;
 //		public AudioClip musicStage4Boss;
@@ -82,7 +92,7 @@ namespace Skysemi.With.Scenes
 //			//行動UIの開始
 //		}
 		//シングルトンの処理
-		void Awake ()
+		void Awake()
 		{
 			if (instance == null)
 			{
@@ -90,12 +100,13 @@ namespace Skysemi.With.Scenes
 			}
 			else if (instance != this)
 			{
-				Destroy (gameObject);
+				Destroy(gameObject);
 			}
 		}
+
 //	
 //		// Use this for initialization
-		void Start ()
+		void Start()
 		{
 			game = Game.instance;
 			game.SetCardUiController(this);
@@ -107,29 +118,30 @@ namespace Skysemi.With.Scenes
 			cardBoard.gameObject.SetActive(false);
 			_equipmentCardFieldUi = EquipmentCardFieldUi.CreateEquipmentCardFieldInCanvas(canvasUI, -240, -300);
 			_equipmentCardFieldUi.Init();
-			
-			
+
+
 			EnemyStatusWindow localEnemyStatusWindow = enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
 			localEnemyStatusWindow.Init();
 			//Eventの登録
-			
-			//自UIのステータス反映
-			PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
-			playerStatusWindow.SyncPlayerStatusReceiver(game.GetPlayer().param);
 
-			
+			//自UIのステータス反映
+			game.GetPlayer().SyncUiParam();
+			// PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
+			// playerStatusWindow.SyncPlayerStatusReceiver(game.GetPlayer().param);
+
+
 			//＊実験＊ 敵の装備をセットする
 			// Enemy enemy = game.CreateEnemy(typeof(EnemyNasu));
-			_equipmentCardFieldMiniUi = EquipmentCardFieldMiniUi.CreateEquipmentCardFieldMiniInParentTransform(enemyStatusWindow.transform, 0, -125f);
+			_equipmentCardFieldMiniUi =
+				EquipmentCardFieldMiniUi.CreateEquipmentCardFieldMiniInParentTransform(enemyStatusWindow.transform, 0,
+					-125f);
 //			ICharaEnemy enemy = game.enemyManager.CreateCharaObject(this, EChara.Nasu);
 //			game.enemyManager.Init(enemy, _equipmentCardFieldMiniUi);
 //			game.enemyManager.Equip(0, gameObject.AddComponent<NasuHeart>());
 //			game.enemyManager.Equip(1, gameObject.AddComponent<MagicAddMaxHp>());
 //			game.enemyManager.Equip(2, gameObject.AddComponent<Punch>());
 //			game.enemyManager.Equip(3, gameObject.AddComponent<Punch>());
-//			game.enemyManager.SyncRecoveryHpInclude();
-			
-			
+//			game.enemyManager.SyncRecoveryHpIncludeCCC();
 
 
 			//実験 途中でカードをすげ替える場合のケース 設定が多すぎなのでまとめたい。19.07.01 だいぶまとまった
@@ -137,14 +149,13 @@ namespace Skysemi.With.Scenes
 //			game.enemyManager.Equip(1, gameObject.AddComponent<NasuHeart>());
 //			game.enemyManager.Equip(2, gameObject.AddComponent<MagicAddMaxHp>());
 //			game.enemyManager.Equip(3, gameObject.AddComponent<MagicAddMaxHp>());
-//			game.enemyManager.SyncRecoveryHpInclude();
+//			game.enemyManager.SyncRecoveryHpIncludeCCC();
 			//実験END
 
-			
-			
+
 			WorldMode = EWorldMode.WALKING;
-			_encountRule = EncountRuleFactory.Create((IGoFrontStateChangeParameter)this);
-			
+			_encountRule = EncountRuleFactory.Create((IGoFrontStateChangeParameter) this);
+
 //			PlayerManager.instance.LoadData();
 			Player player = game.GetPlayer();
 			player.Progress = 0;
@@ -152,15 +163,15 @@ namespace Skysemi.With.Scenes
 			SetBackGround();
 //			playerManager.SyncUpdationParameter();
 		}
-	
+
 		public void SetBackGround()
 		{
 			if (Game.instance.destinationPlace == EStage.OTHER_STAGE1)
 			{
 				imageFlatLand.sprite = imageFlatLandEveningSprite;
 			}
-			
 		}
+
 //		public void PlayMusicBattle()
 //		{
 //			if (Game.instance.destinationPlace == EStage.OUTSIDE_ROAD)
@@ -209,6 +220,7 @@ namespace Skysemi.With.Scenes
 				SoundManager.instance.PlayMusic(musicWalking);
 			}
 		}
+
 //	
 //	
 //		// Update is called once per frame
@@ -226,20 +238,23 @@ namespace Skysemi.With.Scenes
 				{
 					game.eventManager.EncountEnemyBoss(this);
 				}
+
 				return;
 			}
-			
+
 			_randomEncount--;
 			if (player.Progress == 0) return;
 			if (player.Progress == boss_encount_progress)
 			{
 				game.eventManager.EncountEnemyBoss(this);
 			}
-			else if(_randomEncount <= 0){
+			else if (_randomEncount <= 0)
+			{
 				_randomEncount = Random.Range(1, 8) + 10;
 				game.eventManager.EncountEnemy(this);
 			}
 		}
+
 //	
 //		public void GoHomeForLoser()
 //		{
@@ -259,26 +274,26 @@ namespace Skysemi.With.Scenes
 //	//		if (game._worldMode != EWorldMode.WALKING) return;
 //	//		ShizuneMsg.instance.msgOther[EMsgOther.PushHome]();
 //		}
-	    public ISceneController GetSelfController()
-	    {
-		    return this;
-	    }
+		public ISceneController GetSelfController()
+		{
+			return this;
+		}
 
-	    public CardBoardScrollView GetCardBoard()
-	    {
-		    return cardBoard;
-	    }
+		public CardBoardScrollView GetCardBoard()
+		{
+			return cardBoard;
+		}
 
-	    public EquipmentCardFieldUi GetEquipmentCardField()
-	    {
-		    return _equipmentCardFieldUi;
-	    }
+		public EquipmentCardFieldUi GetEquipmentCardField()
+		{
+			return _equipmentCardFieldUi;
+		}
 
-	    public PlayerStatusWindow GetPlayerStatusWindow()
-	    {
-		    return _playerStatusWindow;
-	    }
-	    
+		public PlayerStatusWindow GetPlayerStatusWindow()
+		{
+			return _playerStatusWindow;
+		}
+
 		public void PushGoFrontButton()
 		{
 			if (WorldMode == EWorldMode.BOSS_BATTLE_AFTER) return;
@@ -293,7 +308,7 @@ namespace Skysemi.With.Scenes
 			roadLayer.sprite = imageRoads[landIndex];
 			_playerStatusWindow.Progress.text = player.Progress.ToString();
 			player.NaturalHealingByWalk();
-			
+
 			CheckingProgress();
 
 			/// encountRule EncountNormalRule
@@ -322,22 +337,27 @@ namespace Skysemi.With.Scenes
 
 				_turn = ETurn.PLAYER;
 				game.eventManager.EncountEnemy(this);
+				
+				
 				// WayEventParam param = new WayEventParam(game.GetPlayer(), game.enemyManager.GetEnemy());
 				// 1.　敵の生成(内部) -> CreateEnemy in EncountNormalRule.OutputEnemyで変更 
 
+//			this.WayEvent += game.enemyManager.CreateEnemy;
 				game.enemyManager.CreateEnemy(
-					this, 
+					this,
 					this.GetEquipmentCardFieldUi()
 				);
 				_encountRule.OutputEnemy(this);
 				game.eventManager.DoWayEvent(this);
 
-////			this.WayEvent += game.enemyManager.CreateEnemy;
-////			this.WayEvent += game.uiManager.EncountEnemeyBegin;
-////			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
-
+//			this.WayEvent += game.uiManager.EncountEnemeyBegin;
+//			this.WayEvent += game.shizuneMsg.EnemyCommentary;
+			}
+			else
+			{
 			}
 		}
+
 //		public void CheckingProgress()
 //		{
 //			Debug.Log("CheckingProgress");
@@ -386,7 +406,7 @@ namespace Skysemi.With.Scenes
 ////			EncountEnemeyBegin(game.enemyManager.GetEnemy());
 ////			this.WayEvent += game.enemyManager.CreateEnemy;
 ////			this.WayEvent += game.uiManager.EncountEnemeyBegin;
-////			this.WayEvent += game.skysemiChanMsg.EnemyCommentary;
+////			this.WayEvent += game.shizuneMsg.EnemyCommentary;
 //
 //		}
 
@@ -465,21 +485,24 @@ namespace Skysemi.With.Scenes
 			return btnNavigationWindow;
 		}
 
-	    public EnemyStatusWindow GetEnemyStatusWindow()
-	    {
-		    return enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
-	    }
+		public EnemyStatusWindow GetEnemyStatusWindow()
+		{
+			return enemyStatusWindow.gameObject.GetComponent<EnemyStatusWindow>();
+		}
 
-	    public void SetEnemyMsgTextString(string text)
-	    {
-		    GetBtnNavigationWindow().GetComponentInChildren<Text>().text = text;
-	    }
+		public void SetEnemyMsgTextString(string text)
+		{
+			GetBtnNavigationWindow().GetComponentInChildren<Text>().text = text;
+		}
 
-	    public Text GetEnemyMsgText()
-	    {
-		    return GetBtnNavigationWindow().GetComponentInChildren<Text>();
-	    }
+		public Text GetEnemyMsgText()
+		{
+			return GetBtnNavigationWindow().GetComponentInChildren<Text>();
+		}
 
-    }
-    
+		public void ShuffleRandomEncount()
+		{
+			_encountRule.ShuffleRandomEncount();
+		}
+	}
 }
