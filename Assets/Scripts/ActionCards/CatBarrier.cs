@@ -2,7 +2,7 @@ using Skysemi.With.Enum;
 
 namespace Skysemi.With.ActionCards
 {
-	public class ReafBarrier : ActionCards.ABase
+	public class CatBarrier : ActionCards.ABase
 	{
 		void Start ()
 		{
@@ -12,18 +12,18 @@ namespace Skysemi.With.ActionCards
 		{
 			lv = 0;
 			atk = 0;
-			def = 2;
+			def = 6;
 			agi = 0;
-			eActionCardName = EActionCardName.ReafBarrier;
-			cardUsageText = $" [葉っぱバリア]\n 防御 {def}\n (メルヘン)";
+			eActionCardName = EActionCardName.CatBarrier;
+			cardUsageText = $" [猫バリア]\n 防御 {def}\n (メルヘン)\n 古代エジプト軍を無効化出来る";
 		}
 		public override string GetImageFilePath()
 		{
-			return "ActionCards/ReafBarrier";
+			return "ActionCards/CatBarrier";
 		}
 		public override string GetPrefabFilePath()
 		{
-			return "Prefabs/ActionCards/ReafBarrier";
+			return "Prefabs/ActionCards/CatBarrier";
 		}
 		public override EGroup GetGroup()
 		{

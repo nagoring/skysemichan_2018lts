@@ -2,7 +2,7 @@ using Skysemi.With.Enum;
 
 namespace Skysemi.With.ActionCards
 {
-	public class ReafBarrier : ActionCards.ABase
+	public class Witch : ActionCards.ABase
 	{
 		void Start ()
 		{
@@ -11,19 +11,19 @@ namespace Skysemi.With.ActionCards
 		public override void Init()
 		{
 			lv = 0;
-			atk = 0;
+			atk = 6;
 			def = 2;
-			agi = 0;
-			eActionCardName = EActionCardName.ReafBarrier;
-			cardUsageText = $" [葉っぱバリア]\n 防御 {def}\n (メルヘン)";
+			agi = -2;
+			eActionCardName = EActionCardName.BrokenDoll;
+			cardUsageText = $" [魔法使い]\n 攻撃 {atk}\n 防御 {def}\n 速さ {agi}\n (メルヘン)\n ";
 		}
 		public override string GetImageFilePath()
 		{
-			return "ActionCards/ReafBarrier";
+			return "ActionCards/BrokenDoll";
 		}
 		public override string GetPrefabFilePath()
 		{
-			return "Prefabs/ActionCards/ReafBarrier";
+			return "Prefabs/ActionCards/BrokenDoll";
 		}
 		public override EGroup GetGroup()
 		{

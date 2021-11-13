@@ -18,7 +18,7 @@ namespace Skysemi.With.ActionCards
 			lv = 0;
 			atk = 0;
 			def = 4;
-			eActionCardName = EActionCardName.Shield;
+			eActionCardName = EActionCardName.StrongShield;
 			cardUsageText = $" [強盾] \n  防御 {def}\n (ムキブツ)";
 		}
 
