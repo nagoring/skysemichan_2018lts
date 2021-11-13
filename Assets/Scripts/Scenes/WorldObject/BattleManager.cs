@@ -203,16 +203,17 @@ namespace Skysemi.With.Scenes.WorldObject
 
 		//
 		/// <summary>
-		/// ターン制。１ターンの最初に呼ばれる。MPの高い順に行動する
+		/// ターン制。１ターンの最初に呼ばれる。Agiの高い順に行動する
 		/// </summary>
 		private void OrderAttackTurn()
 		{
 			//しずね
 //			Shizune skysemiChan = game.shizuneManager.skysemiChan;
-			charaActOrderList = new List<IChara>();
-			charaActOrderList.Add(game.GetPlayer());
-			charaActOrderList.Add(enemy);
-			IChara chara = charaActOrderList[0];
+			charaActOrderList = BattleOrderByAgi.GetInstance().GetListForBattleOrder( enemy, game.GetPlayer());
+			// charaActOrderList = new List<IChara>();
+			// charaActOrderList.Add(game.GetPlayer());
+			// charaActOrderList.Add(enemy);
+			// IChara chara = charaActOrderList[0];
 //			charaActOrderList.Add(skysemiChan);
 			charaActOrderList.Sort((a, b) => b.Agi - a.Agi);
 		}
