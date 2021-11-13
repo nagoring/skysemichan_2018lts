@@ -121,16 +121,11 @@ namespace Skysemi.With.Events
 
 		public void BattleEnd(BattleEndEventParam param)
 		{
-			Debug.Log("BattleEnd");
-			// param.enemy = this.enemy;
-			EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
-			Debug.Log("EEEEEEEEEEEEEEEEEEE");
-			enemyStatusWindow.gameObject.SetActive(false);
-			// StartCoroutine(this.DelayMethod(1.0f, () =>
-			// {
-			// 	EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
-			// 	enemyStatusWindow.gameObject.SetActive(false);
-			// }));
+			StartCoroutine(this.DelayMethod(1.0f, () =>
+			{
+				EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
+				enemyStatusWindow.gameObject.SetActive(false);
+			}));
 		}
 	}
 }

@@ -224,15 +224,13 @@ public class ShizuneMsg : MonoBehaviour
 	}
 	public void EnemyCommentary(WayEventParam param) {
 		if (param.enemy == null) return;
-		// msg = GetComponentInChildren<Text>();
 		msg = GetComponent<Text>();
-		Debug.Log(msg);
 		switch (param.enemy.CharaName)
 		{
 			case "ナス": 
 				// msg.text = string.Format("あいつは{0}です！\n弱いので安心して倒しましょう",param.enemy.CharaName);
 				msg.text = $"あいつは{param.enemy.CharaName}です！\n弱いので安心して倒しましょう";
-				break;
+					break;
 			case "きゅうり": 
 				msg.text = $"あいつは{param.enemy.CharaName}です！\nちょっと攻撃力がありますが代わりに防御力が疎かです。ガンガン叩いてやりましょう！！";
 				break;
@@ -371,10 +369,10 @@ public class ShizuneMsg : MonoBehaviour
 		string[] msgTbl = new string[]
 		{
 			"",
-			string.Format("おめでとうございます！！\n初めてのLVUPですね！{0}さんならもっともっと強くなりますよ", game.GetPlayer().CharaName),
-			string.Format("2回目のLVUPですね！{0}さん逞しいです", game.GetPlayer().CharaName),
+			$"おめでとうございます！！\n初めてのLVUPですね！{game.GetPlayer().CharaName}さんならもっともっと強くなりますよ",
+			$"2回目のLVUPですね！{game.GetPlayer().CharaName}さん逞しいです",
 		};
-		int index = game.GetPlayer().Lv;
+		int index = game.GetPlayer().Lv - 1;
 		msg = GetComponentInChildren<Text>();
 
 		if (msgTbl.Length <= index)

@@ -62,7 +62,7 @@ namespace Tests.Chara.DamageLogic
 				game.enemyManager.Equip(nasu, i, enemyCards);
 			}
 
-			game.enemyManager.SyncRecoveryHpIncludeCCC();
+			game.enemyManager.SyncRestoreHpInclude();
 			int resultDamage = 0;
 			
 			// ナマモノ同志

@@ -370,7 +370,7 @@ namespace Skysemi.With.Chara
 		{
 			param.maxhp += 5;
 			param.str += 1;
-			param.vit += 1;
+			// param.vit += 1;
 			//自UIのステータス反映
 			// SyncUiParam();
 		}
@@ -460,12 +460,13 @@ namespace Skysemi.With.Chara
 					this.NextExp = game.expTbl[nextLv];
 				}
 
-
-				this.DoLvUp();
-				
+				//レベルアップの時のセリフとSE
 				SoundManager.instance.Stop();
 				SoundManager.instance.PlaySingle(game.clipLpUp);
 				ShizuneMsg.instance.DelayMsgOther();
+				this.DoLvUp();
+
+				
 			}
 
 			SyncUiParam();

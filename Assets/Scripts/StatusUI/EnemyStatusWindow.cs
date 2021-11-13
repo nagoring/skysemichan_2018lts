@@ -65,7 +65,6 @@ namespace StatusUI
             }
             
             Name.text = _charaParameter.charaName;
-            Debug.Log(Name.text + "" + hp);
             Hp.text = hp.ToString();
             Spirit.text = spirit.ToString();
             Atk.text = atk.ToString();

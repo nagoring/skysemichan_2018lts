@@ -203,10 +203,11 @@ namespace Skysemi.With.Chara.Enemies
 			this.param.spirit = this.param.spirit + tmpSpirit;
 			this.param.agi = this.param.agi + tmpAgi;
 			// TODO 構造が気に入らないから直すかも
-			Game game = Game.instance;;
-			EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
-			enemyStatusWindow.Init();
-			enemyStatusWindow.SyncEnemyStatusReceiver(this, this.param);
+			
+			// Game game = Game.instance;;
+			// EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
+			// enemyStatusWindow.Init();
+			// enemyStatusWindow.SyncEnemyStatusReceiver(this, this.param);
 			// localEnemyStatusWindow.SyncEnemyStatusReceiver(this.param);
 			
 			// game.enemyManager.Sync();
@@ -222,6 +223,20 @@ namespace Skysemi.With.Chara.Enemies
 			
 		}
 
+		public void SyncUiParam()
+		{
+			Game game = Game.instance;;
+			EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
+			enemyStatusWindow.Init();
+			enemyStatusWindow.SyncEnemyStatusReceiver(this, this.param);
+		}
+		/// <summary>
+		///  HPをMaxまで回復
+		/// </summary>
+		public void RestoreHp()
+		{
+			this.Hp = this.MaxHp;
+		}
 
 	}
 }

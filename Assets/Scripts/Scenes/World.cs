@@ -141,7 +141,7 @@ namespace Skysemi.With.Scenes
 //			game.enemyManager.Equip(1, gameObject.AddComponent<MagicAddMaxHp>());
 //			game.enemyManager.Equip(2, gameObject.AddComponent<Punch>());
 //			game.enemyManager.Equip(3, gameObject.AddComponent<Punch>());
-//			game.enemyManager.SyncRecoveryHpIncludeCCC();
+//			game.enemyManager.SyncRestoreHpInclude();
 
 
 			//実験 途中でカードをすげ替える場合のケース 設定が多すぎなのでまとめたい。19.07.01 だいぶまとまった
@@ -149,7 +149,7 @@ namespace Skysemi.With.Scenes
 //			game.enemyManager.Equip(1, gameObject.AddComponent<NasuHeart>());
 //			game.enemyManager.Equip(2, gameObject.AddComponent<MagicAddMaxHp>());
 //			game.enemyManager.Equip(3, gameObject.AddComponent<MagicAddMaxHp>());
-//			game.enemyManager.SyncRecoveryHpIncludeCCC();
+//			game.enemyManager.SyncRestoreHpInclude();
 			//実験END
 
 

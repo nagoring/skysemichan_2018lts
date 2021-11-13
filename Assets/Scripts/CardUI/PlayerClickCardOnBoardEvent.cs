@@ -39,8 +39,6 @@ namespace Skysemi.With.CardUI
 
 			//計算後PlayerStatusUiに反映させる
 			game.GetPlayer().SyncUiParam();
-			// PlayerStatusWindow playerStatusWindow = game.GetPlayerStatusWindow().GetPlayerStatusWindow();
-			// playerStatusWindow.SyncPlayerStatusReceiver(game.GetPlayer().param);
 			
 			//「装備して」のテキストを消す
 			if (PlayerClickCardOnBoardEvent._isPleaseEquipText)
