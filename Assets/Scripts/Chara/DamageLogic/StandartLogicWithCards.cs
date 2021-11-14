@@ -53,7 +53,7 @@ namespace Skysemi.With.Chara.DamageLogic
 				damageAccumulator += damage;
 			}
 
-			return damageAccumulator;
+			return (int)(damageAccumulator / 4);
 
 			// int damage = self.Atk - target.Def;
 			// damage += (int)Random.Range(-3.0f, 3.0f);

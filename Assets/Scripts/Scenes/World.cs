@@ -109,6 +109,7 @@ namespace Skysemi.With.Scenes
 		void Start()
 		{
 			game = Game.instance;
+			if(game.shizuneMsg == null) game.shizuneMsg = ShizuneMsg.instance;
 			game.SetCardUiController(this);
 			game.SetPlayerStatusWindow(this);
 			_playerStatusWindow = PlayerStatusWindow.CreatePlayerStatusWindowInCanvasUI(canvasUI);

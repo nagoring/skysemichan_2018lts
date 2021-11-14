@@ -208,13 +208,13 @@ namespace Skysemi.With.Scenes.WorldObject
 		private void OrderAttackTurn()
 		{
 			//しずね
-			// Shizune skysemiChan = game.shizune.skysemiChan;
+			Shizune shizune = game.GetShizune();
 			charaActOrderList = BattleOrderByAgi.GetInstance().GetListForBattleOrder( enemy, game.GetPlayer());
 			// charaActOrderList = new List<IChara>();
 			// charaActOrderList.Add(game.GetPlayer());
 			// charaActOrderList.Add(enemy);
 			// IChara chara = charaActOrderList[0];
-//			charaActOrderList.Add(skysemiChan);
+			charaActOrderList.Add(shizune);
 			charaActOrderList.Sort((a, b) => b.Agi - a.Agi);
 		}
 

@@ -28,7 +28,7 @@ namespace Skysemi.With.Chara.Enemies
             this.MaxSpirit = 0;
             param.str = 1;
             Def = 0;
-            Agi = 2;
+            Agi = 1;
             
             this.Exp =4;
             this.msg = "ぼくをたべて！ぼくをたべて！";

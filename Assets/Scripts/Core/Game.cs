@@ -94,6 +94,8 @@ namespace Skysemi.With.Core
 				destinationPlace = EStage.NONE;
 				eventManager = obj.AddComponent<EventManager>();
 				enemyManager = new EnemyManager();
+				if(shizuneMsg == null) shizuneMsg = Instantiate(shizuneMsg);
+				
 				// shizuneMsg = obj.AddComponent<ShizuneMsg>();
 				// effectManager = obj.AddComponent<EffectManager>();
 			}
@@ -110,8 +112,9 @@ namespace Skysemi.With.Core
 		{
 			effectManager = EffectManager.instance;
 			// shizuneMsg.msg = shizuneMsgGameObject.GetComponentInChildren<Text>();
-			_shizune = shizuneMsgGameObject.GetComponentInChildren<Shizune>();
-			Debug.Log(_shizune.Atk);
+			// _shizune = shizuneMsgGameObject.GetComponentInChildren<Shizune>();
+			_shizune = shizuneMsgGameObject.GetComponent<Shizune>();
+			_shizune.Init();
 			// EffectManager.instance
 			// Instantiate(effectManager);
 //            eventManager = this.gameObject.AddComponent<EventManager>();
@@ -337,6 +340,11 @@ namespace Skysemi.With.Core
 			GameObject actionCardPrefab = (GameObject)Resources.Load(prefabFilePath);
 			GameObject instance = (GameObject)Object.Instantiate(actionCardPrefab,Vector2.zero,Quaternion.identity);
 			return instance;
+		}
+
+		public Shizune GetShizune()
+		{
+			return _shizune;
 		}
 	}
 }

@@ -15,6 +15,7 @@ namespace Skysemi.With.Chara
 		public Game game;
 		public CharaParameter param;
 		protected ActionCards.ABase[] _actionCard = new ActionCards.ABase[4];
+		public ShizuneMsg shizuneMsg;
 
 		public string CharaName
 		{
@@ -147,7 +148,8 @@ namespace Skysemi.With.Chara
 			MaxHp = 1000;
 			Hp = MaxHp;
 			Atk = 2;
-			Def = 4;
+			Def = 22;
+			shizuneMsg = ShizuneMsg.instance;
 		}
 		
 
@@ -208,6 +210,7 @@ namespace Skysemi.With.Chara
 
 		public void Act(IChara target)
 		{
+			Debug.Log("Shizune");
 			// Game game = Game.instance;
 			//
 			// if (eBattleAction == EBattleAction.ATK)
@@ -267,14 +270,15 @@ namespace Skysemi.With.Chara
 
 		public float BeforeActStartWait()
 		{
-			return 0.3f;
+			return 0.2f;
 		}
 
 		public void BeforeActStartMsg(IChara target)
 		{
-			Game game = Game.instance;
+			// Game game = Game.instance;
+			// if(game.shizuneMsg == null) game.shizuneMsg = ShizuneMsg.instance;
 
-			game.shizuneMsg.msgAttakDict[target.Id]();
+			shizuneMsg.msgAttakDict[target.Id]();
 		}
 
 		/// <summary>
@@ -284,7 +288,7 @@ namespace Skysemi.With.Chara
 		public void SayAtkAfter(IChara target)
 		{
 			Game game = Game.instance;
-			game.shizuneMsg.msgAttakEndDict[target.Id]();
+			shizuneMsg.msgAttakEndDict[target.Id]();
 		}
 
 		void Start()

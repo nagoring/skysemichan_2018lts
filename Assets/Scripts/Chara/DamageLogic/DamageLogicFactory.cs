@@ -9,6 +9,7 @@ namespace Skysemi.With.Chara.DamageLogic
     {
         public static IDmageLogic create(IChara target, IChara iChara)
         {
+            return StandartLogicWithCards.GetInstance();
             return new StandartLogic();
         }
     }    

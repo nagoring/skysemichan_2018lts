@@ -288,6 +288,7 @@ public class ShizuneMsg : MonoBehaviour
 	}
 	public void SayAttackStandart() {
 		msg = GetComponentInChildren<Text>();
+		Debug.Log(msg);
 		int cnt = Random.Range(0,2);
 		switch (cnt)
 		{
