@@ -89,9 +89,6 @@ namespace Skysemi.With.Chara.DamageLogic
 				
 			}
 
-			Debug.Log($"target.Def:{target.Def}");
-			Debug.Log($"baseDefAccumulator:{baseDefAccumulator}");
-			Debug.Log($"cardDefAccumulator:{cardDefAccumulator}");
 			float _result = self.Atk - (target.Def - baseDefAccumulator + cardDefAccumulator);
 			int damage = (int)Math.Round(_result, 1, MidpointRounding.AwayFromZero);
 

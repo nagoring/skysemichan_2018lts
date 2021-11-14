@@ -236,8 +236,7 @@ namespace Skysemi.With.Chara
 				// Debug.Log("damage:" + damage);
 				// Debug.Log("target.Hp:" + target.Hp);
 				target.Hp -= damage;
-				EnemyStatusWindow enemyStatusWindow = World.instance.GetEnemyStatusWindow();
-				enemyStatusWindow.Hp.text = target.Hp.ToString();
+				World.instance.GetEnemyStatusWindow().Hp.text = target.Hp.ToString();
 
 //				game.enemyManager.hp.text = target.Hp.ToString();
 

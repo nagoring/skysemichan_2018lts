@@ -7,47 +7,71 @@ using UnityEngine;
 
 namespace Skysemi.With.Chara
 {
-    public class EnemyFactory
-    {
-        private static EnemyFactory _enemyFactory = null;
+	public class EnemyFactory
+	{
+		private static EnemyFactory _enemyFactory = null;
 
-        public static EnemyFactory GetInstance()
-        {
-            if (_enemyFactory == null)
-            {
-                _enemyFactory = new EnemyFactory();
-            }
-            return _enemyFactory;
-        }
-        public Enemy Factory(MonoBehaviour mono)
-        {
-            if (Constants.Debug == 1)
-            {
-                // return CreateCharaObject(mono, EChara.Nasu);
-            }
-            Game game = Game.instance;
-            
-            EStage eStage = game.destinationPlace;
-            int randomValue = Random.Range(0, 100);
-            switch (eStage)
-            {
-                case EStage.WALKING_COURSE:
-                    //雑魚：なす、きゅうり　BOSS：りんご
-                    if (World.instance.isBoss)
-                    {
-                        return CreateCharaObject(mono, EChara.Ringo);
-                    }
-                    if (randomValue >= 60)
-                    {
-                        return game.CreateEnemy(typeof(EnemyNasu));
-                        return CreateCharaObject(mono, EChara.Nasu);
-                    }
-                    else if(randomValue < 60)
-                    {
-                        return game.CreateEnemy(typeof(EnemyKyuuri));
-                        return CreateCharaObject(mono, EChara.Kyuuri);
-                    }
-                    break;
+		public static EnemyFactory GetInstance()
+		{
+			if (_enemyFactory == null)
+			{
+				_enemyFactory = new EnemyFactory();
+			}
+
+			return _enemyFactory;
+		}
+
+		public Enemy Factory(MonoBehaviour mono)
+		{
+			if (Constants.Debug == 1)
+			{
+				// return CreateCharaObject(mono, EChara.Nasu);
+			}
+
+			Game game = Game.instance;
+			Player player = game.GetPlayer();
+			EStage eStage = game.destinationPlace;
+			int randomValue = Random.Range(0, 100);
+			switch (eStage)
+			{
+				case EStage.WALKING_COURSE:
+					return game.CreateEnemy(typeof(EnemyCarrot));
+					//雑魚：なす、きゅうり、人参　BOSS：りんご
+					if (World.instance.isBoss)
+					{
+						return CreateCharaObject(mono, EChara.Ringo);
+					}
+
+					if (player.Progress >= 50)
+					{
+						if (randomValue >= 90)
+						{
+							return game.CreateEnemy(typeof(EnemyNasu));
+						}
+						else if (randomValue >= 60)
+						{
+							return game.CreateEnemy(typeof(EnemyKyuuri));
+						}
+						else
+						{
+							return game.CreateEnemy(typeof(EnemyCarrot));
+						}
+					}
+					else
+					{
+						if (randomValue >= 60)
+						{
+							return game.CreateEnemy(typeof(EnemyNasu));
+							return CreateCharaObject(mono, EChara.Nasu);
+						}
+						else if (randomValue < 60)
+						{
+							return game.CreateEnemy(typeof(EnemyKyuuri));
+						}
+						
+					}
+
+					break;
 //                case EStage.GOTO_SUICA:
 //                    //雑魚:なす、きゅうり、ダイコン、ブロッコリ BOSS:スイカ
 //                    if (game.isBoss)
@@ -132,18 +156,20 @@ namespace Skysemi.With.Chara
 //                    }
 //
 //                    break;
-            }
-            return CreateCharaObject(mono, EChara.Nasu);
-        }
-        public Enemy CreateCharaObject(MonoBehaviour mono, EChara eChara)
-        {
-            Dictionary<EChara, System.Type> dict = new Dictionary<EChara, System.Type>()
-            {
-                {EChara.Nasu, typeof(EnemyNasu)},
-                {EChara.Kyuuri, typeof(EnemyKyuuri)},
-                {EChara.Ringo, typeof(EnemyRingo)},
-            };
-            return mono.gameObject.AddComponent(dict[eChara]) as Enemy;
-        }
-    }
+			}
+
+			return CreateCharaObject(mono, EChara.Nasu);
+		}
+
+		public Enemy CreateCharaObject(MonoBehaviour mono, EChara eChara)
+		{
+			Dictionary<EChara, System.Type> dict = new Dictionary<EChara, System.Type>()
+			{
+				{EChara.Nasu, typeof(EnemyNasu)},
+				{EChara.Kyuuri, typeof(EnemyKyuuri)},
+				{EChara.Ringo, typeof(EnemyRingo)},
+			};
+			return mono.gameObject.AddComponent(dict[eChara]) as Enemy;
+		}
+	}
 }

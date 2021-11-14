@@ -2,7 +2,8 @@
 {
     public enum EChara
     {
-        None, Player, SkysemiChan, Nasu, Kyuuri, Ringo,
+        None, Player, SkysemiChan, 
+        Nasu, Kyuuri, Carrot, Ringo,
         Daikon,Brocoli,Suica,
         Hourensou,Tomato,BladeRobo,
         CameraStabilizer,PowerShovel,CableReel,DoroDoroHukai,

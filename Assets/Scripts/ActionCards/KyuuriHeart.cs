@@ -22,7 +22,7 @@ namespace Skysemi.With.ActionCards
 			spirit = 0;
 			agi = 6;
 
-			eActionCardName = EActionCardName.NasuHeart;
+			eActionCardName = EActionCardName.KyuuriHeart;
 			cardUsageText = $" [胡瓜の心] \n 最大HP {maxhp}\n 攻撃 {atk}\n 速さ {agi}\n (ナマモノ)";
 		}
 
@@ -43,7 +43,7 @@ namespace Skysemi.With.ActionCards
 
 		public override EGroup GetGroup()
 		{
-			return EGroup.Meruhen;
+			return EGroup.Namamono;
 		}
 	}
 }

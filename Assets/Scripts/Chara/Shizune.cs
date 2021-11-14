@@ -4,6 +4,7 @@ using Skysemi.With.ActionCards;
 using Skysemi.With.Chara.DamageLogic;
 using Skysemi.With.Core;
 using Skysemi.With.Enum;
+using Skysemi.With.Scenes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -119,8 +120,6 @@ namespace Skysemi.With.Chara
 
 		// public static Player instance;
 		public string playerName;
-		public int maxhp;
-		public int maxmp;
 		// public int atk;
 
 		public int lv;
@@ -150,6 +149,10 @@ namespace Skysemi.With.Chara
 			Atk = 2;
 			Def = 22;
 			shizuneMsg = ShizuneMsg.instance;
+			GameObject _obj = new GameObject();
+			_actionCard[0] = (ABase)_obj.AddComponent(typeof(SChanCard1));
+			_actionCard[0].Init();
+			RecalculateEquipmentActionCards();
 		}
 		
 
@@ -210,7 +213,19 @@ namespace Skysemi.With.Chara
 
 		public void Act(IChara target)
 		{
-			Debug.Log("Shizune");
+			if (eBattleAction == EBattleAction.ATK)
+			{
+				IDmageLogic iDamageLogic = DamageLogicFactory.create(target, this);
+				int damage = iDamageLogic.CalcDamage(target, this);
+			    target.Hp -= damage;
+			    
+			    World.instance.GetEnemyStatusWindow().Hp.text = target.Hp.ToString();
+			
+			    //ナビゲーションメッセージ
+			    Text navText = World.instance.GetEnemyMsgText();
+			    navText.color = new Color(0, 0, 0);
+			    navText.text = $"{target.CharaName}は{damage}のダメージをうけた";
+			}
 			// Game game = Game.instance;
 			//
 			// if (eBattleAction == EBattleAction.ATK)
@@ -303,17 +318,48 @@ namespace Skysemi.With.Chara
 
 		public ABase GetActionCard(int index)
 		{
-			throw new System.NotImplementedException();
+			return _actionCard[index];
 		}
 
 		public ABase[] GetActionCards()
 		{
-			throw new System.NotImplementedException();
+			return _actionCard;
 		}
 
 		public float DamageRate(IChara target)
 		{
 			return DamageRating.Calc(target, this);
 		}
+		/// <summary>
+		///  装備したときのカードの数値を内部パラメータに再計算する
+		/// </summary>
+		/// <param name="actionCards"></param>
+		public void RecalculateEquipmentActionCards()
+		{
+			ActionCards.ABase[] actionCards = GetActionCards();
+			int tmpMaxHp = 0;
+			int tmpAtk = 0;
+			int tmpDef = 0;
+			int tmpSpirit = 0;
+			int tmpAgi = 0;
+			foreach (ActionCards.ABase actionCard in actionCards)
+			{
+				if (actionCard == null) continue;
+				tmpMaxHp += actionCard.MaxHp;
+				tmpAtk += actionCard.Atk;
+				tmpDef += actionCard.Def;
+				tmpSpirit += actionCard.Spirit;
+				tmpAgi += actionCard.Agi;
+			}
+
+			param.tmpMaxHp = tmpMaxHp;
+			param.atk = param.str + tmpAtk;
+			param.def = param.vit + tmpDef;
+			param.spirit = param.spirit + tmpSpirit;
+			param.agi = param.agi + tmpAgi;
+
+
+		}
+		
 	}
 }

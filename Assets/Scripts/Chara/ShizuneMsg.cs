@@ -288,18 +288,20 @@ public class ShizuneMsg : MonoBehaviour
 	}
 	public void SayAttackStandart() {
 		msg = GetComponentInChildren<Text>();
-		Debug.Log(msg);
-		int cnt = Random.Range(0,2);
+		int cnt = Random.Range(0,3);
 		switch (cnt)
 		{
 			case 0:
-				msg.text = string.Format("私の攻撃ですね！エイっ！！");
+				msg.text = "私の攻撃ですね！エイっ！！";
 				break;
 			case 1:
-				msg.text = string.Format("これでもくらいなさい！！");
+				msg.text = "これでもくらいなさい！！";
 				break;
 			case 2:
-				msg.text = string.Format("ちゃんと食べてあげるからね！エーイ！");
+				msg.text = "ちゃんと食べてあげるからね！エーイ！";
+				break;
+			case 3:
+				msg.text = "倒れなさい！エイヤーっ！";
 				break;
 		}
 	}

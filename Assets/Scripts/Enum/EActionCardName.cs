@@ -20,6 +20,8 @@
 		CatBarrier = 80,
 		RoboBlade = 90,
 		NasuHeart = 100,
+		KyuuriHeart = 103,
+		CarrotHeart = 106,
 		RingoHeart = 110,
 		DaikonHeart = 120,
 		BroccoliHeart = 130,
@@ -38,5 +40,6 @@
 		JusticeRestiveHorseHeart = 290,
 		JusticeExecutorHeart = 300,
 		GuardPenguin = 310,
+		SChanCard1 = 10000,
 	}
 }
